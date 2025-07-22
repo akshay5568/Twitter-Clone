@@ -1,0 +1,33 @@
+# Node modules
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+
+# OS-specific files
+.DS_Store
+
+# IDEs
+.vscode/
+.idea/
+
+# Build
+dist/
+build/
+
+# Dependency directories
+bower_components/
+
+# Optional npm cache directory
+.npm
+
+# Coverage directory used by testing tools
+coverage/
+
+# Output of 'npm pack'
+*.tgz
