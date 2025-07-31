@@ -4,6 +4,7 @@ import MainPage from "../MainPage";
 import RightContent from "../RightContent";
 import Explore from "../../pages/Explore";
 import { useState } from "react";
+import Profile from "../../pages/Profile";
 function Home() {
     const [currentPage, setCurrentPage] = useState("Home");
   return (
@@ -16,6 +17,7 @@ function Home() {
         <div className="h-[150rem]">
              {currentPage == "Home" && <MainPage/>}
              {currentPage == "Explore" && <Explore/>}
+             {currentPage == "Profile" && <Profile/>}
         </div>
       </div>
 

@@ -53,7 +53,7 @@ function Navbar({setCurrentPage}) {
 
         <div className="flex items-center gap-3  mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full">
           <CiUser />
-          <NavLink to="/">Profile</NavLink>
+          <button onClick={()=> setCurrentPage("Profile")}>Profile</button>
         </div>
 
         <div className="flex items-center gap-3  mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full">
