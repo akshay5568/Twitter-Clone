@@ -48,7 +48,7 @@ function Navbar({setCurrentPage}) {
 
         <div className="flex items-center gap-3 mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full">
           <FaXTwitter />
-          <NavLink to="/">Premium</NavLink>
+          <NavLink to="/premium">Premium</NavLink>
         </div>
 
         <div className="flex items-center gap-3  mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full">
