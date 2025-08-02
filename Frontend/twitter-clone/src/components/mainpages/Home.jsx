@@ -5,19 +5,19 @@ import RightContent from "../RightContent";
 import Explore from "../../pages/Explore";
 import { useState } from "react";
 import Profile from "../../pages/Profile";
-function Home() {
-    const [currentPage, setCurrentPage] = useState("Home");
+function Home({showProfile,showExplore,showMain}) {
+    
   return (
     <div className="w-full h-screen bg-black text-white flex">
       <div className="w-[25%] bg-black pl-30 p-3 pr-5">
-        <Navbar setCurrentPage={setCurrentPage}/>
+        <Navbar/>
       </div>
 
       <div className="w-[40%] h-screen overflow-scroll scroll-smooth">
         <div className="h-[150rem]">
-             {currentPage == "Home" && <MainPage/>}
-             {currentPage == "Explore" && <Explore/>}
-             {currentPage == "Profile" && <Profile/>}
+             {showMain && <MainPage/>}
+             {showExplore && <Explore/>}
+             {showProfile && <Profile/>}
         </div>
       </div>
 

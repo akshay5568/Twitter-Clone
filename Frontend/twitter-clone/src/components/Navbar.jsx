@@ -23,12 +23,12 @@ function Navbar({setCurrentPage}) {
       <div className="w-full mt-5 text-xl">
         <div className="flex items-center gap-3  mb-2 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full">
           <IoHomeOutline />
-          <button onClick={() => setCurrentPage("Home")}>Home</button>
+          <button onClick={() => navigate("/")}>Home</button>
         </div>
 
         <div className="flex items-center gap-3 mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full">
           <IoSearch />
-          <button className="" onClick={() => setCurrentPage("Explore")}>Explore</button>
+          <button className="" onClick={() => navigate("/explore")}>Explore</button>
         </div>
 
         <div className="flex items-center gap-3  mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full">
@@ -36,7 +36,7 @@ function Navbar({setCurrentPage}) {
           <NavLink to="/">Reels</NavLink>
         </div>
 
-        <div className="flex items-center gap-3   mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full">
+        <div className="flex items-center gap-3   mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full">   
           <FaRegBookmark />
           <NavLink to="/">Bookmarks</NavLink>
         </div>
@@ -53,7 +53,7 @@ function Navbar({setCurrentPage}) {
 
         <div className="flex items-center gap-3  mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full">
           <CiUser />
-          <button onClick={()=> setCurrentPage("Profile")}>Profile</button>
+          <button onClick={()=> navigate("/profile")}>Profile</button>
         </div>
 
         <div className="flex items-center gap-3  mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full">

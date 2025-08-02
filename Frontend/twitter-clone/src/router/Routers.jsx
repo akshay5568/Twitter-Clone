@@ -4,15 +4,16 @@ import Home from "../components/mainpages/Home";
 import Signup from "../pages/loginSignupPages/Signup";
 import Explore from "../pages/Explore";
 import Premium from "../pages/Premium";
+import Profile from "../pages/Profile";
 function Router() {
   return(
     <>
         <Routes>
-            <Route path="/" element={<Home/>}/>
+            <Route path="/" element={<Home showMain={true}/>}/>
             <Route path="/login" element={<LoginPage/>}/>   
             <Route path="/signup" element={<Signup/>}/>
-            <Route path="/explore" element={<Explore/>}/>
-            <Route path="/profile" element={<Explore/>}/>   
+            <Route path="/explore" element={<Home showExplore={true}/>}/>
+            <Route path="/profile" element={<Home showProfile={true}/>}/>   
             <Route path="/Premium" element={<Premium/>}/>   
         </Routes>
    </>
