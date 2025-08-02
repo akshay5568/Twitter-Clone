@@ -3,7 +3,7 @@ import { FaArrowLeft } from "react-icons/fa";
 function Profile() {
   return (
     <div className="w-full h-fit bg-black text-white border-1 border-gray-800">
-      <div className="flex items-center gap-3 h-[3vw] w-full bg-black p-2">
+      <div className="flex items-center gap-3 h-[3vw] w-full bg-transparent p-2">
         <button>
           <FaArrowLeft />
         </button>

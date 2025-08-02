@@ -2,9 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import LoginPage from "../pages/loginSignupPages/LoginPage";
 import Home from "../components/mainpages/Home";
 import Signup from "../pages/loginSignupPages/Signup";
-import Explore from "../pages/Explore";
 import Premium from "../pages/Premium";
-import Profile from "../pages/Profile";
 function Router() {
   return(
     <>
@@ -15,6 +13,7 @@ function Router() {
             <Route path="/explore" element={<Home showExplore={true}/>}/>
             <Route path="/profile" element={<Home showProfile={true}/>}/>   
             <Route path="/Premium" element={<Premium/>}/>   
+            <Route path="/bookmarks" element={<Home showBookmarks={true}/>}/>   
         </Routes>
    </>
   );

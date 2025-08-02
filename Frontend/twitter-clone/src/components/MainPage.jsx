@@ -12,7 +12,7 @@ function MainPage() {
     setTure(!false);
   };
   return (
-    <div className="w-full h-fit bg-black text-white border-1 overflow-auto border-gray-800 p-2">
+    <div className="w-full h-fit bg-black text-white border-1 overflow-auto border-gray-800 ">
       <div>
 
       </div>

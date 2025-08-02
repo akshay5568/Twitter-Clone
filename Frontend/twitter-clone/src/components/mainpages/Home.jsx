@@ -1,11 +1,10 @@
-import { Route,Routes } from "react-router-dom";
 import Navbar from "../Navbar";
 import MainPage from "../MainPage";
 import RightContent from "../RightContent";
 import Explore from "../../pages/Explore";
-import { useState } from "react";
 import Profile from "../../pages/Profile";
-function Home({showProfile,showExplore,showMain}) {
+import Bookmarks from "../../pages/Bookmarks";
+function Home({showProfile,showExplore,showMain,showBookmarks}) {
     
   return (
     <div className="w-full h-screen bg-black text-white flex">
@@ -18,6 +17,7 @@ function Home({showProfile,showExplore,showMain}) {
              {showMain && <MainPage/>}
              {showExplore && <Explore/>}
              {showProfile && <Profile/>}
+             {showBookmarks && <Bookmarks/>}
         </div>
       </div>
 
