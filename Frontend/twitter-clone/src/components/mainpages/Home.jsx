@@ -3,8 +3,9 @@ import MainPage from "../MainPage";
 import RightContent from "../RightContent";
 import Explore from "../../pages/Explore";
 import Profile from "../../pages/Profile";
-import Bookmarks from "../../pages/Bookmarks";
-function Home({showProfile,showExplore,showMain,showBookmarks}) {
+import Bookmarks from "../../pages/Bookmarks/Bookmarks";
+import ReelsPage from "../../pages/Reels/ReelsPage";
+function Home({showProfile,showExplore,showMain,showBookmarks,showReels}) {
     
   return (
     <div className="w-full h-screen bg-black text-white flex">
@@ -18,6 +19,7 @@ function Home({showProfile,showExplore,showMain,showBookmarks}) {
              {showExplore && <Explore/>}
              {showProfile && <Profile/>}
              {showBookmarks && <Bookmarks/>}
+             {showReels && <ReelsPage/>}
         </div>
       </div>
 

@@ -35,7 +35,7 @@ function Navbar({ setCurrentPage }) {
 
         <div className="flex items-center gap-3  mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full">
           <BiMovie />
-          <NavLink to="/">Reels</NavLink>
+          <button onClick={() => navigate('/reels')}>Reels</button>
         </div>
 
         <div className="flex items-center gap-3   mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full">
