@@ -3,7 +3,9 @@
 function Premium() {
     return (
         <div>
-            Premium
+           <div>
+            
+           </div>
         </div>
     )
 }
