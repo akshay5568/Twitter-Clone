@@ -44,8 +44,8 @@ function MainPage() {
 
             <div className="h-fit">
               <img
-                className="max-w-[95%] rounded-xl mt-5  border-1 border-gray-500"
-                src="https://pbs.twimg.com/media/Gw3zR9LW4AAg7M9?format=jpg&name=medium"
+                className="max-w-[95%]  rounded-xl mt-5  border-1 border-gray-500"
+                src="https://images.unsplash.com/photo-1741768019347-7fd7730dc9ec?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxMnx8fGVufDB8fHx8fA%3D%3D"
                 alt=""
               />
             </div>
