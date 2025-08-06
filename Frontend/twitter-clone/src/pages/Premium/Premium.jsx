@@ -2,7 +2,7 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 
 function Premium() {
   return (
-    <div className="w-full h-full bg-black text-white ">
+    <div className="w-full h-fit bg-black text-white ">
       <div>
         <div>
           <div className="text-center w-full pt-15">
@@ -138,7 +138,6 @@ function Premium() {
                 <FaLongArrowAltRight />
                 Radar
               </li>
-             
 
               <div className="w-[95%] bg-[#212327] h-[11vw] rounded-md m-auto mt-6 p-2">
                 <h1 className="text-xl mb-2">SuperGrok</h1>
@@ -147,17 +146,58 @@ function Premium() {
                     <FaLongArrowAltRight />
                     Highest usage limits
                   </li>
-                   <li className="flex items-center gap-2 mb-1">
+                  <li className="flex items-center gap-2 mb-1">
                     <FaLongArrowAltRight />
                     Use Grok 4, our most powerful model
                   </li>
                   <li className="flex items-center gap-2 mb-1">
                     <FaLongArrowAltRight />
-                   Early access to new features
+                    Early access to new features
                   </li>
                 </ul>
               </div>
             </ul>
+          </div>
+        </div>
+
+        <div className="w-[67%] m-auto mt-7">
+          <div>
+            <h2 className="text-2xl font-semibold">Compare tiers & features</h2>
+          </div>
+
+          <div className="w-full h-[25vw] bg-[#16181c] rounded-md mt-7 p-5">
+            <div className="w-[90%] m-auto">
+              <table className="table-auto w-full text-center">
+                <thead>
+                  <tr>
+                    <th>Enhanced Experience</th>
+                    <th>Basic</th>
+                    <th>Premium</th>
+                    <th>Premium+</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
+                    <td>Malcolm Lockyer</td>
+                    <td>1961</td>
+                  </tr>
+                  <tr>
+                    <td>Witchy Woman</td>
+                    <td>The Eagles</td>
+                    <td>1972</td>
+                  </tr>
+                  <tr>
+                    <td>Shining Star</td>
+                    <td>Earth, Wind, and Fire</td>
+                    <td>1975</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+
           </div>
         </div>
       </div>
