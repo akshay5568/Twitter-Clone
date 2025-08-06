@@ -1,4 +1,6 @@
 import { FaLongArrowAltRight } from "react-icons/fa";
+import { RxCross2 } from "react-icons/rx";
+import { TbBounceRightFilled } from "react-icons/tb";
 
 function Premium() {
   return (
@@ -166,33 +168,68 @@ function Premium() {
           </div>
 
           <div className="w-full h-[25vw] bg-[#16181c] rounded-md mt-7 p-5">
-            <div className="w-[90%] m-auto">
-              <table className="table-auto w-full text-center">
+            <div className="">
+              <table className="table-auto w-full text-left">
                 <thead>
-                  <tr>
+                  <tr className="font-semibold text-base">
                     <th>Enhanced Experience</th>
                     <th>Basic</th>
                     <th>Premium</th>
                     <th>Premium+</th>
-
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-                    <td>Malcolm Lockyer</td>
-                    <td>1961</td>
+                  <tr className="border-b-1 border-t-1 border-gray-800 mt-2">
+                    <td className="pb-3  pt-3">Ads</td>
+                    <td className="pb-3  pt-3">No reduction</td>
+                    <td className="pb-3  pt-3">Half in For You & Following</td>
+                    <td className="pb-3  pt-3">Fully ad-free</td>
                   </tr>
-                  <tr>
-                    <td>Witchy Woman</td>
-                    <td>The Eagles</td>
-                    <td>1972</td>
+                  <tr className="border-b-1  border-gray-800 mt-2">
+                    <td className="pb-3  pt-3">Reply boost</td>
+                    <td className="pb-3  pt-3">Smallest</td>
+                    <td className="pb-3  pt-3">Larger</td>
+                    <td className="pb-3  pt-3">Largest</td>
                   </tr>
-                  <tr>
-                    <td>Shining Star</td>
-                    <td>Earth, Wind, and Fire</td>
-                    <td>1975</td>
+
+                  <tr className="border-b-1  border-gray-800 mt-2">
+                    <td className="pb-3  pt-3">Radar</td>
+                    <td className="pb-3  pt-3 text-gray-600"><RxCross2/></td>
+                    <td className="pb-3  pt-3 text-gray-600"><RxCross2/></td>
+                    <td className="pb-3  pt-3 text-[#00ba7c]"><TbBounceRightFilled/></td>
                   </tr>
+
+                   <tr className="border-b-1  border-gray-800 mt-2">
+                    <td>Edit post</td>
+                    <td className="pb-3  pt-3 text-[#00ba7c]"><TbBounceRightFilled/></td>
+                    <td className="pb-3  pt-3 text-[#00ba7c]"><TbBounceRightFilled/></td>
+                    <td className="pb-3  pt-3 text-[#00ba7c]"><TbBounceRightFilled/></td>
+                  </tr>
+
+                   <tr className="border-b-1  border-gray-800 mt-2">
+                    <td>Longer posts</td>
+                    <td className="pb-3  pt-3 text-[#00ba7c]"><TbBounceRightFilled/></td>
+                    <td className="pb-3  pt-3 text-[#00ba7c]"><TbBounceRightFilled/></td>
+                    <td className="pb-3  pt-3 text-[#00ba7c]"><TbBounceRightFilled/></td>
+                   
+                  </tr>
+
+                   <tr className="border-b-1  border-gray-800 mt-2">
+                    <td>Background video playback</td>
+                    <td className="pb-3  pt-3 text-[#00ba7c]"><TbBounceRightFilled/></td>
+                    <td className="pb-3  pt-3 text-[#00ba7c]"><TbBounceRightFilled/></td>
+                    <td className="pb-3  pt-3 text-[#00ba7c]"><TbBounceRightFilled/></td>
+                   
+                  </tr>
+
+                   <tr className=" border-gray-800 mt-2">
+                    <td>Download videos</td>
+                    <td className="pb-3  pt-3 text-[#00ba7c]"><TbBounceRightFilled/></td>
+                    <td className="pb-3  pt-3 text-[#00ba7c]"><TbBounceRightFilled/></td>
+                    <td className="pb-3  pt-3 text-[#00ba7c]"><TbBounceRightFilled/></td>
+                  
+                  </tr>
+
                 </tbody>
               </table>
             </div>
