@@ -1,5 +1,5 @@
 import logo from "../assets/logo.jpg";
-import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { IoHomeOutline } from "react-icons/io5";
 import { IoSearch } from "react-icons/io5";
 import { FaRegBookmark } from "react-icons/fa";

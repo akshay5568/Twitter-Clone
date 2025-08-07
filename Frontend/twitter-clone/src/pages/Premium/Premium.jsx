@@ -1,12 +1,17 @@
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 import { TbBounceRightFilled } from "react-icons/tb";
+import { useNavigate } from "react-router-dom";
 
 function Premium() {
+  
+  const navigate = useNavigate();
+
   return (
     <div className="w-full h-fit bg-black text-white ">
       <div>
         <div>
+          <button onClick={() => navigate('/')} className="absolute top-4 left-5 bg-red-400 rounded-full text-2xl"><RxCross2/></button>
           <div className="text-center w-full pt-15">
             <h1 className="text-5xl font-bold">Upgrade to Premium</h1>
             <p className="text-gray-500 mt-3">
