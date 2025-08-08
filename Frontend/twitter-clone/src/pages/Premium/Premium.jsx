@@ -4,14 +4,18 @@ import { TbBounceRightFilled } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 
 function Premium() {
-  
   const navigate = useNavigate();
 
   return (
     <div className="w-full h-fit bg-black text-white ">
-      <div>
+      <div className="h-fit">
         <div>
-          <button onClick={() => navigate('/')} className="absolute top-4 left-5 bg-red-400 rounded-full text-2xl"><RxCross2/></button>
+          <button
+            onClick={() => navigate("/")}
+            className="absolute top-4 left-5 bg-red-400 rounded-full text-2xl"
+          >
+            <RxCross2 />
+          </button>
           <div className="text-center w-full pt-15">
             <h1 className="text-5xl font-bold">Upgrade to Premium</h1>
             <p className="text-gray-500 mt-3">
@@ -167,12 +171,12 @@ function Premium() {
           </div>
         </div>
 
-        <div className="w-[67%] m-auto mt-7">
+        <div className="w-[67%] h-fit m-auto mt-7">
           <div>
             <h2 className="text-2xl font-semibold">Compare tiers & features</h2>
           </div>
 
-          <div className="w-full h-[25vw] bg-[#16181c] rounded-md mt-7 p-5">
+          <div className=" h-fit bg-[#16181c] rounded-md mt-7 p-5">
             <div className="">
               <table className="table-auto w-full text-left">
                 <thead>
@@ -199,47 +203,210 @@ function Premium() {
 
                   <tr className="border-b-1  border-gray-800 mt-2">
                     <td className="pb-3  pt-3">Radar</td>
-                    <td className="pb-3  pt-3 text-gray-600"><RxCross2/></td>
-                    <td className="pb-3  pt-3 text-gray-600"><RxCross2/></td>
-                    <td className="pb-3  pt-3 text-[#00ba7c]"><TbBounceRightFilled/></td>
+                    <td className="pb-3  pt-3 text-gray-600">
+                      <RxCross2 />
+                    </td>
+                    <td className="pb-3  pt-3 text-gray-600">
+                      <RxCross2 />
+                    </td>
+                    <td className="pb-3  pt-3 text-[#00ba7c]">
+                      <TbBounceRightFilled />
+                    </td>
                   </tr>
 
-                   <tr className="border-b-1  border-gray-800 mt-2">
+                  <tr className="border-b-1  border-gray-800 mt-2">
                     <td>Edit post</td>
-                    <td className="pb-3  pt-3 text-[#00ba7c]"><TbBounceRightFilled/></td>
-                    <td className="pb-3  pt-3 text-[#00ba7c]"><TbBounceRightFilled/></td>
-                    <td className="pb-3  pt-3 text-[#00ba7c]"><TbBounceRightFilled/></td>
+                    <td className="pb-3  pt-3 text-[#00ba7c]">
+                      <TbBounceRightFilled />
+                    </td>
+                    <td className="pb-3  pt-3 text-[#00ba7c]">
+                      <TbBounceRightFilled />
+                    </td>
+                    <td className="pb-3  pt-3 text-[#00ba7c]">
+                      <TbBounceRightFilled />
+                    </td>
                   </tr>
 
-                   <tr className="border-b-1  border-gray-800 mt-2">
+                  <tr className="border-b-1  border-gray-800 mt-2">
                     <td>Longer posts</td>
-                    <td className="pb-3  pt-3 text-[#00ba7c]"><TbBounceRightFilled/></td>
-                    <td className="pb-3  pt-3 text-[#00ba7c]"><TbBounceRightFilled/></td>
-                    <td className="pb-3  pt-3 text-[#00ba7c]"><TbBounceRightFilled/></td>
-                   
+                    <td className="pb-3  pt-3 text-[#00ba7c]">
+                      <TbBounceRightFilled />
+                    </td>
+                    <td className="pb-3  pt-3 text-[#00ba7c]">
+                      <TbBounceRightFilled />
+                    </td>
+                    <td className="pb-3  pt-3 text-[#00ba7c]">
+                      <TbBounceRightFilled />
+                    </td>
                   </tr>
 
-                   <tr className="border-b-1  border-gray-800 mt-2">
+                  <tr className="border-b-1  border-gray-800 mt-2">
                     <td>Background video playback</td>
-                    <td className="pb-3  pt-3 text-[#00ba7c]"><TbBounceRightFilled/></td>
-                    <td className="pb-3  pt-3 text-[#00ba7c]"><TbBounceRightFilled/></td>
-                    <td className="pb-3  pt-3 text-[#00ba7c]"><TbBounceRightFilled/></td>
-                   
+                    <td className="pb-3  pt-3 text-[#00ba7c]">
+                      <TbBounceRightFilled />
+                    </td>
+                    <td className="pb-3  pt-3 text-[#00ba7c]">
+                      <TbBounceRightFilled />
+                    </td>
+                    <td className="pb-3  pt-3 text-[#00ba7c]">
+                      <TbBounceRightFilled />
+                    </td>
                   </tr>
 
-                   <tr className=" border-gray-800 mt-2">
+                  <tr className=" border-gray-800 mt-2">
                     <td>Download videos</td>
-                    <td className="pb-3  pt-3 text-[#00ba7c]"><TbBounceRightFilled/></td>
-                    <td className="pb-3  pt-3 text-[#00ba7c]"><TbBounceRightFilled/></td>
-                    <td className="pb-3  pt-3 text-[#00ba7c]"><TbBounceRightFilled/></td>
-                  
+                    <td className="pb-3  pt-3 text-[#00ba7c]">
+                      <TbBounceRightFilled />
+                    </td>
+                    <td className="pb-3  pt-3 text-[#00ba7c]">
+                      <TbBounceRightFilled />
+                    </td>
+                    <td className="pb-3  pt-3 text-[#00ba7c]">
+                      <TbBounceRightFilled />
+                    </td>
                   </tr>
-
                 </tbody>
               </table>
             </div>
+          </div>
 
+          <div className=" bg-[#16181c] p-3 rounded-md mt-4">
+            <table className="table-auto w-full text-left">
+              <thead>
+                <tr className="font-semibold text-base">
+                  <th>Grok AI</th>
+                  <th>Basic</th>
+                  <th>Premium</th>
+                  <th>Premium+</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b-1 border-t-1 border-gray-800 mt-2">
+                  <td className="pb-3  pt-3">Usage limits</td>
+                  <td className="pb-3  pt-3 text-gray-600">
+                    <RxCross2 />
+                  </td>
+                  <td className="pb-3  pt-3">Higher</td>
+                  <td className="pb-3  pt-3">Highest</td>
+                </tr>
+                <tr className="border-b-1  border-gray-800 mt-2">
+                  <td className="pb-3  pt-3">SuperGrok</td>
+                  <td className="pb-3  pt-3 text-gray-600">
+                    <RxCross2 />
+                  </td>
+                  <td className="pb-3  pt-3 text-gray-600">
+                    <RxCross2 />
+                  </td>
+                  <td className="pb-3  pt-3 text-[#00ba7c]">
+                    <TbBounceRightFilled />
+                  </td>
+                </tr>
 
+                <tr className="border-b-1  border-gray-800 mt-2">
+                  <td className="pb-3  pt-3">Early access to new features</td>
+                  <td className="pb-3  pt-3 text-gray-600">
+                    <RxCross2 />
+                  </td>
+                  <td className="pb-3  pt-3 text-gray-600">
+                    <RxCross2 />
+                  </td>
+                  <td className="pb-3  pt-3 text-[#00ba7c]">
+                    <TbBounceRightFilled />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div className="bg-[#16181c] p-3 rounded-md mt-4">
+            <table className="table-auto w-full text-left">
+              <thead>
+                <tr className="font-semibold text-base">
+                  <th>Created Hub</th>
+                  <th>Basic</th>
+                  <th>Premium</th>
+                  <th>Premium+</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b-1 border-t-1 border-gray-800 mt-2">
+                  <td className="pb-3  pt-3">Write Articls</td>
+                  <td className="pb-3  pt-3 text-gray-600">
+                    <RxCross2 />
+                  </td>
+                     <td className="pb-3  pt-3 text-gray-600">
+                    <RxCross2 />
+                  </td>
+                      <td className="pb-3  pt-3 text-[#00ba7c]">
+                    <TbBounceRightFilled />
+                  </td>
+                </tr>
+                <tr className="border-b-1  border-gray-800 mt-2">
+                  <td className="pb-3  pt-3">Get paid to post</td>
+                  <td className="pb-3  pt-3 text-gray-600">
+                    <RxCross2 />
+                  </td>
+                      <td className="pb-3  pt-3 text-[#00ba7c]">
+                    <TbBounceRightFilled />
+                  </td>
+                   <td className="pb-3  pt-3 text-[#00ba7c]">
+                    <TbBounceRightFilled />
+                  </td>
+                </tr>
+
+                <tr className="border-b-1  border-gray-800 mt-2">
+                  <td className="pb-3  pt-3">Creator Subscriptions</td>
+                  <td className="pb-3  pt-3 text-gray-600">
+                    <RxCross2 />
+                  </td>
+                    <td className="pb-3  pt-3 text-[#00ba7c]">
+                    <TbBounceRightFilled />
+                  </td>
+                  <td className="pb-3  pt-3 text-[#00ba7c]">
+                    <TbBounceRightFilled />
+                  </td>
+                </tr>
+
+                <tr className="border-b-1  border-gray-800 mt-2">
+                  <td>X Pro</td>
+                  <td className="pb-3  pt-3 text-gray-600">
+                    <RxCross2 />
+                  </td>
+                  <td className="pb-3  pt-3 text-[#00ba7c]">
+                    <TbBounceRightFilled />
+                  </td>
+                  <td className="pb-3  pt-3 text-[#00ba7c]">
+                    <TbBounceRightFilled />
+                  </td>
+                </tr>
+
+                <tr className="border-b-1  border-gray-800 mt-2">
+                  <td>Media Studio</td>
+                   <td className="pb-3  pt-3 text-gray-600">
+                    <RxCross2 />
+                  </td>
+                  <td className="pb-3  pt-3 text-[#00ba7c]">
+                    <TbBounceRightFilled />
+                  </td>
+                  <td className="pb-3  pt-3 text-[#00ba7c]">
+                    <TbBounceRightFilled />
+                  </td>
+                </tr>
+
+                <tr className="border-b-1  border-gray-800 mt-2">
+                  <td>Analytics</td>
+                <td className="pb-3  pt-3 text-gray-600">
+                    <RxCross2 />
+                  </td>
+                  <td className="pb-3  pt-3 text-[#00ba7c]">
+                    <TbBounceRightFilled />
+                  </td>
+                  <td className="pb-3  pt-3 text-[#00ba7c]">
+                    <TbBounceRightFilled />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
