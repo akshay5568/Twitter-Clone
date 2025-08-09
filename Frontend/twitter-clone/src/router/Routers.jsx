@@ -3,6 +3,8 @@ import LoginPage from "../pages/loginSignupPages/LoginPage";
 import Home from "../components/mainpages/Home";
 import Signup from "../pages/loginSignupPages/Signup";
 import Premium from '../pages/Premium/Premium';
+import Post from "../components/Post";
+Post
 function Router() {
   return(
     <>
@@ -15,6 +17,7 @@ function Router() {
             <Route path="/Premium" element={<Premium/>}/>   
             <Route path="/bookmarks" element={<Home showBookmarks={true}/>}/>   
             <Route path="/reels" element={<Home showReels={true}/>}/>   
+            <Route path="/post" element={<Post/>}/>   
         </Routes>
    </>
   );

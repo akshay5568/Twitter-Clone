@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 
 function Post () {
     return (
+       <div className="w-full bg-black h-full">
         <div className="w-full h-fit p-2 border-t-1 border-gray-800">
             <div className="flex text-white gap-3 p-3">
                 <div className="w-[10%]">
@@ -18,6 +19,7 @@ function Post () {
                 </div>
             </div>
         </div>
+        </div> 
     )
 
 }

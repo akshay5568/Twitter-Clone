@@ -64,7 +64,7 @@ function Navbar({ setCurrentPage }) {
         </div>
 
         <div className="w-full p-3 bg-white rounded-full text-center">
-          <button className="text-black text-xl font-semibold">Post</button>
+          <button onClick={() => navigate('/post')} className="cursor-pointer text-black text-xl font-semibold">Post</button>
         </div>
 
         <div className="mt-25 rounded-full transition duration-500 hover:bg-[#3c3c3c]  p-2">
