@@ -1,10 +1,20 @@
 import logo from '..//../assets/logo.jpg';
+import { RxCross2 } from "react-icons/rx";
+import { useNavigate } from "react-router-dom";
 
 
 
 function Signup () {
+
+     const navigate = useNavigate();
     return (
         <div className='w-full h-full bg-[#242d35] flex justify-center items-center text-white'>
+            <button
+                        onClick={() => navigate("/login")}
+                        className="absolute top-4 left-5 bg-red-400 rounded-full text-2xl"
+                      >
+                        <RxCross2 />
+                      </button>
             <div className='w-[40%] h-[80%] bg-black rounded-xl px-20'>
                  <img className='w-[50px] m-auto mt-3' src={logo} alt="" />
                  <h1 className='text-2xl mt-7' >Create your account</h1>
