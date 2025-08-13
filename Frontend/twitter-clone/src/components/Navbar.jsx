@@ -58,11 +58,7 @@ function Navbar({ setCurrentPage }) {
           <button onClick={() => navigate("/profile")}>Profile</button>
         </div>
 
-        <div className="flex items-center gap-3  mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full">
-          <CgMoreO />
-          <NavLink to="/">More</NavLink>
-        </div>
-
+    
         <div className="w-full p-3 bg-white rounded-full text-center">
           <button onClick={() => navigate('/post')} className="cursor-pointer text-black text-xl font-semibold">Post</button>
         </div>
@@ -93,6 +89,9 @@ function Navbar({ setCurrentPage }) {
         ) : (
           ""
         )}
+
+
+
       </div>
     </>
   );
