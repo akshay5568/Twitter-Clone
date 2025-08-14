@@ -34,11 +34,11 @@ function Post() {
                   id="file-upload"
                 />
                 <label htmlFor="file-upload">
-                  <FaImage className="text-[#1d9bf0]" />
+                  <FaImage className="text-[#1d9bf0]  cursor-pointer" />
                 </label>
              
 
-              <button className="px-3 p-1 bg-white rounded-full text-black  font-semibold">
+                <button className="px-3 p-1 bg-white rounded-full text-black   cursor-pointer font-semibold">
                 Post
               </button>
                </div>

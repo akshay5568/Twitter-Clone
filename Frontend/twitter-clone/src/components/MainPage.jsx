@@ -10,7 +10,7 @@ function MainPage() {
   const [isTure, setTure] = useState(false);
 
   const Hanlde = () => {
-    setTure(!false);
+    setTure(!isTure);
   };
   return (
     <div className="w-full h-fit bg-black text-white border-1 overflow-auto border-gray-800 ">
@@ -58,9 +58,9 @@ function MainPage() {
                 <FaRegComment />
                 {6}k
               </button>
-              <button onClick={Hanlde} className={`flex items-center gap-1`}>
+              <button onClick={Hanlde} className={`flex items-center gap-1 cursor-pointer`}>
                 <PiHeartStraightLight
-                  className={` ${isTure ? "bg-red-500" : " "}`}
+                  className={` ${isTure ? "text-red-500" : " "}`}
                 />
                 {6}k
               </button>

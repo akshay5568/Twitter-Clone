@@ -43,7 +43,7 @@ function RightContent() {
               <h4>Aditya</h4>
             </div>
             <div className="bg-white p-1 px-5 text-black font-semibold rounded-full">
-                {isFollow ?  <button className="cursor-pointer">Unfollow</button> :  <button className="cursor-pointer">Folllow</button>}
+                {isFollow ?  <button className="cursor-pointer" onClick={() => setIsFollow(!isFollow)}>Unfollow</button> :  <button  onClick={() => setIsFollow(!isFollow)} className="cursor-pointer">Folllow</button>}
             </div>
           </div>
         </div>
