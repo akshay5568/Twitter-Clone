@@ -1,10 +1,14 @@
 import { FaArrowLeft } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
+   const navigate = useNavigate();
   return (
     <div className="w-full h-fit bg-black text-white border-1 border-gray-800">
       <div className="flex items-center gap-3 h-[3vw] w-full bg-transparent p-2">
-        <button>
+        <button 
+        className="cursor-pointer"
+        onClick={() => navigate(-1)}>
           <FaArrowLeft />
         </button>
         <h3>Aditya Jangid</h3>

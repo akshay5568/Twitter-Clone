@@ -4,6 +4,7 @@ import { CiBookmark } from "react-icons/ci";
 import { FiShare } from "react-icons/fi";
 import { useState } from "react";
 import Post from "./Post";
+import { NavLink } from "react-router-dom";
 
 function MainPage() {
   const [isTure, setTure] = useState(false);
@@ -23,14 +24,16 @@ function MainPage() {
 
       <div className="h-full ">
         <div className="bg-black h-fit border-t-1 border-gray-800 p-2 border-b-1">
+          <NavLink to="/profile">
           <div className="flex items-center gap-7">
             <img
-              className="w-[3vw] h-[3vw] rounded-full border-1 border-gray-400"
+              className="w-[3vw] h-[3vw] rounded-full border-1 border-gray-400 hover:border-1"
               src="https://plus.unsplash.com/premium_photo-1752192844294-35fb57ae49be?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDV8dG93SlpGc2twR2d8fGVufDB8fHx8fA%3D%3D"
               alt=""
             />
-            <h5>Aditya Jangid</h5>
+            <h5 className="hover:underline">Aditya Jangid</h5>
           </div>
+          </NavLink>
 
           <div className="pl-18 mt-3">
             <div>

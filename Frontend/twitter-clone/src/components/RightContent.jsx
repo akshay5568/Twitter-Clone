@@ -1,6 +1,10 @@
+import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
+import { useNavigate } from "react-router-dom";
 
 function RightContent() {
+  const navigate = useNavigate();
+  const [isFollow,setIsFollow] = useState(true);
   return (
     <div className="w-full h-full pl-9 p-3">
       <div className="w-[80%]">
@@ -19,7 +23,9 @@ function RightContent() {
               Subscribe to unlock new features and if eligible, receive a share
               of revenue.
             </p>
-            <button className="p-2 px-6 rounded-r-full rounded-l-full bg-[#1d9bf0] mt-3 font-semibold text-xs cursor-pointer">
+            <button 
+            onClick={() => navigate("/premium")}
+            className="p-2 px-6 rounded-r-full rounded-l-full bg-[#1d9bf0] mt-3 font-semibold text-xs cursor-pointer">
               Subscribe
             </button>
           </div>
@@ -37,7 +43,7 @@ function RightContent() {
               <h4>Aditya</h4>
             </div>
             <div className="bg-white p-1 px-5 text-black font-semibold rounded-full">
-              <button className="cursor-pointer">Folllow</button>
+                {isFollow ?  <button className="cursor-pointer">Unfollow</button> :  <button className="cursor-pointer">Folllow</button>}
             </div>
           </div>
         </div>

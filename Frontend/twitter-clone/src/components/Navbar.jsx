@@ -21,49 +21,50 @@ function Navbar({ setCurrentPage }) {
       </div>
 
       <div className="w-full mt-5 text-xl relative">
-        <div className="flex items-center gap-3  mb-2 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full">
+        <div className="flex items-center gap-3  mb-2 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer">
           <IoHomeOutline />
           <button onClick={() => navigate("/")}>Home</button>
         </div>
 
-        <div className="flex items-center gap-3 mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full">
+        <div className="flex items-center gap-3 mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer">
           <IoSearch />
           <button className="" onClick={() => navigate("/explore")}>
             Explore
           </button>
         </div>
 
-        <div className="flex items-center gap-3  mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full">
+        <div className="flex items-center gap-3  mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer">
           <BiMovie />
           <button onClick={() => navigate('/reels')}>Reels</button>
         </div>
 
-        <div className="flex items-center gap-3   mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full">
+        <div className="flex items-center gap-3   mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer">
           <FaRegBookmark />
           <button onClick={() => navigate("/bookmarks")}>Bookmarks</button>
         </div>
 
-        <div className="flex items-center gap-3   mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full">
+        <div className="flex items-center gap-3   mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer">
           <PiSuitcaseSimpleBold />
           <NavLink to="/">Jobs</NavLink>
         </div>
 
-        <div className="flex items-center gap-3 mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full">
-          <FaXTwitter />
-          <NavLink to="/premium">Premium</NavLink>
-        </div>
-
-        <div className="flex items-center gap-3  mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full">
-          <CiUser />
-          <button onClick={() => navigate("/profile")}>Profile</button>
-        </div>
+        
+          
+          <NavLink to="/premium"
+          className="flex items-center gap-3 mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer"
+          ><FaXTwitter />Premium</NavLink>
+      
+        
+          
+          <button className="flex items-center gap-3  mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer" onClick={() => navigate("/profile")}><CiUser />Profile</button>
+       
 
     
         <div className="w-full p-3 bg-white rounded-full text-center">
           <button onClick={() => navigate('/post')} className="cursor-pointer text-black text-xl font-semibold">Post</button>
         </div>
 
-        <div className="mt-25 rounded-full transition duration-500 hover:bg-[#3c3c3c]  p-2">
+        <div className="mt-25 rounded-full transition duration-500 hover:bg-[#3c3c3c] cursor-pointer p-2">
           <div
             className="flex items-center gap-4"
             onClick={() => setLogout(!logout)}

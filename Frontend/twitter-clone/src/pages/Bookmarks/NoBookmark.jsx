@@ -1,11 +1,13 @@
 import { FaArrowLeft } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 
 function NoBookmark() {
+  const navigate = useNavigate();
   return (
     <div className="w-full h-full border-1 border-gray-800">
       <div className="flex items-center gap-3 p-3 font-semibold text-xl"> 
-            <button className="cursor-pointer"><FaArrowLeft/></button>
+            <button onClick={() => navigate(-1)} className="cursor-pointer"><FaArrowLeft/></button>
             <h2>Bookmarks</h2>
       </div>
 
