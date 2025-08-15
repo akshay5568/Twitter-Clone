@@ -14,7 +14,7 @@ function Home({showProfile,showExplore,showMain,showBookmarks,showReels}) {
       </div>
 
       <div className="w-[40%] h-screen overflow-scroll scroll-smooth">
-        <div className="h-[150rem]">
+        <div className="h-fit">
              {showMain && <MainPage/>}
              {showExplore && <Explore/>}
              {showProfile && <Profile/>}

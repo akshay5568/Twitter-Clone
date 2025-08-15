@@ -1,5 +1,5 @@
 import logo from "../assets/logo.jpg";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { IoHomeOutline } from "react-icons/io5";
 import { IoSearch } from "react-icons/io5";
 import { FaRegBookmark } from "react-icons/fa";
@@ -12,56 +12,86 @@ import { IoIosMore } from "react-icons/io";
 import { useState } from "react";
 
 function Navbar({ setCurrentPage }) {
-  const navigate = useNavigate();
   const [logout, setLogout] = useState(false);
   return (
     <>
       <div>
-        <img src={logo} alt="" className="w-[20%]" />
+        <NavLink to="/">
+          <img src={logo} alt="" className="w-[20%]" />
+        </NavLink>
       </div>
 
       <div className="w-full mt-5 text-xl relative">
-        <div className="flex items-center gap-3  mb-2 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer">
+        <NavLink
+          className="flex items-center gap-3  mb-2 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer"
+          to="/"
+          style={(e) => (e.isActive ? { color: "tomato" } : { color: "white" })}
+        >
           <IoHomeOutline />
-          <button onClick={() => navigate("/")}>Home</button>
-        </div>
+          Home
+        </NavLink>
 
-        <div className="flex items-center gap-3 mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer">
-          <IoSearch />
-          <button className="" onClick={() => navigate("/explore")}>
-            Explore
-          </button>
-        </div>
-
-        <div className="flex items-center gap-3  mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer">
-          <BiMovie />
-          <button onClick={() => navigate('/reels')}>Reels</button>
-        </div>
-
-        <div className="flex items-center gap-3   mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer">
-          <FaRegBookmark />
-          <button onClick={() => navigate("/bookmarks")}>Bookmarks</button>
-        </div>
-
-        <div className="flex items-center gap-3   mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer">
-          <PiSuitcaseSimpleBold />
-          <NavLink to="/">Jobs</NavLink>
-        </div>
-
-        
-          
-          <NavLink to="/premium"
+        <NavLink
+          to="/explore"
           className="flex items-center gap-3 mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer"
-          ><FaXTwitter />Premium</NavLink>
-      
-        
-          
-          <button className="flex items-center gap-3  mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer" onClick={() => navigate("/profile")}><CiUser />Profile</button>
-       
+          style={(e) => (e.isActive ? { color: "tomato" } : { color: "white" })}
+        >
+          <IoSearch />
+          Explore
+        </NavLink>
 
-    
+        <NavLink
+          className="flex items-center gap-3  mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer"
+          to="/reels"
+          style={(e) => (e.isActive ? { color: "tomato" } : { color: "white" })}
+        >
+          <BiMovie />
+          Reels
+        </NavLink>
+
+        <NavLink
+          className="flex items-center gap-3   mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer"
+          to="/bookmarks"
+          style={(e) => (e.isActive ? { color: "tomato" } : { color: "white" })}
+        >
+          <FaRegBookmark />
+          Bookmark
+        </NavLink>
+
+        <NavLink
+          className="flex items-center gap-3   mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer"
+          to="/"
+          style={(e) => (e.isActive ? { color: "tomato" } : { color: "white" })}
+        >
+          <PiSuitcaseSimpleBold />
+          Jobs
+        </NavLink>
+
+        <NavLink
+          to="/premium"
+          className="flex items-center gap-3 mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer"
+        >
+          <FaXTwitter />
+          Premium
+        </NavLink>
+
+        <NavLink
+          className="flex items-center gap-3  mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer"
+          to="/profile"
+          style={(e) => (e.isActive ? { color: "tomato" } : { color: "white" })}
+        >
+          {" "}
+          <CiUser />
+          Profle
+        </NavLink>
+
         <div className="w-full p-3 bg-white rounded-full text-center">
-          <button onClick={() => navigate('/post')} className="cursor-pointer text-black text-xl font-semibold">Post</button>
+          <button
+            onClick={() => navigate("/post")}
+            className="cursor-pointer text-black text-xl font-semibold"
+          >
+            Post
+          </button>
         </div>
 
         <div className="mt-25 rounded-full transition duration-500 hover:bg-[#3c3c3c] cursor-pointer p-2">
@@ -90,9 +120,6 @@ function Navbar({ setCurrentPage }) {
         ) : (
           ""
         )}
-
-
-
       </div>
     </>
   );
