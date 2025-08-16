@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom";
 
 function MainPage() {
   const [isTure, setTure] = useState(false);
-
+  const [isBookmark,setBookmark] = useState(true)
   const Hanlde = () => {
     setTure(!isTure);
   };
@@ -58,13 +58,14 @@ function MainPage() {
                 <FaRegComment />
                 {6}k
               </button>
-              <button onClick={Hanlde} className={`flex items-center gap-1 cursor-pointer`}>
-                <PiHeartStraightLight
-                  className={` ${isTure ? "text-red-500" : " "}`}
-                />
+              <button onClick={Hanlde} className={`flex items-center gap-1 cursor-pointer ${isTure ? "text-red-500" : " "}`}>
+                <PiHeartStraightLight/>
                 {6}k
               </button>
-              <button className="flex items-center gap-1">
+              <button
+              className={`flex items-center gap-1 ${isBookmark ? "text-[#1d9bf0]" : " "} cursor-pointer`}
+              onClick={() => setBookmark(!isBookmark)}
+              >
                 <CiBookmark />
               </button>
               <button className="flex items-center gap-1">

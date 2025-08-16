@@ -12,6 +12,7 @@ import { IoIosMore } from "react-icons/io";
 import { useState } from "react";
 
 function Navbar({ setCurrentPage }) {
+  
   const [logout, setLogout] = useState(false);
   return (
     <>
