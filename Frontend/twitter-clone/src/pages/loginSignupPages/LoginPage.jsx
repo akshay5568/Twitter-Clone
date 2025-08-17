@@ -1,6 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import logo from "..//../assets/logo.jpg";
 import { useState } from "react";
+import axios from "axios";
+import {toast} from 'react-toastify';
+import { ToastContainer } from "react-toastify";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -18,10 +21,32 @@ function LoginPage() {
     setInputData({ ...inputData, [e.target.name]: e.target.value });
   };
 
-  const formHandler = (e) => {
+  const formHandler = async (e) => {
     e.preventDefault();
-    console.log(inputData);
-    setInputData({...inputData, email:"", password:""});
+
+    try {
+      console.log(inputData);
+
+      const response = await axios.post(
+        "http://localhost:8080/api/auth/login",
+        inputData
+      );
+
+      if (response.status == 200 || response.status == 201) {
+        localStorage.setItem("token", response.data.token);
+        console.log(response.data.token);
+        setInputData({ ...inputData, email: "", password: "" });   
+        toast.success("Login successfully");
+        setTimeout(() => {
+            navigate('/');
+        }, 2000)
+      } else {
+        toast.error("Invalid credentials");
+        console.log("Error");
+      }
+    } catch (e) {
+      toast.error(e.response?.data?.massage || "Something Went Wrong");
+    }
   };
 
   return (
@@ -63,6 +88,7 @@ function LoginPage() {
                 Login
               </button>
             </form>
+            <ToastContainer/>
 
             <div className="flex w-[50%] items-center mt-3">
               <div className="text-gray-500">________________</div>

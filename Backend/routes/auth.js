@@ -30,7 +30,7 @@ router.post('/signup' , async (req,res) => {
 //Login 
 router.post('/login', async (req,res) => {
     const {email,password} = req.body;
-
+    console.log(email,password);
     const user = await User.findOne({email});
     if (!user) return res.status(400).json({massage:"Invalid credentials"});
 

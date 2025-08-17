@@ -1,5 +1,6 @@
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { MdOutlineMonochromePhotos } from "react-icons/md";
 
 function Profile() {
    const navigate = useNavigate();
@@ -24,11 +25,15 @@ function Profile() {
         </div>
         <div className="w-full h-fit p-3">
           <div className="w-[10vw] h-[10vw] absolute rounded-full top-35">
+            <input type="file" className="hidden" id="img"/>
+            <label htmlFor="img" className="cursor-pointer ">
             <img
               className="rounded-full absolute w-full h-full"
               src="https://images.unsplash.com/photo-1680763921539-afae7b2c219e?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8R2VybWFuJTIwQWN0b3J8ZW58MHx8MHx8fDA%3D"
               alt=""
             />
+            <span className=""><MdOutlineMonochromePhotos/></span>
+            </label>
           </div>
 
           <div className="mt-15">
