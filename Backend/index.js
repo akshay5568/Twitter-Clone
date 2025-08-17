@@ -1,27 +1,30 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const cors = require("cors");
+require("dotenv").config();
 const User = require("./models/UserModel");
+
+//Middilwares
+app.use(cors());
+app.use(express.json());
+
+const authRoutes = require("./routes/auth");
+
+app.use("/api/auth", authRoutes);
 
 app.listen(8080, () => {
   console.log("Server is Running on Port");
 });
 
-app.get("/", (req, res) => {
-  res.send("Hello, Twitter Clone");
-});
-
-
+//For Database
 const MONGO_URL = process.env.MONGO_URL;
 mongoose
   .connect(MONGO_URL)
   .then(() => console.log("connected to mongo"))
-  .catch((e) => e);
+  .catch((e) => console.log(e));
 
-
-const data = {
-    name:"Aditya",
-    email:"Adityajangid124@gmail.com",
-    password:"121313"
-}
-
+//Routes
+app.get("/", (req, res) => {
+  res.send("Hello, Twitter Clone");
+});
