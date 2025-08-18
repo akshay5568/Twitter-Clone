@@ -1,5 +1,5 @@
 import logo from "../assets/logo.jpg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { IoHomeOutline } from "react-icons/io5";
 import { IoSearch } from "react-icons/io5";
 import { FaRegBookmark } from "react-icons/fa";
@@ -10,10 +10,20 @@ import { CgMoreO } from "react-icons/cg";
 import { BiMovie } from "react-icons/bi";
 import { IoIosMore } from "react-icons/io";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import { useSelector } from "react-redux";
 
 function Navbar({ setCurrentPage }) {
-  
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+  const LogoutButton = () => {
+    localStorage.removeItem("token");
+  };
   const [logout, setLogout] = useState(false);
+
+  const userDetails = useSelector((state) => state.user.user);
+
   return (
     <>
       <div>
@@ -52,7 +62,7 @@ function Navbar({ setCurrentPage }) {
 
         <NavLink
           className="flex items-center gap-3   mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer"
-          to="/bookmarks"
+          to={token ? "/bookmarks" : "/login"}
           style={(e) => (e.isActive ? { color: "tomato" } : { color: "white" })}
         >
           <FaRegBookmark />
@@ -102,10 +112,10 @@ function Navbar({ setCurrentPage }) {
           >
             <img
               className="w-[20%] h-[5vh] rounded-xl object-fill"
-              src="https://plus.unsplash.com/premium_photo-1670071482460-5c08776521fe?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
+              src={userDetails.profileImg}
               alt=""
             />
-            <h5 className="text-sm font-semibold">Aditya Jangid</h5>
+            <h5 className="text-sm font-semibold">{userDetails.name}</h5>
             <button>
               <IoIosMore />
             </button>
@@ -114,8 +124,8 @@ function Navbar({ setCurrentPage }) {
 
         {logout ? (
           <div className="w-[20vw] h-[5vw] border-1 shadow-md border-gray-800 absolute bottom-19 rounded-xl bg-black flex items-center text-xl font-semibold ">
-            <button className="m-auto cursor-pointer">
-              Log out Aditya jangid
+            <button className="m-auto cursor-pointer" onClick={LogoutButton}>
+              Log out {userDetails.name}
             </button>
           </div>
         ) : (

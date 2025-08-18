@@ -30,7 +30,7 @@ router.post('/signup' , async (req,res) => {
 //Login 
 router.post('/login', async (req,res) => {
     const {email,password} = req.body;
-    console.log(email,password);
+   
     const user = await User.findOne({email});
     if (!user) return res.status(400).json({massage:"Invalid credentials"});
 
@@ -41,6 +41,15 @@ router.post('/login', async (req,res) => {
     res.status(200).json({token});
 })
 
+
+router.get('/user' , async (req,res) => {
+    const token = req.headers.authorization.split(" ")[1];
+    if (!token) return res.status(401).send("No token found");
+
+    const decode = JWT.verify(token, process.env.JWT_SECRET);
+    const userDetails = await User.findById(decode.id);
+    res.status(200).json(userDetails);
+})
 
 
 
