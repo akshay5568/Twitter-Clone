@@ -7,6 +7,7 @@ import Post from "./Post";
 import { NavLink } from "react-router-dom";
 
 function MainPage() {
+  const token = localStorage.getItem("token")
   const [isTure, setTure] = useState(false);
   const [isBookmark,setBookmark] = useState(true)
   const Hanlde = () => {
@@ -18,9 +19,9 @@ function MainPage() {
 
       </div>
 
-      <div>
+      {token ? (<div>
         <Post/>
-      </div>
+      </div>) : ""}
 
       <div className="h-full ">
         <div className="bg-black h-fit border-t-1 border-gray-800 p-2 border-b-1">

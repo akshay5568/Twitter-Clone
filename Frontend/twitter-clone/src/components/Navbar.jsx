@@ -17,10 +17,13 @@ import { useSelector } from "react-redux";
 function Navbar({ setCurrentPage }) {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const [logout, setLogout] = useState(false);
+
   const LogoutButton = () => {
     localStorage.removeItem("token");
+    setLogout(false);
+    navigate("/");
   };
-  const [logout, setLogout] = useState(false);
 
   const userDetails = useSelector((state) => state.user.user);
 
@@ -32,7 +35,10 @@ function Navbar({ setCurrentPage }) {
         </NavLink>
       </div>
 
-      <div className="w-full mt-5 text-xl relative">
+      <div
+        className="w-full mt-5 text-xl relative"
+        onBlur={() => setLogout(false)}
+      >
         <NavLink
           className="flex items-center gap-3  mb-2 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer"
           to="/"
@@ -88,7 +94,7 @@ function Navbar({ setCurrentPage }) {
 
         <NavLink
           className="flex items-center gap-3  mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer"
-          to="/profile"
+          to={token ? "/profile" : "/login"}
           style={(e) => (e.isActive ? { color: "tomato" } : { color: "white" })}
         >
           {" "}
@@ -99,28 +105,39 @@ function Navbar({ setCurrentPage }) {
         <div className="w-full p-3 bg-white rounded-full text-center">
           <button
             onClick={() => navigate("/post")}
-            className="cursor-pointer text-black text-xl font-semibold"
+            className="w-full cursor-pointer text-black text-xl font-semibold"
           >
             Post
           </button>
         </div>
 
-        <div className="mt-25 rounded-full transition duration-500 hover:bg-[#3c3c3c] cursor-pointer p-2">
-          <div
-            className="flex items-center gap-4"
-            onClick={() => setLogout(!logout)}
-          >
-            <img
-              className="w-[20%] h-[5vh] rounded-xl object-fill"
-              src={userDetails.profileImg}
-              alt=""
-            />
-            <h5 className="text-sm font-semibold">{userDetails.name}</h5>
-            <button>
-              <IoIosMore />
+        {token ? (
+          <div className="mt-25 rounded-full transition duration-500 hover:bg-[#3c3c3c] cursor-pointer p-2">
+            <div
+              className="flex items-center gap-4"
+              onClick={() => setLogout(!logout)}
+            >
+              <img
+                className="w-[20%] h-[5vh] rounded-xl object-fill"
+                src={userDetails.profileImg}
+                alt=""
+              />
+              <h5 className="text-sm font-semibold">{userDetails.name}</h5>
+              <button>
+                <IoIosMore />
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="mt-25 h-[50px] w-[200px] rounded-xl border-1 transition duration-500 hover:bg-[#3c3c3c]  border-gray-800 flex items-center justify-center">
+            <button
+              className="text-base font-semibold cursor-pointer"
+              onClick={() => navigate("/login")}
+            >
+              Login
             </button>
           </div>
-        </div>
+        )}
 
         {logout ? (
           <div className="w-[20vw] h-[5vw] border-1 shadow-md border-gray-800 absolute bottom-19 rounded-xl bg-black flex items-center text-xl font-semibold ">
