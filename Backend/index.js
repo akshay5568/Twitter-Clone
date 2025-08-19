@@ -8,9 +8,19 @@ require("dotenv").config();
 app.use(cors());
 app.use(express.json());
 
-const authRoutes = require("./routes/auth");
 
+
+//For Routers
+const authRoutes = require("./routes/auth");
 app.use("/api/auth", authRoutes);
+
+const userPost = require('./routes/userPosts');
+app.use('/api', userPost);
+
+
+
+
+
 
 app.listen(8080, () => {
   console.log("Server is Running on Port");
@@ -25,6 +35,6 @@ mongoose
 
 //Routes
 app.get("/", (req, res) => {
-  res.send("Hello, Twitter Clone");
+  res.send("Hello, Twitter Clone");       
 });
 

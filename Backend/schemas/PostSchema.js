@@ -8,10 +8,15 @@ const PostSchema = mongoose.Schema({
     content:{
         type:String
     },
-   img:{
+    img:{
       type:String
-   }
-
+    },
+    comments:{
+        type:String
+    },
+    likes:{
+        type:Number
+    },
 })
 
 module.exports = PostSchema;

@@ -1,10 +1,31 @@
 import { NavLink } from "react-router-dom";
 import { FaImage } from "react-icons/fa6";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+import axios from 'axios';
 
 function Post() {
+  const userDetails = useSelector((state) => state.user.user);
+  const [textContent,setTextContent] = useState("");
+  const [file,setFile] = useState(null);
+ 
+  const token = localStorage.getItem("token");
+  const handlerForm = async (e) =>{
+      e.preventDefault(); 
+    if(textContent && token){
+      const formData = new FormData();
+      formData.append("textContent",textContent);
+      if(file) formData.append("file",file);
+      await axios.post("http://localhost:8080/api/user-posts", formData , {
+        headers:{
+          Authorization: token ? `Bearer ${token}` : undefined,
+             "Content-Type": "multipart/form-data",
+        }
+      }).then(res => console.log(res)).catch(e => console.log(e));
+    }
 
-  const userDetails = useSelector(state => state.user.user);
+  }
+
   return (
     <div className="w-full bg-black h-full">
       <div className="w-full h-fit p-2 border-t-1 border-gray-800">
@@ -20,12 +41,14 @@ function Post() {
           </div>
 
           <div className="w-[90%]">
-            <form action="" className="">
+            <form action="" className="" onSubmit={handlerForm}>
               <textarea
                 name=""
                 className="border-b-1 border-b-gray-600 w-full text-xl outline-none"
                 placeholder="What's happening?"
                 id=""
+                value={textContent}
+                onChange={(e) => setTextContent(e.target.value)}
               ></textarea>
               <br />
               <div className="flex items-center justify-between">
@@ -34,17 +57,18 @@ function Post() {
                   type="file"
                   name="Image"
                   placeholder="Image"
+                  accept="image/*,video/*" 
                   id="file-upload"
+                  onChange={(e) => setFile(e.target.files[0])}
                 />
                 <label htmlFor="file-upload">
                   <FaImage className="text-[#1d9bf0]  cursor-pointer" />
                 </label>
-             
 
                 <button className="px-3 p-1 bg-white rounded-full text-black   cursor-pointer font-semibold">
-                Post
-              </button>
-               </div>
+                  Post
+                </button>
+              </div>
             </form>
           </div>
         </div>
