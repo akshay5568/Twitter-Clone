@@ -7,8 +7,11 @@ import Bookmarks from "../../pages/Bookmarks/Bookmarks";
 import ReelsPage from "../../pages/Reels/ReelsPage";
 import { useEffect } from "react";
 import { addUser } from "../../reducers/UserReducer";
+import {allUserPosts} from "../../reducers/PostReducer";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+
+
 function Home({
   showProfile,
   showExplore,
@@ -36,7 +39,24 @@ function Home({
       };
       userApi();
     }
-  }, [dispatch]);
+  }, [dispatch,token]);
+
+  //Apicall for the all user's post.
+  useEffect(() => {
+      if(token) {
+        const postsApi =  async () => {
+          const response = await axios.get("http://localhost:8080/api/user-posts");
+          dispatch(allUserPosts(response.data))
+        }
+        postsApi();
+      }
+  }, [dispatch,token])
+
+
+
+
+
+
 
   //Logic
   return (

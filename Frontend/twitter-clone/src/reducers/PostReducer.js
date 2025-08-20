@@ -14,3 +14,5 @@ export const PostReducer = createSlice({
         }
     }
 })
+export const {allUserPosts} = PostReducer.actions;
+export default PostReducer.reducer;

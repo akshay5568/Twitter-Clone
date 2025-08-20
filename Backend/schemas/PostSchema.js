@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
 
 
-const PostSchema = mongoose.Schema({
+const PostSchema = new mongoose.Schema({
     userId:{
-        type:mongoose.Schema.Types.ObjectId , ref:'user'
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'user',
+        required:true
     },
     content:{
         type:String
@@ -12,10 +14,12 @@ const PostSchema = mongoose.Schema({
       type:String
     },
     comments:{
-        type:String
+        type:String,
+        default:""
     },
     likes:{
-        type:Number
+        type:Number,
+        default:0
     },
 })
 

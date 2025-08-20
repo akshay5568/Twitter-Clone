@@ -2,29 +2,40 @@ import { NavLink } from "react-router-dom";
 import { FaImage } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
+import {toast} from "react-toastify";
 
 function Post() {
   const userDetails = useSelector((state) => state.user.user);
-  const [textContent,setTextContent] = useState("");
-  const [file,setFile] = useState(null);
- 
-  const token = localStorage.getItem("token");
-  const handlerForm = async (e) =>{
-      e.preventDefault(); 
-    if(textContent && token){
-      const formData = new FormData();
-      formData.append("textContent",textContent);
-      if(file) formData.append("file",file);
-      await axios.post("http://localhost:8080/api/user-posts", formData , {
-        headers:{
-          Authorization: token ? `Bearer ${token}` : undefined,
-             "Content-Type": "multipart/form-data",
-        }
-      }).then(res => console.log(res)).catch(e => console.log(e));
-    }
+  const [textContent, setTextContent] = useState("");
+  const [file, setFile] = useState(null);
 
-  }
+  const token = localStorage.getItem("token");
+
+  const handlerForm = async (e) => {
+    e.preventDefault();
+    if (textContent && token) {
+      const formData = new FormData();
+      formData.append("textContent", textContent);
+      if (file) formData.append("file", file);
+      try {
+        await axios
+          .post("http://localhost:8080/api/user-posts", formData, {
+            headers: {
+              Authorization: token ? `Bearer ${token}` : undefined,
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((res) => console.log(res))
+          .catch((e) => console.log(e));
+      } catch (error) {
+        console.log(error);
+      }
+      setTextContent("");
+    } else {
+      toast.error("Something Went Wrong");
+    }
+  };
 
   return (
     <div className="w-full bg-black h-full">
@@ -49,6 +60,7 @@ function Post() {
                 id=""
                 value={textContent}
                 onChange={(e) => setTextContent(e.target.value)}
+                required
               ></textarea>
               <br />
               <div className="flex items-center justify-between">
@@ -57,7 +69,7 @@ function Post() {
                   type="file"
                   name="Image"
                   placeholder="Image"
-                  accept="image/*,video/*" 
+                  accept="image/*,video/*"
                   id="file-upload"
                   onChange={(e) => setFile(e.target.files[0])}
                 />
