@@ -22,7 +22,7 @@ function Navbar({ setCurrentPage }) {
   const LogoutButton = () => {
     localStorage.removeItem("token");
     setLogout(false);
-    navigate("/");
+    navigate("/login");
   };
 
   const userDetails = useSelector((state) => state.user.user);

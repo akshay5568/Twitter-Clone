@@ -7,10 +7,10 @@ import Bookmarks from "../../pages/Bookmarks/Bookmarks";
 import ReelsPage from "../../pages/Reels/ReelsPage";
 import { useEffect } from "react";
 import { addUser } from "../../reducers/UserReducer";
-import {allUserPosts} from "../../reducers/PostReducer";
+import { allUserPosts } from "../../reducers/PostReducer";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-
+import { userPost } from "../../reducers/PostReducer";
 
 function Home({
   showProfile,
@@ -20,7 +20,6 @@ function Home({
   showReels,
 }) {
   const token = localStorage.getItem("token");
-  console.log(token);
   const dispatch = useDispatch();
 
   //ApiCall for the user
@@ -39,24 +38,33 @@ function Home({
       };
       userApi();
     }
-  }, [dispatch,token]);
+  }, [dispatch, token]);
 
   //Apicall for the all user's post.
   useEffect(() => {
-      if(token) {
-        const postsApi =  async () => {
-          const response = await axios.get("http://localhost:8080/api/user-posts");
-          dispatch(allUserPosts(response.data))
-        }
-        postsApi();
-      }
-  }, [dispatch,token])
+    if (token) {
+      const postsApi = async () => {
+        const response = await axios.get(
+          "http://localhost:8080/api/user-posts"
+        );
+        dispatch(allUserPosts(response.data));
+      };
+      postsApi();
+    }
+  }, [dispatch, token]);
 
-
-
-
-
-
+  //Indivisual user post api.
+  useEffect(() => {
+    const callApi = async () => {
+      const response = await axios.get("http://localhost:8080/api/user-post", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      dispatch(userPost(response.data));
+    };
+    callApi();
+  }, []);
 
   //Logic
   return (

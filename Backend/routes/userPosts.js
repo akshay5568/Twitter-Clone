@@ -5,6 +5,9 @@ const JWT = require("jsonwebtoken");
 
 const router = express.Router();
 
+
+
+//Making post route
 router.post("/user-posts", upload.single("file"), (req, res) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
@@ -24,15 +27,34 @@ router.post("/user-posts", upload.single("file"), (req, res) => {
   }
 });
 
+
+
+//All user's posts for the home page.
 router.get("/user-posts", async (req, res) => {
   try {
     const allPosts = await Post.find({});
-    console.log(allPosts);
     res.status(200).json(allPosts);
   } catch (error) {
     console.log("something went wrong");
     res.status(500).send("something went wrong while fatching data");
   }
 });
+
+
+//Indivisual post route
+router.get('/user-post', async (req,res) => {
+   try{
+        const token = req.headers.authorization.split(" ")[1];
+        if (!token) res.status(401).send("Could Not Able to Find the Post");   
+        const decode = JWT.decode(token,process.env.JWT_SECRET);
+        const userPost = await Post.findOne({userId:decode.id});
+        res.status(200).json([userPost]);
+   }
+   catch (error) {
+        res.status(500).send("something went wrong while fatching post", error.massage);
+   }
+})
+
+
 
 module.exports = router;
