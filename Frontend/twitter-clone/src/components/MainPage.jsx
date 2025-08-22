@@ -2,23 +2,43 @@ import { FaRegComment } from "react-icons/fa";
 import { PiHeartStraightLight } from "react-icons/pi";
 import { CiBookmark } from "react-icons/ci";
 import { FiShare } from "react-icons/fi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Post from "./Post";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { Likes } from "../reducers/PostReducer";
+import axios from "axios";
 
 function MainPage() {
+  //Other state variables
   const token = localStorage.getItem("token");
   const [isTure, setTure] = useState(false);
   const [isBookmark, setBookmark] = useState(true);
-  const Hanlde = () => {
+
+  //For redux
+  const allUserPosts = useSelector((state) => state.post?.post);
+  const user = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
+
+  //For likes button
+  const Hanlde = (PostId) => {
+    const UserId = user._id;
     setTure(!isTure);
+    dispatch(Likes({ UserId, PostId }));
+
+    //For likes Api
+    const ApiCall = async () => {
+      const response = await axios.post(`http://localhost:8080/api/post-like/${PostId}`, {} , {
+        headers: {
+          Authorization: `Brearer ${token}`,
+        },
+      });
+      console.log(response.data);
+    };
+    ApiCall();
   };
 
-  const allUserPosts = useSelector((state) => state.post?.post);   
-  const user = useSelector((state) => state.user.user);
-
-  // console.log(allUserPosts);
+  //Main content
   return (
     <div className="w-full h-fit bg-black text-white border-1 overflow-auto border-gray-800 ">
       <div></div>
@@ -62,7 +82,7 @@ function MainPage() {
                     {}k
                   </button>
                   <button
-                    onClick={Hanlde}
+                    onClick={() => Hanlde(posts._id)}
                     className={`flex items-center gap-1 cursor-pointer ${
                       isTure ? "text-red-500" : " "
                     }`}

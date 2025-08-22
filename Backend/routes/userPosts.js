@@ -5,8 +5,6 @@ const JWT = require("jsonwebtoken");
 
 const router = express.Router();
 
-
-
 //Making post route
 router.post("/user-posts", upload.single("file"), (req, res) => {
   try {
@@ -27,8 +25,6 @@ router.post("/user-posts", upload.single("file"), (req, res) => {
   }
 });
 
-
-
 //All user's posts for the home page.
 router.get("/user-posts", async (req, res) => {
   try {
@@ -40,21 +36,44 @@ router.get("/user-posts", async (req, res) => {
   }
 });
 
-
 //Indivisual post route
-router.get('/user-post', async (req,res) => {
-   try{
-        const token = req.headers.authorization.split(" ")[1];
-        if (!token) res.status(401).send("Could Not Able to Find the Post");   
-        const decode = JWT.decode(token,process.env.JWT_SECRET);
-        const userPost = await Post.findOne({userId:decode.id});
-        res.status(200).json([userPost]);
-   }
-   catch (error) {
-        res.status(500).send("something went wrong while fatching post", error.massage);
-   }
-})
+router.get("/user-post", async (req, res) => {
+  try {
+    const token = req.headers.authorization.split(" ")[1];
+    if (!token) res.status(401).send("Could Not Able to Find the Post");
+    const decode = JWT.decode(token, process.env.JWT_SECRET);
+    const userPost = await Post.findOne({ userId: decode.id });
+    res.status(200).json([userPost]);
+  } catch (error) {
+    res
+      .status(500)
+      .send("something went wrong while fatching post", error.massage);
+  }
+});
 
+router.post("/post-like/:id", async (req, res) => {
+  try {
+    const postId = req.params.id;
+    const token = req.headers.authorization.split(" ")[1];
+    if (!token) res.status(401).send("something went wrong");
+    const post = await Post.findById(postId);
+    const decode = JWT.decode(token, process.env.JWT_SECRET);
+    const userId = decode._id;
 
+    if (!post.likedBy.includes(userId)) {
+      post.likes = Math.max(0, post.likes - 1);
+      post.likedBy = post.likedBy.filter((id) => id.toString() !== userId);
+    } else {
+      post.likes = post.likes + 1;
+      post.likedBy.push(userId);
+    }
+    await post.save();
+    res.status(200).json(post);
+  } catch (error) {
+    res
+      .status(500)
+      .send("Something went wrong while fatching post", error.massage);
+  }
+});
 
 module.exports = router;
