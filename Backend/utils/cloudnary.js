@@ -13,7 +13,7 @@ const storage = new CloudinaryStorage({
   params: {
      folder: "user_uploads",
     resource_type: "auto",
-    allowed_formats: ["jpg", "png", "jpeg", "webp", "mp4", "avi", "mov", "mkv"],
+    allowed_formats: ["jpg", "png", "jpeg", "webp", "mp4", "avi", "mov", "mkv", "avif"],
   },
 });
 

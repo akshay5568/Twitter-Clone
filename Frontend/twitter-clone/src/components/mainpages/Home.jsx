@@ -48,7 +48,6 @@ function Home({
           "http://localhost:8080/api/user-posts"
         );
         dispatch(allUserPosts(response.data));
-        console.log(response.data)
       };
       postsApi();
     }

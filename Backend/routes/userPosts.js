@@ -42,7 +42,7 @@ router.get("/user-post", async (req, res) => {
     const token = req.headers.authorization.split(" ")[1];
     if (!token) res.status(401).send("Could Not Able to Find the Post");
     const decode = JWT.decode(token, process.env.JWT_SECRET);
-    const userPost = await Post.findOne({ userId: decode.id });
+    const userPost = await Post.find({ userId: decode.id });
     res.status(200).json([userPost]);
   } catch (error) {
     res
@@ -58,16 +58,20 @@ router.post("/post-like/:id", async (req, res) => {
     if (!token) res.status(401).send("something went wrong");
     const post = await Post.findById(postId);
     const decode = JWT.decode(token, process.env.JWT_SECRET);
-    const userId = decode._id;
+    const userId = decode.id;
 
-    if (!post.likedBy.includes(userId)) {
+    if (post.likedBy.includes(userId)) {
       post.likes = Math.max(0, post.likes - 1);
-      post.likedBy = post.likedBy.filter((id) => id.toString() !== userId);
+      const userFound = post.likedBy.indexOf(userId); 
+      if (userFound !== -1) {
+        post.likedBy.splice(userFound,1);
+      }
     } else {
       post.likes = post.likes + 1;
       post.likedBy.push(userId);
     }
     await post.save();
+    
     res.status(200).json(post);
   } catch (error) {
     res

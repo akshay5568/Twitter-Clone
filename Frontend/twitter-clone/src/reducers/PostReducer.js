@@ -13,24 +13,29 @@ export const PostReducer = createSlice({
       state.post = action.payload;
     },
     userPost: (state, action) => {
-      state.userPost = action.payload;
+      state.userPost = action.payload.flat();
     },
     Likes: (state, action) => {
       const { UserId, PostId } = action.payload;
       const post = state.post.find((post) => post._id === PostId);
-
       if (post) {
-           if (!post.likedBy) post.likedBy = []; 
-        if (post.likedBy?.includes(UserId)) {
-          post.likes -= 1;
-           post.likedBy = post.likedBy.filter((id) => id !== UserId);
+        if (post.likedBy.includes(UserId)) {
+           const userfound = post.likedBy.indexOf(UserId)
+          if (userfound !== -1) post.likedBy.splice(userfound,1);   
+          Math.max(0,post.likes -= 1);
+         
         } else {
+            post.likedBy.push(UserId);
             post.likes += 1;
-             post.likedBy.push(UserId);
         }
       }
     },
+    postDelete:(state,action) => {
+        const id = action.payload;
+        state.userPost = state.userPost.filter(post => post._id !== id);
+        state.post = state.post.filter(post => post._id !== id);
+    }
   },
 });
-export const { allUserPosts, userPost, Likes } = PostReducer.actions;
+export const { allUserPosts, userPost, Likes , postDelete} = PostReducer.actions;
 export default PostReducer.reducer;

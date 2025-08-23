@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import axios from "axios";
 import {toast} from "react-toastify";
+import { FaPhotoVideo } from "react-icons/fa";
+
 
 function Post() {
   const userDetails = useSelector((state) => state.user.user);
@@ -73,8 +75,9 @@ function Post() {
                   id="file-upload"
                   onChange={(e) => setFile(e.target.files[0])}
                 />
-                <label htmlFor="file-upload">
+                <label htmlFor="file-upload" className="flex items-center gap-3">
                   <FaImage className="text-[#1d9bf0]  cursor-pointer" />
+                  <FaPhotoVideo  className="text-[#1d9bf0]  cursor-pointer"/>
                 </label>
 
                 <button className="px-3 p-1 bg-white rounded-full text-black   cursor-pointer font-semibold">

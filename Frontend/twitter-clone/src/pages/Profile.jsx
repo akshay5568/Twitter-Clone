@@ -1,15 +1,29 @@
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { MdOutlineMonochromePhotos } from "react-icons/md";  
+import { MdOutlineMonochromePhotos } from "react-icons/md";
 import { useSelector, useDispatch } from "react-redux";
 import { FaRegComment } from "react-icons/fa";
 import { PiHeartStraightLight } from "react-icons/pi";
 import { CiBookmark } from "react-icons/ci";
 import { FiShare } from "react-icons/fi";
 import { CiMenuKebab } from "react-icons/ci";
+import { useState } from "react";
+import axios from "axios";
+import { postDelete } from "../reducers/PostReducer";
 
 function Profile() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [toggel, setToggel] = useState(null);
+
+  const handllerToggel = (index) => {
+    setToggel(toggel == index ? null : index);
+  };
+
+  const PostDeleter = async (id) => {
+    await axios.delete(`http://localhost:8080/api/delete-post/${id}`);
+     dispatch(postDelete(id));
+  };
 
   const userDetails = useSelector((state) => state.user?.user);
   const userPost = useSelector((state) => state.post?.userPost);
@@ -60,10 +74,10 @@ function Profile() {
             Posts
           </div>
           <div className="p-3 border-1 border-gray-800 mt-3 rounded-md">
-            {userPost[0]
+            {userPost.length > 0 
               ? userPost.map((posts, index) => {
                   return (
-                    <div className="h-full " key={index}>
+                    <div className="h-full " key={posts._id}>
                       <div className="bg-black h-fit border-t-1 border-gray-800 p-2 border-b-1">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3">
@@ -76,9 +90,26 @@ function Profile() {
                               {userDetails.name}
                             </h5>
                           </div>
-                          <button className="cursor-pointer">
-                            <CiMenuKebab />
-                          </button>
+                          <div className="relative">
+                            <button
+                              className="cursor-pointer"
+                              onClick={() => handllerToggel(index)}
+                            >
+                              <CiMenuKebab />
+                            </button>
+                            <div
+                              className={`absolute text-white w-[100px] rounded-md pt-3 text-center text-sm font-semibold  h-[50px] p-2      right-5 bg-black border-1 border-gray-800 ${
+                                toggel == index ? "inline" : "hidden"
+                              }`}
+                            >
+                              <button
+                                className="cursor-pointer"
+                                onClick={() => PostDeleter(posts._id)}
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          </div>
                         </div>
                         <div className="pl-18 mt-3">
                           <div>
