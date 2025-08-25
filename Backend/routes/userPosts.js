@@ -2,6 +2,7 @@ const express = require("express");
 const Post = require("../models/PostModel");
 const upload = require("../utils/cloudnary");
 const JWT = require("jsonwebtoken");
+const User = require("../models/UserModel");
 
 const router = express.Router();
 
@@ -51,6 +52,7 @@ router.get("/user-post", async (req, res) => {
   }
 });
 
+//Likes route
 router.post("/post-like/:id", async (req, res) => {
   try {
     const postId = req.params.id;
@@ -62,22 +64,34 @@ router.post("/post-like/:id", async (req, res) => {
 
     if (post.likedBy.includes(userId)) {
       post.likes = Math.max(0, post.likes - 1);
-      const userFound = post.likedBy.indexOf(userId); 
+      const userFound = post.likedBy.indexOf(userId);
       if (userFound !== -1) {
-        post.likedBy.splice(userFound,1);
+        post.likedBy.splice(userFound, 1);
       }
     } else {
       post.likes = post.likes + 1;
       post.likedBy.push(userId);
     }
     await post.save();
-    
+
     res.status(200).json(post);
   } catch (error) {
     res
       .status(500)
-      .send("Something went wrong while fatching post", error.massage);
+      .send("Something went wrong while fatching post", error.massage);   
   }
 });
 
+//All user's fatching route
+router.get("/all-users", async (req, res) => {
+  try {
+    const AllUsers = await User.find({});
+    if (!AllUsers) res.status(401).send("Users Not Found");
+    res.status(200).json(AllUsers);
+  } catch (error) {
+    res
+      .status(500)
+      .send("Something went wrong could'nt able fatch data right now", error);   
+  }
+});
 module.exports = router;

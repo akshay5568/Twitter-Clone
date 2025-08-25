@@ -21,13 +21,17 @@ function Profile() {
   };
 
   const PostDeleter = async (id) => {
+    try {
     await axios.delete(`http://localhost:8080/api/delete-post/${id}`);
      dispatch(postDelete(id));
+    }catch (error) {
+      console.error("Smoething went wrong", error);
+    }
+
   };
 
   const userDetails = useSelector((state) => state.user?.user);
   const userPost = useSelector((state) => state.post?.userPost);
-
   return (
     <div className="w-full h-fit bg-black text-white border-1 border-gray-800">
       <div className="flex items-center gap-3 h-[3vw] w-full bg-transparent p-2">

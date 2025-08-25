@@ -22,20 +22,24 @@ function MainPage() {
   //For likes button
   const Hanlde = (PostId) => {
     //For likes Api
-    const ApiCall = async () => {
-      const response = await axios.post(
-        `http://localhost:8080/api/post-like/${PostId}`,
-        {},
-        {
-          headers: {
-            Authorization: `Brearer ${token}`,
-          },
-        }
-      );
-    };
-    ApiCall();
-    const UserId = user._id;
-    dispatch(Likes({ UserId, PostId }));
+    try {
+      const ApiCall = async () => {
+        const response = await axios.post(
+          `http://localhost:8080/api/post-like/${PostId}`,
+          {},
+          {
+            headers: {
+              Authorization: `Brearer ${token}`,
+            },
+          }
+        );
+      };
+      ApiCall();
+      const UserId = user._id;
+      dispatch(Likes({ UserId, PostId }));
+    } catch (error) {
+      console.error("Something went wrong ", error);
+    }
   };
 
   //Main content
@@ -52,8 +56,7 @@ function MainPage() {
       )}
 
       {allUserPosts.map((posts, index) => {
-        const isLiked = posts.likedBy.includes(user._id);   
-
+        const isLiked = posts.likedBy.includes(user._id);
 
         return (
           <div className="h-full " key={index}>
@@ -73,30 +76,31 @@ function MainPage() {
                 </div>
 
                 <div className="h-fit">
-                  <img
-                    className="max-w-[95%]  rounded-xl mt-5  border-1 border-gray-500"
-                    src={posts.img}
-                    alt=""
-                  />
-                  <video
-                  className="max-w-[95%]  rounded-xl mt-5  border-1 border-gray-500"
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    src={posts.img}
-                  ></video>
+                  {posts.img?.match(/\.(jpeg|jpg|png|gif|avif)$/i) ? (
+                    <img
+                      className="max-w-[95%] rounded-xl mt-5 border-1 border-gray-500"
+                      src={posts.img}
+                      alt=""
+                    />
+                  ) : posts.img?.match(/\.(mp4|webm|ogg)$/i) ? (
+                    <video
+                      className="max-w-[95%] rounded-xl mt-5 border-1 border-gray-500"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      src={posts.img}
+                    />
+                  ) : null}
                 </div>
 
-                <div className="flex justify-between w-[95%] p-2 font-semibold text-gray-500">   
+                <div className="flex justify-between w-[95%] p-2 font-semibold text-gray-500">
                   <button className="flex items-center gap-1">
                     <FaRegComment />
                     {}k
                   </button>
                   <button
-                    onClick={() =>
-                      Hanlde(posts._id)
-                    }
+                    onClick={() => Hanlde(posts._id)}
                     className={`flex items-center gap-1 cursor-pointer ${
                       isLiked ? "text-red-500" : "text-gray-500"
                     }`}

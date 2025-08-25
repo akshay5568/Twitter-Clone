@@ -17,7 +17,7 @@ app.use("/api/auth", authRoutes);
 const userPost = require('./routes/userPosts');
 app.use('/api', userPost);
 
-const deletePost = require('./routes/deletePost');
+const deletePost = require('./routes/deletePost');   
 app.use('/api', deletePost);
 
 

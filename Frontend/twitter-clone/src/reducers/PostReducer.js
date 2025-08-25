@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   post: [],
   userPost: [],
+  allUsersAccounts:[],
 };
 
 export const PostReducer = createSlice({
@@ -34,8 +35,12 @@ export const PostReducer = createSlice({
         const id = action.payload;
         state.userPost = state.userPost.filter(post => post._id !== id);
         state.post = state.post.filter(post => post._id !== id);
+    },
+    allUsersAccounts:(state,action) => {
+       state.allUsersAccounts = action.payload;
     }
+
   },
 });
-export const { allUserPosts, userPost, Likes , postDelete} = PostReducer.actions;
+export const { allUserPosts, userPost, Likes , postDelete, allUsersAccounts} = PostReducer.actions;
 export default PostReducer.reducer;
