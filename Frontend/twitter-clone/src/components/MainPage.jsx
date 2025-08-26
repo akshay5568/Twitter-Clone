@@ -15,7 +15,7 @@ function MainPage() {
   const [isBookmark, setBookmark] = useState(true);
 
   //For redux
-  const allUserPosts = useSelector((state) => state.post?.post);
+  const allUserPosts = useSelector((state) => state.post?.post);   
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
 
@@ -44,7 +44,7 @@ function MainPage() {
 
   //Main content
   return (
-    <div className="w-full h-fit bg-black text-white border-1 overflow-auto border-gray-800 ">
+    <div className="w-full h-fit bg-black text-white border-1 overflow-auto border-gray-800 ">   
       <div></div>
 
       {token ? (
@@ -57,13 +57,13 @@ function MainPage() {
 
       {allUserPosts.map((posts, index) => {
         const isLiked = posts.likedBy.includes(user._id);
-
+  
         return (
           <div className="h-full " key={index}>
             <div className="bg-black h-fit border-t-1 border-gray-800 p-2 border-b-1">
               <NavLink to="/profile" className="flex items-center gap-7">
                 <img
-                  className="w-[3vw] h-[3vw] rounded-full border-1 border-gray-400 hover:border-1"
+                  className="w-[3vw] h-[3vw] rounded-full border-1 border-gray-400 hover:border-1"   
                   src={user.profileImg}
                   alt=""
                 />
@@ -112,7 +112,7 @@ function MainPage() {
                     className={`flex items-center gap-1 ${
                       isBookmark ? "text-[#1d9bf0]" : " "
                     } cursor-pointer`}
-                    onClick={() => setBookmark(!isBookmark)}
+                    onClick={() => setBookmark(!isBookmark)}   
                   >
                     <CiBookmark />
                   </button>

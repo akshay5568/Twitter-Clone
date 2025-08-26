@@ -22,12 +22,11 @@ function Profile() {
 
   const PostDeleter = async (id) => {
     try {
-    await axios.delete(`http://localhost:8080/api/delete-post/${id}`);
-     dispatch(postDelete(id));
-    }catch (error) {
+      await axios.delete(`http://localhost:8080/api/delete-post/${id}`);
+      dispatch(postDelete(id));
+    } catch (error) {
       console.error("Smoething went wrong", error);
     }
-
   };
 
   const userDetails = useSelector((state) => state.user?.user);
@@ -67,8 +66,8 @@ function Profile() {
           <div className="mt-15">
             <h3 className="font-semibold text-xl">{userDetails.name}</h3>
             <div className="flex items-center gap-3 mt-3 text-xs text-gray-500">
-              <h3>{userDetails.following} Following</h3>
-              <h3>{userDetails.followers} Followers</h3>
+              <h3>Following {userDetails.following?.length}</h3>
+              <h3>Followers {userDetails.followers?.length}</h3>
             </div>
           </div>
         </div>
@@ -78,7 +77,7 @@ function Profile() {
             Posts
           </div>
           <div className="p-3 border-1 border-gray-800 mt-3 rounded-md">
-            {userPost.length > 0 
+            {userPost.length > 0
               ? userPost.map((posts, index) => {
                   return (
                     <div className="h-full " key={posts._id}>
@@ -121,11 +120,22 @@ function Profile() {
                           </div>
 
                           <div className="h-fit">
-                            <img
-                              className="max-w-[95%]  rounded-xl mt-5  border-1 border-gray-500"
-                              src={posts.img}
-                              alt=""
-                            />
+                            {posts.img?.match(/\.(jpeg|jpg|png|gif|avif)$/i) ? (
+                              <img
+                                className="max-w-[95%] rounded-xl mt-5 border-1 border-gray-500"
+                                src={posts.img}
+                                alt=""
+                              />
+                            ) : posts.img?.match(/\.(mp4|webm|ogg)$/i) ? (
+                              <video
+                                className="max-w-[95%] rounded-xl mt-5 border-1 border-gray-500"
+                                autoPlay
+                                muted
+                                loop
+                                playsInline
+                                src={posts.img}
+                              />
+                            ) : null}
                           </div>
 
                           <div className="flex justify-between w-[95%] p-2 font-semibold text-gray-500">

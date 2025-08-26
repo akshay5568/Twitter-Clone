@@ -20,7 +20,8 @@ app.use('/api', userPost);
 const deletePost = require('./routes/deletePost');   
 app.use('/api', deletePost);
 
-
+const followRoute = require('./routes/followRoutes');
+app.use('/api' , followRoute);
 
 
 
