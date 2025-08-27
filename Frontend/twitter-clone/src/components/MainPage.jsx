@@ -18,6 +18,7 @@ function MainPage() {
   const allUserPosts = useSelector((state) => state.post?.post);   
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
+  
 
   //For likes button
   const Hanlde = (PostId) => {
@@ -56,10 +57,10 @@ function MainPage() {
       )}
 
       {allUserPosts.map((posts, index) => {
-        const isLiked = posts.likedBy.includes(user._id);
-  
+        const isLiked = posts.likedBy.includes(user._id);   
+       
         return (
-          <div className="h-full " key={index}>
+          <div className="h-full " key={posts._id}>
             <div className="bg-black h-fit border-t-1 border-gray-800 p-2 border-b-1">
               <NavLink to="/profile" className="flex items-center gap-7">
                 <img

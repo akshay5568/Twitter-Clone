@@ -19,4 +19,4 @@ const BookmarkSchema = mongoose.Schema({
   },
 });
 
-module.exports = BookmarkSchema;
+module.exports = BookmarkSchema;   

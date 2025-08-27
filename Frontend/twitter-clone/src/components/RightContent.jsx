@@ -29,7 +29,7 @@ function RightContent() {
 
   //follow Handller 
   const followHandel = async (followUserID) => {
-       const response = await axios.post(`http://localhost:8080/api/user-followers/${followUserID}` , {followingUserID});
+       const response = await axios.post(`http://localhost:8080/api/user-followers/${followUserID}` , {followingUserID});   
        console.log(response)
        dispatch(followAccount({followUserID,followingUserID}))       
   }
