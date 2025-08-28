@@ -9,8 +9,10 @@ import { useEffect } from "react";
 import { addUser } from "../../reducers/UserReducer";
 import { allUserPosts } from "../../reducers/PostReducer";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userPost } from "../../reducers/PostReducer";
+import { allBookmarks } from "../../reducers/BookmarkReducer";
+import { userAllBookmarks } from "../../reducers/BookmarkReducer";
 
 function Home({
   showProfile,
@@ -21,6 +23,10 @@ function Home({
 }) {
   const token = localStorage.getItem("token");
   const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.user.user);
+  const bookmarks = useSelector((state) => state.bookmarks.bookmarks);
+
 
   //ApiCall for the user
   useEffect(() => {
@@ -65,6 +71,28 @@ function Home({
     };
     callApi();
   }, []);
+
+  //bookmark ApiCall
+  useEffect(() => {
+    try {
+      const apiCall = async () => {
+        const response = await axios.get(
+          "http://localhost:8080/api/allbookmarks"
+        );
+        dispatch(allBookmarks(response.data));
+      };
+      apiCall();
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
+  //Send userID to bookmarkReducer
+  useEffect(() => {
+    if (user && user._id && bookmarks.length > 0) {
+      dispatch(userAllBookmarks(user._id));
+    }
+  }, [user, bookmarks, dispatch]);
 
   //Logic
   return (

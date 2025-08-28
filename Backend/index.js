@@ -23,6 +23,9 @@ app.use('/api', deletePost);
 const followRoute = require('./routes/followRoutes');
 app.use('/api' , followRoute);
 
+const bookmarkRoute = require('./routes/bookmarkRoute');
+app.use('/api', bookmarkRoute);
+
 
 
 

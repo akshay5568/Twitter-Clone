@@ -7,18 +7,19 @@ import Post from "./Post";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Likes } from "../reducers/PostReducer";
-import axios, { all } from "axios";
+import axios from "axios";
 
 function MainPage() {
+
+  
   //Other state variables
   const token = localStorage.getItem("token");
   const [isBookmark, setBookmark] = useState(true);
-
-  //For redux
-  const allUserPosts = useSelector((state) => state.post?.post);   
-  const user = useSelector((state) => state.user.user);
-  const dispatch = useDispatch();
   
+  //For redux
+  const allUserPosts = useSelector((state) => state.post?.post);
+  const user = useSelector((state) => state.user?.user);
+  const dispatch = useDispatch();
 
   //For likes button
   const Hanlde = (PostId) => {
@@ -26,7 +27,7 @@ function MainPage() {
     try {
       const ApiCall = async () => {
         const response = await axios.post(
-          `http://localhost:8080/api/post-like/${PostId}`,
+          `http://localhost:8080/api/post-like/${PostId}`,   
           {},
           {
             headers: {
@@ -43,9 +44,23 @@ function MainPage() {
     }
   };
 
+  //For Bookmarks
+  const bookmark = async (PostId) => {
+    try {
+      const UserId = user._id; 
+      const response = await axios.post(
+        `http://localhost:8080/api/add-bookmark/${PostId}`,
+         {UserId} 
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   //Main content
   return (
-    <div className="w-full h-fit bg-black text-white border-1 overflow-auto border-gray-800 ">   
+    <div className="w-full h-fit bg-black text-white border-1 overflow-auto border-gray-800 ">
       <div></div>
 
       {token ? (
@@ -57,14 +72,14 @@ function MainPage() {
       )}
 
       {allUserPosts.map((posts, index) => {
-        const isLiked = posts.likedBy.includes(user._id);   
-       
+        const isLiked = posts.likedBy.includes(user._id);
+
         return (
           <div className="h-full " key={posts._id}>
             <div className="bg-black h-fit border-t-1 border-gray-800 p-2 border-b-1">
               <NavLink to="/profile" className="flex items-center gap-7">
                 <img
-                  className="w-[3vw] h-[3vw] rounded-full border-1 border-gray-400 hover:border-1"   
+                  className="w-[3vw] h-[3vw] rounded-full border-1 border-gray-400 hover:border-1"
                   src={user.profileImg}
                   alt=""
                 />
@@ -113,7 +128,7 @@ function MainPage() {
                     className={`flex items-center gap-1 ${
                       isBookmark ? "text-[#1d9bf0]" : " "
                     } cursor-pointer`}
-                    onClick={() => setBookmark(!isBookmark)}   
+                    onClick={() => bookmark(posts._id)}
                   >
                     <CiBookmark />
                   </button>

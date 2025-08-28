@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const PostSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "user",
+    ref: "User",
     required: true,
   },
   content: {
@@ -20,8 +20,7 @@ const PostSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  likedBy: [{type:mongoose.Schema.Types.ObjectId, ref:'user'}],
-  bookmarks:[{type:mongoose.Schema.Types.ObjectId, res:'user'}],
+  likedBy: [{type:mongoose.Schema.Types.ObjectId, ref:'User'}],
 });
 
 module.exports = PostSchema;
