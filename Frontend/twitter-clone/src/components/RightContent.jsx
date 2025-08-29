@@ -5,6 +5,7 @@ import { allUsersAccounts } from "../reducers/PostReducer";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { followAccount } from "../reducers/PostReducer";
+import Explore from "../pages/Explore";
 
 function RightContent() {
 
@@ -29,8 +30,7 @@ function RightContent() {
 
   //follow Handller 
   const followHandel = async (followUserID) => {
-       const response = await axios.post(`http://localhost:8080/api/user-followers/${followUserID}` , {followingUserID});   
-       console.log(response)
+       await axios.post(`http://localhost:8080/api/user-followers/${followUserID}` , {followingUserID});   
        dispatch(followAccount({followUserID,followingUserID}))       
   }
 
@@ -54,11 +54,7 @@ function RightContent() {
     <div className="w-full h-full pl-9 p-3">
       <div className="w-[80%]">
         <div>
-          <input
-            type="text"
-            className="p-3 rounded-l-full rounded-r-full border-1 border-gray-600 text-white w-full text-xs"   
-            placeholder="🔍  Search"
-          />
+          <Explore/>
         </div>
 
         <div className="border-1 border-gray-600 rounded-xl mt-5 p-3 pr-5">

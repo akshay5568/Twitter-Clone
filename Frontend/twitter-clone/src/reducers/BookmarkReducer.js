@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   bookmarks: [],
-  userBookmark: [],
+  userBookmark: [],   
 };
 
 const BookmarkReducer = createSlice({
@@ -10,20 +10,37 @@ const BookmarkReducer = createSlice({
   initialState,
   reducers: {
     allBookmarks: (state, action) => {
-      state.bookmarks = action.payload;
+      try {
+        state.bookmarks = action.payload;
+      } catch (error) {
+        console.error(error);
+      }
     },
 
     userAllBookmarks: (state, action) => {
-      const userID = action.payload;
+      try {
+        const userID = action.payload;
 
-      const userDetails = state.bookmarks.filter(
-        (i) => String(i.userId) === String(userID)
-      );
+        state.userBookmark = state.bookmarks.filter(
+          (i) => String(i.userId) === String(userID)
+        );
 
-      state.userBookmark = userDetails;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+    userBookmarkDelete: (state, action) => {
+      try {
+        const bookmarkID = action.payload;
+        console.log(bookmarkID);
+        state.userBookmark = state.userBookmark.filter(bookID => bookID._id !== bookmarkID);   
+      } catch (error) {
+        console.error(error);
+      }
     },
   },
 });
 
-export const { allBookmarks, userAllBookmarks } = BookmarkReducer.actions;
+export const { allBookmarks, userAllBookmarks , userBookmarkDelete} = BookmarkReducer.actions;
 export default BookmarkReducer.reducer;

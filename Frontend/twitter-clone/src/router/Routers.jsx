@@ -13,7 +13,7 @@ function Router() {
             <Route path="/login" element={<LoginPage/>}/>   
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/explore" element={<Home showExplore={true}/>}/>
-            <Route path="/profile" element={<Home showProfile={true}/>}/>   
+            <Route path="/profile/:id" element={<Home showProfile={true}/>}/>   
             <Route path="/Premium" element={<Premium/>}/>   
             <Route path="/bookmarks" element={<Home showBookmarks={true}/>}/>   
             <Route path="/reels" element={<Home showReels={true}/>}/>   

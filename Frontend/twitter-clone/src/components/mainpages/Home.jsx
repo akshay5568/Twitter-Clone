@@ -12,7 +12,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { userPost } from "../../reducers/PostReducer";
 import { allBookmarks } from "../../reducers/BookmarkReducer";
-import { userAllBookmarks } from "../../reducers/BookmarkReducer";
+import { userAllBookmarks } from "../../reducers/BookmarkReducer";   
 
 function Home({
   showProfile,
@@ -25,7 +25,7 @@ function Home({
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user.user);
-  const bookmarks = useSelector((state) => state.bookmarks.bookmarks);
+  const bookmarks = useSelector((state) => state.bookmarks.bookmarks);   
 
 
   //ApiCall for the user

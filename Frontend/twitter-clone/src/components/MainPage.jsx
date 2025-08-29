@@ -8,16 +8,15 @@ import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Likes } from "../reducers/PostReducer";
 import axios from "axios";
+import { userAllBookmarks } from "../reducers/BookmarkReducer";
 
 function MainPage() {
-
-  
-  //Other state variables
+  //Other state variabls
   const token = localStorage.getItem("token");
-  const [isBookmark, setBookmark] = useState(true);
-  
+
   //For redux
   const allUserPosts = useSelector((state) => state.post?.post);
+  const userBookmark = useSelector((state) => state.bookmarks?.userBookmark);
   const user = useSelector((state) => state.user?.user);
   const dispatch = useDispatch();
 
@@ -27,7 +26,7 @@ function MainPage() {
     try {
       const ApiCall = async () => {
         const response = await axios.post(
-          `http://localhost:8080/api/post-like/${PostId}`,   
+          `http://localhost:8080/api/post-like/${PostId}`,
           {},
           {
             headers: {
@@ -47,20 +46,21 @@ function MainPage() {
   //For Bookmarks
   const bookmark = async (PostId) => {
     try {
-      const UserId = user._id; 
+      const UserId = user._id;
       const response = await axios.post(
         `http://localhost:8080/api/add-bookmark/${PostId}`,
-         {UserId} 
+        { UserId }
       );
       console.log(response.data);
+      dispatch(userAllBookmarks(UserId));
     } catch (error) {
       console.error(error);
     }
-  };
+  };  
 
   //Main content
   return (
-    <div className="w-full h-fit bg-black text-white border-1 overflow-auto border-gray-800 ">
+    <div className="w-full h-fit bg-black text-white border-1 overflow-auto border-gray-800 ">   
       <div></div>
 
       {token ? (
@@ -79,7 +79,7 @@ function MainPage() {
             <div className="bg-black h-fit border-t-1 border-gray-800 p-2 border-b-1">
               <NavLink to="/profile" className="flex items-center gap-7">
                 <img
-                  className="w-[3vw] h-[3vw] rounded-full border-1 border-gray-400 hover:border-1"
+                  className="w-[3vw] h-[3vw] rounded-full border-1 border-gray-400 hover:border-1"   
                   src={user.profileImg}
                   alt=""
                 />
@@ -124,14 +124,16 @@ function MainPage() {
                     <PiHeartStraightLight />
                     {posts.likes}
                   </button>
-                  <button
-                    className={`flex items-center gap-1 ${
-                      isBookmark ? "text-[#1d9bf0]" : " "
-                    } cursor-pointer`}
-                    onClick={() => bookmark(posts._id)}
-                  >
-                    <CiBookmark />
-                  </button>
+                  
+                    <button
+                      className={`flex items-center gap-1 ${
+                      userBookmark[index]?.postId?._id == posts._id ? "text-[#1d9bf0]" : "text-white"
+                      } cursor-pointer`}
+                      onClick={() => bookmark(posts._id)}
+                    >
+                      <CiBookmark />
+                    </button>
+             
                   <button className="flex items-center gap-1">
                     <FiShare />
                   </button>

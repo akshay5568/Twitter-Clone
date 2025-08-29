@@ -1,22 +1,46 @@
 import { useState } from "react";
 import NoBookmark from "../Bookmarks/NoBookmark";
 import MainPage from "..//../components/MainPage";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { FaRegComment } from "react-icons/fa";
 import { PiHeartStraightLight } from "react-icons/pi";
 import { CiBookmark } from "react-icons/ci";
 import { FiShare } from "react-icons/fi";
 import { CiMenuKebab } from "react-icons/ci";
+import axios from "axios";
+import { userBookmarkDelete } from "../../reducers/BookmarkReducer";   
 
 function Bookmarks() {
   const [isBookmarkHere, setBook] = useState(false);
-  const userBookmark = useSelector((state) => state.bookmarks.userBookmark);
+  const [toggel, setToggel] = useState(null);
+  const userBookmark = useSelector((state) => state.bookmarks.userBookmark);  
   const userDetails = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (userBookmark) setBook(true);
     else setBook(false);
   }, [userBookmark, setBook]);
+
+  const toggelHandller = (index) => {
+    toggel == index ? setToggel(null) : setToggel(index);
+  };
+
+  const DeleteBookmark = async (bookmarkID) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:8080/api/delete-bookmark/${bookmarkID}`
+      );
+      dispatch(userBookmarkDelete(bookmarkID));
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
+
   return (
     <div>
       {isBookmarkHere ? (
@@ -24,26 +48,35 @@ function Bookmarks() {
           {userBookmark.length > 0 ? (
             userBookmark.map((posts, index) => {
               return (
-                <div className="h-full " key={posts._id}>
-                  <div className="bg-black h-fit border-t-1 border-gray-800 p-2 border-b-1">
+                <div className="h-full mb-3 " key={posts._id}>
+                  <div className="bg-black h-fit  border-gray-800 rounded-md border-1 p-2 ">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <img
-                          className="w-[3vw] h-[3vw] rounded-full border-1 border-gray-400 hover:border-1"
+                          className="w-[3vw] h-[3vw] rounded-full border-1 border-gray-400 hover:border-1"   
                           src={userDetails.profileImg}
                           alt=""
                         />
                         <h5 className="hover:underline">{userDetails.name}</h5>
                       </div>
                       <div className="relative">
-                        <button className="cursor-pointer">
+                        <button
+                          className="cursor-pointer"
+                          onClick={() => toggelHandller(index)}
+                        >
                           <CiMenuKebab />
                         </button>
                         <div
-                          className={`absolute text-white w-[100px] rounded-md pt-3 text-center text-sm font-semibold  h-[50px] p-2      right-5 bg-black border-1 border-gray-800 
-                                            `}
+                          className={`absolute text-white w-[100px] rounded-md pt-2 text-center text-sm font-semibold  h-[60px] p-2  right-5   bg-black border-1 border-gray-800 ${
+                            toggel == index ? "inline" : "hidden"
+                          }`}
                         >
-                          <button className="cursor-pointer">Delete</button>
+                          <button
+                            className="cursor-pointer"
+                            onClick={() => DeleteBookmark(posts._id)}
+                          >
+                            Delete From Bookmark
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -73,7 +106,7 @@ function Bookmarks() {
                         ) : null}
                       </div>
 
-                      <div className="flex justify-between w-[95%] p-2 font-semibold text-gray-500">
+                      <div className="flex justify-between w-[95%] p-2 font-semibold text-gray-500">   
                         <button className="flex items-center gap-1">
                           <FaRegComment />
                           {}k

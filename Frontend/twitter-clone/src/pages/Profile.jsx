@@ -1,5 +1,5 @@
 import { FaArrowLeft } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { MdOutlineMonochromePhotos } from "react-icons/md";
 import { useSelector, useDispatch } from "react-redux";
 import { FaRegComment } from "react-icons/fa";
@@ -7,19 +7,36 @@ import { PiHeartStraightLight } from "react-icons/pi";
 import { CiBookmark } from "react-icons/ci";
 import { FiShare } from "react-icons/fi";
 import { CiMenuKebab } from "react-icons/ci";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { postDelete } from "../reducers/PostReducer";
+import { updateUserProfile } from "../reducers/UserReducer";
 
 function Profile() {
+  //Importent variables.
+  const userProfileId = useParams().id;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [toggel, setToggel] = useState(null);
 
+  const userDetails = useSelector((state) => state.user?.user);
+  const userPost = useSelector((state) => state.post?.post);
+
+  const allUsersAccount = useSelector(state => state.post?.allUsersAccounts);
+  const filterdUser = allUsersAccount?.filter(user => {
+    return user._id === userProfileId
+  })
+
+  const filterdPost = userPost?.filter(post => post.userId === userProfileId);
+
+  
+
+  //Toggle Delete Handller.
   const handllerToggel = (index) => {
     setToggel(toggel == index ? null : index);
   };
 
+  //Post Delete Handller.
   const PostDeleter = async (id) => {
     try {
       await axios.delete(`http://localhost:8080/api/delete-post/${id}`);
@@ -29,32 +46,47 @@ function Profile() {
     }
   };
 
-  const userDetails = useSelector((state) => state.user?.user);
-  const userPost = useSelector((state) => state.post?.userPost);
+  //Profile Img. updation.
+  const profileIMG = async (profileData) => {
+    const formData = new FormData();
+    formData.append("file", profileData);
+    const response = await axios.post(
+      `http://localhost:8080/api/profile-image/${userDetails._id}`,
+      formData
+    );
+    dispatch(updateUserProfile(response.data.profileImg));
+  };
+
+  //Main logic code.
   return (
     <div className="w-full h-fit bg-black text-white border-1 border-gray-800">
       <div className="flex items-center gap-3 h-[3vw] w-full bg-transparent p-2">
         <button className="cursor-pointer" onClick={() => navigate(-1)}>
           <FaArrowLeft />
         </button>
-        <h3>{userDetails.name}</h3>
+        <h3>{filterdUser[0]?.name}</h3>
       </div>
 
       <div className="w-full h-fit relative">
         <div className="h-[15vw]">
           <img
             className="h-full w-full object-fit"
-            src={userDetails.img}
+            src={filterdUser[0]?.img}
             alt=""
           />
         </div>
         <div className="w-full h-fit p-3">
           <div className="w-[10vw] h-[10vw] absolute rounded-full top-35">
-            <input type="file" className="hidden" id="img" />
+            <input
+              type="file"
+              className="hidden"
+              id="img"
+              onChange={(e) => profileIMG(e.target.files[0])}
+            />
             <label htmlFor="img" className="cursor-pointer ">
               <img
                 className="rounded-full absolute w-full h-full"
-                src={userDetails.profileImg}
+                src={filterdUser[0]?.profileImg}
                 alt=""
               />
               <span className="">
@@ -64,10 +96,10 @@ function Profile() {
           </div>
 
           <div className="mt-15">
-            <h3 className="font-semibold text-xl">{userDetails.name}</h3>
+            <h3 className="font-semibold text-xl">{filterdUser[0]?.name}</h3>
             <div className="flex items-center gap-3 mt-3 text-xs text-gray-500">
-              <h3>Following {userDetails.following?.length}</h3>
-              <h3>Followers {userDetails.followers?.length}</h3>
+              <h3>Following {filterdUser[0]?.following?.length}</h3>
+              <h3>Followers {filterdUser[0]?.followers?.length}</h3>
             </div>
           </div>
         </div>
@@ -77,20 +109,20 @@ function Profile() {
             Posts
           </div>
           <div className="p-3 border-1 border-gray-800 mt-3 rounded-md">
-            {userPost.length > 0
-              ? userPost.map((posts, index) => {
+            {filterdPost.length > 0
+              ? filterdPost.map((posts, index) => {
                   return (
                     <div className="h-full " key={posts._id}>
-                      <div className="bg-black h-fit border-t-1 border-gray-800 p-2 border-b-1">
+                      <div className="bg-black h-fit border-1 mb-3 rounded-md border-gray-800 p-2 ">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3">
                             <img
                               className="w-[3vw] h-[3vw] rounded-full border-1 border-gray-400 hover:border-1"
-                              src={userDetails.profileImg}
+                              src={filterdUser[0]?.profileImg}
                               alt=""
                             />
                             <h5 className="hover:underline">
-                              {userDetails.name}
+                              {filterdUser[0]?.name}
                             </h5>
                           </div>
                           <div className="relative">
@@ -107,7 +139,7 @@ function Profile() {
                             >
                               <button
                                 className="cursor-pointer"
-                                onClick={() => PostDeleter(posts._id)}
+                                onClick={() => userDetails._id == posts.userId ? PostDeleter(posts._id) : "loading..."}
                               >
                                 Delete
                               </button>

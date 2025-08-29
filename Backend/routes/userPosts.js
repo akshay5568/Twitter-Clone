@@ -7,22 +7,31 @@ const User = require("../models/UserModel");
 const router = express.Router();
 
 //Making post route
-router.post("/user-posts", upload.single("file"), (req, res) => {
+router.post("/user-posts", upload.single("file"), async (req, res) => {
   try {
-    const token = req.headers.authorization.split(" ")[1];
-    if (!token) res.status(401).json({ massage: "something went wrong" });
+    const token = req.headers.authorization?.split(" ")[1];
+    if (!token) return res.status(401).json({ message: "Unauthorized" });
     const decode = JWT.decode(token, process.env.JWT_SECRET);
     const userId = decode.id;
     const content = req.body.textContent;
-    const img = req.file ? req.file.path : null; // cloudnary url
-    Post.create({ content, img, userId });
-    res.status(200).json({ massage: "ok" });
-  } catch (error) {
-    console.error("Error while creating post:", error.message);
-    res.status(500).json({
-      message: "Something went wrong while saving the post",
-      error: error.message,
+    // ✅ Add file validation
+    if (!req.file) {
+      return res.status(400).json({ message: "No file uploaded" });
+    }
+    console.log(JSON.stringify(req.file, null, 2)); // For single file
+    console.log(JSON.stringify(req.files, null, 2)); // For multiple files
+    const img = req.file.path; // Cloudinary URL
+    const newPost = new Post({
+      content,
+      img,
+      userId: userId,
     });
+    await newPost.save();
+
+    res.status(201).json({ message: "Post created successfully" });
+  } catch (error) {
+    console.error("Error while creating post:", error);
+    res.status(500).json({ error: error.message });
   }
 });
 
@@ -78,7 +87,7 @@ router.post("/post-like/:id", async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .send("Something went wrong while fatching post", error.massage);   
+      .send("Something went wrong while fatching post", error.massage);
   }
 });
 
@@ -91,7 +100,29 @@ router.get("/all-users", async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .send("Something went wrong could'nt able fatch data right now", error);   
+      .send("Something went wrong could'nt able fatch data right now", error);
   }
+});
+
+//Upload profile img. route
+router.post("/profile-image/:id", upload.single("file"), async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const img = req.file ? req.file.path : null; // cloudnary url
+    const updatedUserData = await User.findByIdAndUpdate(
+      userId,
+      { profileImg: img },
+      { new: true }
+    );
+    res.status(200).json(updatedUserData);
+  } catch (error) {
+    res.status(500).send("Something Went Wrong in the server", error);
+  }
+});
+
+// Add this to your routes file (before module.exports = router)
+router.get("/test", (req, res) => {
+  console.log("✅ TEST ROUTE HIT - Routes are working!");
+  res.json({ message: "Routes are working!", timestamp: new Date() });
 });
 module.exports = router;
