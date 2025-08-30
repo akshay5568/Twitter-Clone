@@ -92,13 +92,13 @@ function MainPage() {
                 </div>
 
                 <div className="h-fit">
-                  {posts.img?.match(/\.(jpeg|jpg|png|gif|avif)$/i) ? (
-                    <img
+                
+                    {/* <img
                       className="max-w-[95%] rounded-xl mt-5 border-1 border-gray-500"
                       src={posts.img}
                       alt=""
-                    />
-                  ) : posts.img?.match(/\.(mp4|webm|ogg)$/i) ? (
+                    /> */}
+                 
                     <video
                       className="max-w-[95%] rounded-xl mt-5 border-1 border-gray-500"
                       autoPlay
@@ -107,7 +107,7 @@ function MainPage() {
                       playsInline
                       src={posts.img}
                     />
-                  ) : null}
+               
                 </div>
 
                 <div className="flex justify-between w-[95%] p-2 font-semibold text-gray-500">
@@ -127,7 +127,7 @@ function MainPage() {
                   
                     <button
                       className={`flex items-center gap-1 ${
-                      userBookmark[index]?.postId?._id == posts._id ? "text-[#1d9bf0]" : "text-white"
+                      userBookmark[index]?.postId?._id == posts?._id ? "text-[#1d9bf0]" : "text-white"   
                       } cursor-pointer`}
                       onClick={() => bookmark(posts._id)}
                     >

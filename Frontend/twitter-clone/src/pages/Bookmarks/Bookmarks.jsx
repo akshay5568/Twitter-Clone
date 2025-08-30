@@ -86,16 +86,14 @@ function Bookmarks() {
                       </div>
 
                       <div className="h-fit">
-                        {posts.postId.img?.match(
-                          /\.(jpeg|jpg|png|gif|avif)$/i
-                        ) ? (
+                      
                           <img
                             className="max-w-[95%] rounded-xl mt-5 border-1 border-gray-500"
                             src={posts.postId.img}
                             alt=""
                           />
-                        ) : posts.postId.img?.match(/\.(mp4|webm|ogg)$/i) ? (
-                          <video
+                    
+                          {/* <video
                             className="max-w-[95%] rounded-xl mt-5 border-1 border-gray-500"
                             autoPlay
                             muted
@@ -103,7 +101,7 @@ function Bookmarks() {
                             playsInline
                             src={posts.postId.img}
                           />
-                        ) : null}
+                       */}
                       </div>
 
                       <div className="flex justify-between w-[95%] p-2 font-semibold text-gray-500">   

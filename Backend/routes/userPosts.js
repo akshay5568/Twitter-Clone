@@ -1,29 +1,47 @@
 const express = require("express");
 const Post = require("../models/PostModel");
-const upload = require("../utils/cloudnary");
+// const upload = require("../utils/cloudnary");
 const JWT = require("jsonwebtoken");
 const User = require("../models/UserModel");
+const fileUpload = require("express-fileupload");
+// const cloudinary = require("../utils/cloudinary");
+const imagekit = require("../utils/ImageKit");
+const fs = require("fs");
 
 const router = express.Router();
+router.use(
+  fileUpload({
+    useTempFiles: true,
+  })
+);
 
 //Making post route
-router.post("/user-posts", upload.single("file"), async (req, res) => {
+router.post("/user-posts", async (req, res) => {
   try {
     const token = req.headers.authorization?.split(" ")[1];
     if (!token) return res.status(401).json({ message: "Unauthorized" });
     const decode = JWT.decode(token, process.env.JWT_SECRET);
+
     const userId = decode.id;
     const content = req.body.textContent;
-    // ✅ Add file validation
-    if (!req.file) {
-      return res.status(400).json({ message: "No file uploaded" });
+    const img = req.files.image;
+
+    let imgURL = null;
+    if (img) {
+      const fileBase64 = fs.readFileSync(img.tempFilePath).toString("base64");
+      const result = await imagekit.upload({
+        file: fileBase64,
+        fileName: `post-image-${userId}`,
+        folder: "Twitter-Clone",
+        useUniqueFileName: true,
+      });
+
+      imgURL = result.url;
     }
-    console.log(JSON.stringify(req.file, null, 2)); // For single file
-    console.log(JSON.stringify(req.files, null, 2)); // For multiple files
-    const img = req.file.path; // Cloudinary URL
+
     const newPost = new Post({
       content,
-      img,
+      img: imgURL,
       userId: userId,
     });
     await newPost.save();
@@ -105,13 +123,22 @@ router.get("/all-users", async (req, res) => {
 });
 
 //Upload profile img. route
-router.post("/profile-image/:id", upload.single("file"), async (req, res) => {
+router.post("/profile-image/:id", async (req, res) => {
   try {
     const userId = req.params.id;
-    const img = req.file ? req.file.path : null; // cloudnary url
+    const img = req.files ? req.files.image : null;
+    const fileBase64 = fs.readFileSync(img.tempFilePath).toString("base64");
+    
+    const result = await imagekit.upload({
+      file:fileBase64,
+      fileName:`profile-image-${userId}`,
+      folder:'Profile-images-twitter-clone',
+      useUniqueFileName: true,
+    })
+    let image = result.url;
     const updatedUserData = await User.findByIdAndUpdate(
       userId,
-      { profileImg: img },
+      { profileImg: image },
       { new: true }
     );
     res.status(200).json(updatedUserData);
@@ -120,9 +147,4 @@ router.post("/profile-image/:id", upload.single("file"), async (req, res) => {
   }
 });
 
-// Add this to your routes file (before module.exports = router)
-router.get("/test", (req, res) => {
-  console.log("✅ TEST ROUTE HIT - Routes are working!");
-  res.json({ message: "Routes are working!", timestamp: new Date() });
-});
 module.exports = router;

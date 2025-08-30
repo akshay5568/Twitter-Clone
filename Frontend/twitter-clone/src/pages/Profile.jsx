@@ -49,7 +49,7 @@ function Profile() {
   //Profile Img. updation.
   const profileIMG = async (profileData) => {
     const formData = new FormData();
-    formData.append("file", profileData);
+    formData.append("image", profileData);
     const response = await axios.post(
       `http://localhost:8080/api/profile-image/${userDetails._id}`,
       formData
@@ -152,13 +152,13 @@ function Profile() {
                           </div>
 
                           <div className="h-fit">
-                            {posts.img?.match(/\.(jpeg|jpg|png|gif|avif)$/i) ? (
+                            
                               <img
                                 className="max-w-[95%] rounded-xl mt-5 border-1 border-gray-500"
                                 src={posts.img}
                                 alt=""
                               />
-                            ) : posts.img?.match(/\.(mp4|webm|ogg)$/i) ? (
+{/*                            
                               <video
                                 className="max-w-[95%] rounded-xl mt-5 border-1 border-gray-500"
                                 autoPlay
@@ -167,7 +167,7 @@ function Profile() {
                                 playsInline
                                 src={posts.img}
                               />
-                            ) : null}
+                         */}
                           </div>
 
                           <div className="flex justify-between w-[95%] p-2 font-semibold text-gray-500">

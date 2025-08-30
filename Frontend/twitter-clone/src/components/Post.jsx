@@ -10,6 +10,7 @@ function Post() {
   const userDetails = useSelector((state) => state.user.user);
   const [textContent, setTextContent] = useState("");
   const [file, setFile] = useState(null);
+
   const token = localStorage.getItem("token");
 
   const handlerForm = async (e) => {
@@ -18,7 +19,7 @@ function Post() {
       const formData = new FormData();
       formData.append("textContent", textContent);
       if (file) {
-        formData.append("file", file);
+        formData.append("image", file);
       }
 
       try {
@@ -31,10 +32,9 @@ function Post() {
             },
           }
         );
-        console.log("✅ Post created:", res.data);
+        console.log(res.data);
       } catch (error) {
         console.error(
-          "❌ Upload error:",
           error.response?.data || error.message
         );
       }
@@ -59,7 +59,7 @@ function Post() {
           </div>
 
           <div className="w-[90%]">
-            <form action="" className="" onSubmit={handlerForm}>
+            <form className="" onSubmit={handlerForm} >
               <textarea
                 className="border-b-1 border-b-gray-600 w-full text-xl outline-none"
                 placeholder="What's happening?"
