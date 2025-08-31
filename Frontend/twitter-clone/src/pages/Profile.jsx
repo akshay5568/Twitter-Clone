@@ -22,14 +22,12 @@ function Profile() {
   const userDetails = useSelector((state) => state.user?.user);
   const userPost = useSelector((state) => state.post?.post);
 
-  const allUsersAccount = useSelector(state => state.post?.allUsersAccounts);
-  const filterdUser = allUsersAccount?.filter(user => {
-    return user._id === userProfileId
-  })
+  const allUsersAccount = useSelector((state) => state.post?.allUsersAccounts);
+  const filterdUser = allUsersAccount?.filter((user) => {
+    return user._id === userProfileId;
+  });
 
-  const filterdPost = userPost?.filter(post => post.userId === userProfileId);
-
-  
+  const filterdPost = userPost?.filter((post) => post.userId === userProfileId);
 
   //Toggle Delete Handller.
   const handllerToggel = (index) => {
@@ -139,7 +137,11 @@ function Profile() {
                             >
                               <button
                                 className="cursor-pointer"
-                                onClick={() => userDetails._id == posts.userId ? PostDeleter(posts._id) : "loading..."}
+                                onClick={() =>
+                                  userDetails._id == posts.userId
+                                    ? PostDeleter(posts._id)
+                                    : "loading..."
+                                }
                               >
                                 Delete
                               </button>
@@ -152,13 +154,13 @@ function Profile() {
                           </div>
 
                           <div className="h-fit">
-                            
+                            {posts.mediaType?.startsWith("image") ? (
                               <img
                                 className="max-w-[95%] rounded-xl mt-5 border-1 border-gray-500"
                                 src={posts.img}
                                 alt=""
                               />
-{/*                            
+                            ) : (
                               <video
                                 className="max-w-[95%] rounded-xl mt-5 border-1 border-gray-500"
                                 autoPlay
@@ -167,7 +169,7 @@ function Profile() {
                                 playsInline
                                 src={posts.img}
                               />
-                         */}
+                            )}
                           </div>
 
                           <div className="flex justify-between w-[95%] p-2 font-semibold text-gray-500">

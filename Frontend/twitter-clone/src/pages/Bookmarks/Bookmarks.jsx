@@ -9,12 +9,12 @@ import { CiBookmark } from "react-icons/ci";
 import { FiShare } from "react-icons/fi";
 import { CiMenuKebab } from "react-icons/ci";
 import axios from "axios";
-import { userBookmarkDelete } from "../../reducers/BookmarkReducer";   
+import { userBookmarkDelete } from "../../reducers/BookmarkReducer";
 
 function Bookmarks() {
   const [isBookmarkHere, setBook] = useState(false);
   const [toggel, setToggel] = useState(null);
-  const userBookmark = useSelector((state) => state.bookmarks.userBookmark);  
+  const userBookmark = useSelector((state) => state.bookmarks.userBookmark);
   const userDetails = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
 
@@ -39,8 +39,6 @@ function Bookmarks() {
     }
   };
 
-
-
   return (
     <div>
       {isBookmarkHere ? (
@@ -53,7 +51,7 @@ function Bookmarks() {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <img
-                          className="w-[3vw] h-[3vw] rounded-full border-1 border-gray-400 hover:border-1"   
+                          className="w-[3vw] h-[3vw] rounded-full border-1 border-gray-400 hover:border-1"
                           src={userDetails.profileImg}
                           alt=""
                         />
@@ -86,14 +84,14 @@ function Bookmarks() {
                       </div>
 
                       <div className="h-fit">
-                      
+                        {posts.postId.mediaType?.startsWith("image") ? (
                           <img
                             className="max-w-[95%] rounded-xl mt-5 border-1 border-gray-500"
                             src={posts.postId.img}
                             alt=""
                           />
-                    
-                          {/* <video
+                        ) : (
+                          <video
                             className="max-w-[95%] rounded-xl mt-5 border-1 border-gray-500"
                             autoPlay
                             muted
@@ -101,10 +99,10 @@ function Bookmarks() {
                             playsInline
                             src={posts.postId.img}
                           />
-                       */}
+                        )}
                       </div>
 
-                      <div className="flex justify-between w-[95%] p-2 font-semibold text-gray-500">   
+                      <div className="flex justify-between w-[95%] p-2 font-semibold text-gray-500">
                         <button className="flex items-center gap-1">
                           <FaRegComment />
                           {}k

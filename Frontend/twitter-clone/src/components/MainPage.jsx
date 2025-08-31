@@ -77,7 +77,7 @@ function MainPage() {
         return (
           <div className="h-full " key={posts._id}>
             <div className="bg-black h-fit border-t-1 border-gray-800 p-2 border-b-1">
-              <NavLink to="/profile" className="flex items-center gap-7">
+              <NavLink to={`/profile/${user._id}`} className="flex items-center gap-7">
                 <img
                   className="w-[3vw] h-[3vw] rounded-full border-1 border-gray-400 hover:border-1"   
                   src={user.profileImg}
@@ -93,12 +93,13 @@ function MainPage() {
 
                 <div className="h-fit">
                 
-                    {/* <img
+                   {posts.mediaType?.startsWith("image") ? (
+                    <img
                       className="max-w-[95%] rounded-xl mt-5 border-1 border-gray-500"
                       src={posts.img}
                       alt=""
-                    /> */}
-                 
+                    />
+                   ): (
                     <video
                       className="max-w-[95%] rounded-xl mt-5 border-1 border-gray-500"
                       autoPlay
@@ -106,7 +107,9 @@ function MainPage() {
                       loop
                       playsInline
                       src={posts.img}
-                    />
+                    /> 
+                   )                  
+                   } 
                
                 </div>
 

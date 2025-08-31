@@ -12,6 +12,9 @@ const PostSchema = new mongoose.Schema({
   img: {
     type: String,
   },
+  mediaType:{
+     type:String
+  },
   comments: {
     type: String,
     default: "",

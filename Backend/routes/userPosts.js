@@ -24,9 +24,10 @@ router.post("/user-posts", async (req, res) => {
 
     const userId = decode.id;
     const content = req.body.textContent;
-    const img = req.files.image;
+    const img =req.files.image ;
 
     let imgURL = null;
+    let mediaTYPE = null
     if (img) {
       const fileBase64 = fs.readFileSync(img.tempFilePath).toString("base64");
       const result = await imagekit.upload({
@@ -37,12 +38,15 @@ router.post("/user-posts", async (req, res) => {
       });
 
       imgURL = result.url;
+      mediaTYPE = result.fileType;
+      console.log(mediaTYPE);
     }
 
     const newPost = new Post({
       content,
       img: imgURL,
-      userId: userId,
+      mediaType:mediaTYPE,
+      userId:userId,
     });
     await newPost.save();
 

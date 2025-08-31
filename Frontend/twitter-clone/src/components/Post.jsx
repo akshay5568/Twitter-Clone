@@ -49,7 +49,7 @@ function Post() {
       <div className="w-full h-fit p-2 border-t-1 border-gray-800">
         <div className="flex text-white gap-3 p-3">
           <div className="w-[10%]">
-            <NavLink to="/profile">
+            <NavLink to={`/profile/${userDetails._id}`}>
               <img
                 className="w-[3vw] h-[3vw] rounded-full cursor-pointer"
                 src={userDetails.profileImg}
