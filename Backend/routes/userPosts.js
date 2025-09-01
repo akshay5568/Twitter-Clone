@@ -60,7 +60,7 @@ router.post("/user-posts", async (req, res) => {
 //All user's posts for the home page.
 router.get("/user-posts", async (req, res) => {
   try {
-    const allPosts = await Post.find({});
+    const allPosts = await Post.find({}).populate("userId");
     res.status(200).json(allPosts);
   } catch (error) {
     console.log("something went wrong");

@@ -16,7 +16,10 @@ function MainPage() {
 
   //For redux
   const allUserPosts = useSelector((state) => state.post?.post);
+
   const userBookmark = useSelector((state) => state.bookmarks?.userBookmark);
+  const allUsersAccount = useSelector(state => state.post?.allUsersAccounts);
+  // console.log(allUsersAccount)
   const user = useSelector((state) => state.user?.user);
   const dispatch = useDispatch();
 
@@ -73,7 +76,7 @@ function MainPage() {
 
       {allUserPosts.map((posts, index) => {
         const isLiked = posts.likedBy.includes(user._id);
-
+      
         return (
           <div className="h-full " key={posts._id}>
             <div className="bg-black h-fit border-t-1 border-gray-800 p-2 border-b-1">
@@ -83,7 +86,8 @@ function MainPage() {
                   src={user.profileImg}
                   alt=""
                 />
-                <h5 className="hover:underline">{user.name}</h5>
+              
+                <h5 className="hover:underline">{posts?.userId?.name}</h5>
               </NavLink>
 
               <div className="pl-18 mt-3">
@@ -102,9 +106,10 @@ function MainPage() {
                    ): (
                     <video
                       className="max-w-[95%] rounded-xl mt-5 border-1 border-gray-500"
+                      onClick={(e) => e.target.muted = !e.target.muted}
                       autoPlay
-                      muted
                       loop
+                      muted
                       playsInline
                       src={posts.img}
                     /> 

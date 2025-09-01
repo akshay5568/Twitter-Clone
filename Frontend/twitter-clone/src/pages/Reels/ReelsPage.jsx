@@ -17,9 +17,10 @@ function ReelsPage() {
           <video
             autoPlay
             muted
-            loop
+            
             playsInline
             className="w-auto h-fit object-cover"
+            onClick={(e) => e.target.muted = !e.target.muted}
             src={video}
           ></video>
 

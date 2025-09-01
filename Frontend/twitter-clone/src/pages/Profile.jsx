@@ -27,7 +27,9 @@ function Profile() {
     return user._id === userProfileId;
   });
 
-  const filterdPost = userPost?.filter((post) => post.userId === userProfileId);
+
+  const filterdPost = userPost?.filter((post) => post.userId._id === userProfileId);   
+
 
   //Toggle Delete Handller.
   const handllerToggel = (index) => {
@@ -49,7 +51,7 @@ function Profile() {
     const formData = new FormData();
     formData.append("image", profileData);
     const response = await axios.post(
-      `http://localhost:8080/api/profile-image/${userDetails._id}`,
+      `http://localhost:8080/api/profile-image/${userDetails._id}`,   
       formData
     );
     dispatch(updateUserProfile(response.data.profileImg));
@@ -163,6 +165,7 @@ function Profile() {
                             ) : (
                               <video
                                 className="max-w-[95%] rounded-xl mt-5 border-1 border-gray-500"
+                                onClick={(e) => e.target.muted = !e.target.muted}
                                 autoPlay
                                 muted
                                 loop
@@ -172,7 +175,7 @@ function Profile() {
                             )}
                           </div>
 
-                          <div className="flex justify-between w-[95%] p-2 font-semibold text-gray-500">
+                          <div className="flex justify-between w-[95%] p-2 font-semibold text-gray-500">   
                             <button className="flex items-center gap-1">
                               <FaRegComment />
                               {}k
