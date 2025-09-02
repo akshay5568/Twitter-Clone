@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { followAccount } from "../reducers/PostReducer";
 import Explore from "../pages/Explore";
+import { toast, ToastContainer } from "react-toastify";
 
 function RightContent() {
   //Variables
@@ -26,12 +27,15 @@ function RightContent() {
   const followingUserID = userDetails._id;
 
   //follow Handller
-  const followHandel = async (followUserID) => {
+  const followHandel = async (followUserID, isFollow) => {
     await axios.post(
       `http://localhost:8080/api/user-followers/${followUserID}`,
       { followingUserID }
     );
     dispatch(followAccount({ followUserID, followingUserID }));
+    if (isFollow) {
+      toast.success("Unfollowed");
+    } else toast.success("Followed");
   };
 
   //Alluser's ApiCAll
@@ -78,7 +82,10 @@ function RightContent() {
             return (
               <div className="flex justify-between items-center mt-4">
                 <div>
-                  <NavLink className="flex items-center gap-3" to={`/profile/${allUsers[index]._id}`}>
+                  <NavLink
+                    className="flex items-center gap-3"
+                    to={`/profile/${allUsers[index]._id}`}
+                  >
                     <img
                       className="w-[3vw] h-[3vw] rounded-full"
                       src={users.profileImg}
@@ -90,7 +97,7 @@ function RightContent() {
                 <div className="bg-white p-1 px-5 text-black font-semibold rounded-full">
                   <button
                     className="cursor-pointer"
-                    onClick={() => followHandel(users._id)}
+                    onClick={() => followHandel(users._id, isFollow)}
                   >
                     {users.followers == followingUserID || isFollow
                       ? "Unfollow"
@@ -102,6 +109,7 @@ function RightContent() {
           })}
         </div>
       </div>
+   
     </div>
   );
 }

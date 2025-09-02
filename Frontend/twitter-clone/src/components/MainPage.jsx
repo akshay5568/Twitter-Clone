@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Likes } from "../reducers/PostReducer";
 import axios from "axios";
 import { userAllBookmarks } from "../reducers/BookmarkReducer";
+import { toast, ToastContainer } from "react-toastify";
 
 function MainPage() {
   //Other state variabls
@@ -56,6 +57,7 @@ function MainPage() {
       );
       console.log(response.data);
       dispatch(userAllBookmarks(UserId));
+      toast.success("Bookmarked");
     } catch (error) {
       console.error(error);
     }
@@ -67,7 +69,7 @@ function MainPage() {
       <div></div>
 
       {token ? (
-        <div>
+        <div className="max-sm:hidden">
           <Post />
         </div>
       ) : (
@@ -80,24 +82,24 @@ function MainPage() {
         return (
           <div className="h-full " key={posts._id}>
             <div className="bg-black h-fit border-t-1 border-gray-800 p-2 border-b-1">
-              <NavLink to={`/profile/${user._id}`} className="flex items-center gap-7">
+              <NavLink to={`/profile/${posts?.userId?._id}`} className="flex items-center gap-7 max-sm:gap-3">
                 <img
-                  className="w-[3vw] h-[3vw] rounded-full border-1 border-gray-400 hover:border-1"   
-                  src={user.profileImg}
+                  className="w-[3vw] h-[3vw] rounded-full border-1 border-gray-400 hover:border-1 max-sm:w-[10vw] max-sm:h-[10vw] "   
+                  src={posts.userId.profileImg}
                   alt=""
                 />
               
-                <h5 className="hover:underline">{posts?.userId?.name}</h5>
+                <h5 className="hover:underline max-sm:text-sm max-sm:font-bold">{posts?.userId?.name}</h5>
               </NavLink>
 
-              <div className="pl-18 mt-3">
-                <div>
-                  <p>{posts.content}</p>
+              <div className="pl-18 max-sm:pl-11 sm:mt-3">
+                <div className="">
+                  <p className="max-sm:text-sm max-sm:text-gray-400">{posts.content}</p>
                 </div>
 
                 <div className="h-fit">
-                
-                   {posts.mediaType?.startsWith("image") ? (
+                 { posts.mediaType ? 
+                   posts.mediaType?.startsWith("image") ? (
                     <img
                       className="max-w-[95%] rounded-xl mt-5 border-1 border-gray-500"
                       src={posts.img}
@@ -114,11 +116,12 @@ function MainPage() {
                       src={posts.img}
                     /> 
                    )                  
-                   } 
+                   : ""
+                  }
                
                 </div>
 
-                <div className="flex justify-between w-[95%] p-2 font-semibold text-gray-500">
+                <div className="flex justify-between w-[95%] p-2 font-semibold text-gray-500 max-sm:text-sm">
                   <button className="flex items-center gap-1">
                     <FaRegComment />
                     {}k
@@ -151,6 +154,7 @@ function MainPage() {
           </div>
         );
       })}
+      <ToastContainer/>
     </div>
   );
 }

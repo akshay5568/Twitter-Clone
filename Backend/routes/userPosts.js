@@ -24,7 +24,7 @@ router.post("/user-posts", async (req, res) => {
 
     const userId = decode.id;
     const content = req.body.textContent;
-    const img =req.files.image ;
+    const img = req.files ? req.files.image : "" ;
 
     let imgURL = null;
     let mediaTYPE = null

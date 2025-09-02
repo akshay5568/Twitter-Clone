@@ -9,13 +9,14 @@ import { CiBookmark } from "react-icons/ci";
 import { FiShare } from "react-icons/fi";
 import { CiMenuKebab } from "react-icons/ci";
 import axios from "axios";
-import { userBookmarkDelete } from "../../reducers/BookmarkReducer";   
+import { userBookmarkDelete } from "../../reducers/BookmarkReducer";
+import { toast,ToastContainer } from "react-toastify";
 
 function Bookmarks() {
   const [isBookmarkHere, setBook] = useState(false);
   const [toggel, setToggel] = useState(null);
-  const userBookmark = useSelector((state) => state.bookmarks.userBookmark);   
- 
+  const userBookmark = useSelector((state) => state.bookmarks.userBookmark);
+
   const userDetails = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
 
@@ -35,6 +36,7 @@ function Bookmarks() {
       );
       dispatch(userBookmarkDelete(bookmarkID));
       console.log(response.data);
+      toast.success("Bookmark Deleted")
     } catch (error) {
       console.error(error);
     }
@@ -81,26 +83,32 @@ function Bookmarks() {
                     </div>
                     <div className="pl-18 mt-3">
                       <div>
-                        <p>{posts.postId.content}</p>
+                        <p>{posts?.postId?.content}</p>
                       </div>
 
                       <div className="h-fit">
-                        {posts.postId.mediaType?.startsWith("image") ? (
-                          <img
-                            className="max-w-[95%] rounded-xl mt-5 border-1 border-gray-500"
-                            src={posts.postId.img}
-                            alt=""
-                          />
+                        {posts.postId?.mediaType ? (
+                          posts.postId.mediaType?.startsWith("image") ? (
+                            <img
+                              className="max-w-[95%] rounded-xl mt-5 border-1 border-gray-500"
+                              src={posts.postId.img}
+                              alt=""
+                            />
+                          ) : (
+                            <video
+                              className="max-w-[95%] rounded-xl mt-5 border-1 border-gray-500"
+                              onChange={(e) =>
+                                (e.target.muted = !e.target.muted)
+                              }
+                              autoPlay
+                              muted
+                              loop
+                              playsInline
+                              src={posts.postId.img}
+                            />
+                          )
                         ) : (
-                          <video
-                            className="max-w-[95%] rounded-xl mt-5 border-1 border-gray-500"
-                            onChange={(e) => e.target.muted = !e.target.muted}
-                            autoPlay
-                            muted
-                            loop
-                            playsInline
-                            src={posts.postId.img}
-                          />
+                          ""
                         )}
                       </div>
 
@@ -113,7 +121,7 @@ function Bookmarks() {
                           className={`flex items-center gap-1 cursor-pointer`}
                         >
                           <PiHeartStraightLight />
-                          {posts.postId.likes}
+                          {posts.postId?.likes}
                         </button>
                         <button
                           className={`flex items-center gap-1 cursor-pointer`}
@@ -136,6 +144,7 @@ function Bookmarks() {
       ) : (
         <NoBookmark />
       )}
+      <ToastContainer/>
     </div>
   );
 }

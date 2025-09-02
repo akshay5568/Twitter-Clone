@@ -11,6 +11,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { postDelete } from "../reducers/PostReducer";
 import { updateUserProfile } from "../reducers/UserReducer";
+import { toast,ToastContainer } from "react-toastify";
+import { UpdateUserProfile } from "../reducers/PostReducer";
 
 function Profile() {
   //Importent variables.
@@ -27,9 +29,9 @@ function Profile() {
     return user._id === userProfileId;
   });
 
-
-  const filterdPost = userPost?.filter((post) => post.userId._id === userProfileId);   
-
+  const filterdPost = userPost?.filter(
+    (post) => post.userId._id === userProfileId
+  );
 
   //Toggle Delete Handller.
   const handllerToggel = (index) => {
@@ -41,34 +43,44 @@ function Profile() {
     try {
       await axios.delete(`http://localhost:8080/api/delete-post/${id}`);
       dispatch(postDelete(id));
+      toast.success("Post deleted");
     } catch (error) {
       console.error("Smoething went wrong", error);
+      toast.error(error)
     }
   };
 
   //Profile Img. updation.
-  const profileIMG = async (profileData) => {
-    const formData = new FormData();
-    formData.append("image", profileData);
-    const response = await axios.post(
-      `http://localhost:8080/api/profile-image/${userDetails._id}`,   
-      formData
-    );
-    dispatch(updateUserProfile(response.data.profileImg));
+  const profileIMG = async (profileData, ) => {
+    try {
+      const formData = new FormData();
+      formData.append("image", profileData);
+      const response = await axios.post(
+        `http://localhost:8080/api/profile-image/${userDetails._id}`,       
+        formData
+      );
+      dispatch(updateUserProfile(response.data.profileImg));      
+      console.log(response.data._id)
+      dispatch(UpdateUserProfile(response.data))   
+      toast.success("Profile Image Updated");   
+    } catch (error) {
+      console.error(error);
+      toast.error(error);
+    }
   };
 
   //Main logic code.
   return (
-    <div className="w-full h-fit bg-black text-white border-1 border-gray-800">
-      <div className="flex items-center gap-3 h-[3vw] w-full bg-transparent p-2">
-        <button className="cursor-pointer" onClick={() => navigate(-1)}>
+    <div className="w-full h-fit bg-black text-white border-1 border-gray-800">   
+      <div className="flex items-center gap-3 h-[3vw] w-full bg-transparent p-2 max-sm:p-5">
+        <button className="cursor-pointer max-sm:text-gray-500" onClick={() => navigate(-1)}>
           <FaArrowLeft />
         </button>
-        <h3>{filterdUser[0]?.name}</h3>
+        <h3 >{filterdUser[0]?.name}</h3>
       </div>
 
       <div className="w-full h-fit relative">
-        <div className="h-[15vw]">
+        <div className="h-[15vw] max-sm:h-[30vw]">
           <img
             className="h-full w-full object-fit"
             src={filterdUser[0]?.img}
@@ -76,7 +88,7 @@ function Profile() {
           />
         </div>
         <div className="w-full h-fit p-3">
-          <div className="w-[10vw] h-[10vw] absolute rounded-full top-35">
+          <div className="w-[10vw] h-[10vw] absolute rounded-full top-35 max-sm:top-20 max-sm:w-[20vw] max-sm:h-[20vw]">
             <input
               type="file"
               className="hidden"
@@ -95,11 +107,11 @@ function Profile() {
             </label>
           </div>
 
-          <div className="mt-15">
+          <div className="mt-15 max-sm:mt-10">
             <h3 className="font-semibold text-xl">{filterdUser[0]?.name}</h3>
-            <div className="flex items-center gap-3 mt-3 text-xs text-gray-500">
-              <h3>Following {filterdUser[0]?.following?.length}</h3>
-              <h3>Followers {filterdUser[0]?.followers?.length}</h3>
+            <div className="flex items-center gap-3 mt-3 max-sm:mt-2 text-xs text-gray-500">
+              <h3>Following <span className="text-white">{filterdUser[0]?.following?.length}</span></h3>
+              <h3>Followers <span className="text-white">{filterdUser[0]?.followers?.length}</span></h3>
             </div>
           </div>
         </div>
@@ -117,7 +129,7 @@ function Profile() {
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3">
                             <img
-                              className="w-[3vw] h-[3vw] rounded-full border-1 border-gray-400 hover:border-1"
+                              className="w-[3vw] h-[3vw] max-sm:w-[10vw] max-sm:h-[10vw] rounded-full border-1 border-gray-400 hover:border-1"
                               src={filterdUser[0]?.profileImg}
                               alt=""
                             />
@@ -140,23 +152,25 @@ function Profile() {
                               <button
                                 className="cursor-pointer"
                                 onClick={() =>
-                                  userDetails._id == posts.userId
+                                  userDetails._id == posts.userId._id
                                     ? PostDeleter(posts._id)
                                     : "loading..."
                                 }
                               >
                                 Delete
                               </button>
+                        
                             </div>
                           </div>
                         </div>
                         <div className="pl-18 mt-3">
-                          <div>
+                          <div className="max-sm:text-gray-300">
                             <p>{posts.content}</p>
                           </div>
 
                           <div className="h-fit">
-                            {posts.mediaType?.startsWith("image") ? (
+                            {posts.mediaType ? 
+                            posts.mediaType?.startsWith("image") ? (
                               <img
                                 className="max-w-[95%] rounded-xl mt-5 border-1 border-gray-500"
                                 src={posts.img}
@@ -165,17 +179,20 @@ function Profile() {
                             ) : (
                               <video
                                 className="max-w-[95%] rounded-xl mt-5 border-1 border-gray-500"
-                                onClick={(e) => e.target.muted = !e.target.muted}
+                                onClick={(e) =>
+                                  (e.target.muted = !e.target.muted)
+                                }
                                 autoPlay
                                 muted
                                 loop
                                 playsInline
                                 src={posts.img}
                               />
-                            )}
+                            ) : ""
+                          }
                           </div>
 
-                          <div className="flex justify-between w-[95%] p-2 font-semibold text-gray-500">   
+                          <div className="flex justify-between w-[95%] p-2 font-semibold text-gray-500 max-sm:text-sm">
                             <button className="flex items-center gap-1">
                               <FaRegComment />
                               {}k
@@ -204,6 +221,7 @@ function Profile() {
           </div>
         </div>
       </div>
+            <ToastContainer/>
     </div>
   );
 }

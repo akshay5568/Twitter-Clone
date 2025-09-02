@@ -97,11 +97,11 @@ function Home({
   //Logic
   return (
     <div className="w-full h-screen bg-black text-white flex">
-      <div className="w-[25%] bg-black pl-30 p-3 pr-5">
+      <div className="w-[25%] bg-black pl-30 p-3 pr-5 max-sm:hidden">
         <Navbar />
       </div>
 
-      <div className="w-[40%] h-screen overflow-scroll scroll-smooth">
+      <div className="w-[40%] h-screen overflow-scroll scroll-smooth max-sm:w-full">
         <div className="h-fit">
           {showMain && <MainPage />}
           {showExplore && <Explore />}
@@ -111,7 +111,7 @@ function Home({
         </div>
       </div>
 
-      <div className="w-[35%] bg-black">
+      <div className="w-[35%] bg-black max-sm:hidden">
         <RightContent />
       </div>
     </div>

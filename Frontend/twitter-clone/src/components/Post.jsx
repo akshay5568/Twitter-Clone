@@ -3,7 +3,7 @@ import { FaImage } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { toast,ToastContainer} from "react-toastify";
 import { FaPhotoVideo } from "react-icons/fa";
 
 function Post() {
@@ -33,6 +33,7 @@ function Post() {
           }
         );
         console.log(res.data);
+        toast.success("Post Uploaded");
       } catch (error) {
         console.error(
           error.response?.data || error.message
@@ -94,6 +95,7 @@ function Post() {
           </div>
         </div>
       </div>
+      <ToastContainer/>
     </div>
   );
 }
