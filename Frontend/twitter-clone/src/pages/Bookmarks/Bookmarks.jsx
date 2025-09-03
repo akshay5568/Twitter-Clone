@@ -54,7 +54,7 @@ function Bookmarks() {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <img
-                          className="w-[3vw] h-[3vw] rounded-full border-1 border-gray-400 hover:border-1"
+                          className="w-[3vw] h-[3vw] rounded-full max-sm:w-[10vw] max-sm:h-[10vw] border-1 border-gray-400 hover:border-1"
                           src={userDetails.profileImg}
                           alt=""
                         />
@@ -81,9 +81,9 @@ function Bookmarks() {
                         </div>
                       </div>
                     </div>
-                    <div className="pl-18 mt-3">
+                    <div className="pl-18 max-sm:pl-10 mt-3">
                       <div>
-                        <p>{posts?.postId?.content}</p>
+                        <p className="max-sm:text-gray-500">{posts?.postId?.content}</p>
                       </div>
 
                       <div className="h-fit">
@@ -112,7 +112,7 @@ function Bookmarks() {
                         )}
                       </div>
 
-                      <div className="flex justify-between w-[95%] p-2 font-semibold text-gray-500">
+                      <div className="flex justify-between w-[95%] p-2 font-semibold text-gray-500 max-sm:text-sm">
                         <button className="flex items-center gap-1">
                           <FaRegComment />
                           {}k

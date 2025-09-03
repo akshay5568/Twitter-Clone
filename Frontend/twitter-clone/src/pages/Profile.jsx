@@ -163,8 +163,8 @@ function Profile() {
                             </div>
                           </div>
                         </div>
-                        <div className="pl-18 mt-3">
-                          <div className="max-sm:text-gray-300">
+                        <div className="max-sm:pl-10 pl-18 mt-3">
+                          <div className="max-sm:text-gray-300 max-sm:text-sm">
                             <p>{posts.content}</p>
                           </div>
 

@@ -28,15 +28,15 @@ function Navbar({ setCurrentPage }) {
   const userDetails = useSelector((state) => state.user.user);
 
   return (
-    <>
-      <div>
+    <div className="max-sm:bg-black">
+      <div className="max-sm:hidden">
         <NavLink to="/">
           <img src={logo} alt="" className="w-[20%]" />
         </NavLink>
       </div>
 
       <div
-        className="w-full mt-5 text-xl relative"
+        className="w-full mt-5 text-xl relative max-sm:flex max-sm:justify-between"
         onBlur={() => setLogout(false)}
       >
         <NavLink
@@ -45,7 +45,7 @@ function Navbar({ setCurrentPage }) {
           style={(e) => (e.isActive ? { color: "tomato" } : { color: "white" })}
         >
           <IoHomeOutline />
-          Home
+          <span className="max-sm:hidden">Home</span>
         </NavLink>
 
         <NavLink
@@ -54,7 +54,7 @@ function Navbar({ setCurrentPage }) {
           style={(e) => (e.isActive ? { color: "tomato" } : { color: "white" })}
         >
           <IoSearch />
-          Explore
+          <span className="max-sm:hidden">Explore</span>
         </NavLink>
 
         <NavLink
@@ -63,7 +63,7 @@ function Navbar({ setCurrentPage }) {
           style={(e) => (e.isActive ? { color: "tomato" } : { color: "white" })}
         >
           <BiMovie />
-          Reels
+          <span className="max-sm:hidden">Reels</span>
         </NavLink>
 
         <NavLink
@@ -72,7 +72,7 @@ function Navbar({ setCurrentPage }) {
           style={(e) => (e.isActive ? { color: "tomato" } : { color: "white" })}
         >
           <FaRegBookmark />
-          Bookmark
+          <span className="max-sm:hidden">Bookmark</span>
         </NavLink>
 
         <NavLink
@@ -81,7 +81,7 @@ function Navbar({ setCurrentPage }) {
           style={(e) => (e.isActive ? { color: "tomato" } : { color: "white" })}
         >
           <PiSuitcaseSimpleBold />
-          Jobs
+          <span className="max-sm:hidden">Jobs</span>
         </NavLink>
 
         <NavLink
@@ -89,7 +89,7 @@ function Navbar({ setCurrentPage }) {
           className="flex items-center gap-3 mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer"
         >
           <FaXTwitter />
-          Premium
+          <span className="max-sm:hidden">Premium</span>
         </NavLink>
 
         <NavLink
@@ -99,10 +99,10 @@ function Navbar({ setCurrentPage }) {
         >
           {" "}
           <CiUser />
-          Profle
+          <span className="max-sm:hidden">Profle</span>
         </NavLink>
 
-        <div className="w-full p-3 bg-white rounded-full text-center">
+        <div className="w-full p-3 bg-white rounded-full text-center max-sm:hidden">
           <button
             onClick={() => navigate("/post")}
             className="w-full cursor-pointer text-black text-xl font-semibold"
@@ -112,7 +112,7 @@ function Navbar({ setCurrentPage }) {
         </div>
 
         {token ? (
-          <div className="mt-25 rounded-full transition duration-500 hover:bg-[#3c3c3c] cursor-pointer p-2">
+          <div className="mt-25 rounded-full transition duration-500 hover:bg-[#3c3c3c] cursor-pointer p-2 max-sm:hidden">
             <div
               className="flex items-center gap-4"
               onClick={() => setLogout(!logout)}
@@ -140,7 +140,7 @@ function Navbar({ setCurrentPage }) {
         )}
 
         {logout ? (
-          <div className="w-[20vw] h-[5vw] border-1 shadow-md border-gray-800 absolute bottom-19 rounded-xl bg-black flex items-center text-xl font-semibold ">
+          <div className="w-[20vw] h-[5vw] border-1 shadow-md border-gray-800 absolute bottom-19 rounded-xl bg-black flex items-center text-xl font-semibold max-sm:hidden">
             <button className="m-auto cursor-pointer" onClick={LogoutButton}>
               Log out {userDetails.name}
             </button>
@@ -149,7 +149,7 @@ function Navbar({ setCurrentPage }) {
           ""
         )}
       </div>
-    </>
+    </div>
   );
 }
 
