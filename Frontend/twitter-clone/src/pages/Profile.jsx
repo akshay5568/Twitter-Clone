@@ -41,7 +41,7 @@ function Profile() {
   //Post Delete Handller.
   const PostDeleter = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/api/delete-post/${id}`);
+      await axios.delete(`${import.meta.env.VITE_BACKEND_API}/api/delete-post/${id}`);
       dispatch(postDelete(id));
       toast.success("Post deleted");
     } catch (error) {
@@ -56,7 +56,7 @@ function Profile() {
       const formData = new FormData();
       formData.append("image", profileData);
       const response = await axios.post(
-        `http://localhost:8080/api/profile-image/${userDetails._id}`,       
+        `${import.meta.env.VITE_BACKEND_API}/api/profile-image/${userDetails._id}`,       
         formData
       );
       dispatch(updateUserProfile(response.data.profileImg));      

@@ -17,8 +17,8 @@ function Premium() {
             <RxCross2 />
           </button>
           <div className="text-center w-full pt-15">
-            <h1 className="text-5xl font-bold">Upgrade to Premium</h1>
-            <p className="text-gray-500 mt-3">
+            <h1 className="text-5xl font-bold max-sm:text-2xl">Upgrade to Premium</h1>
+            <p className="text-gray-500 mt-3 max-sm:text-sm">
               Enjoy an enhanced experience, exclusive creator tools, top-tier
               verification and security. <br />
               (For organizations, sign up here)
@@ -26,8 +26,8 @@ function Premium() {
           </div>
         </div>
 
-        <div className="flex justify-center items-center w-full gap-3 mt-7">
-          <div className="w-[22%] h-[33vw]  bg-[#16181c] rounded-xl p-3">
+        <div className="flex justify-center items-center w-full gap-3 mt-7 max-sm:block max-sm:p-2">
+          <div className="w-[22%] h-[33vw]  bg-[#16181c] rounded-xl p-3 max-sm:w-full max-sm:h-fit">
             <div className="flex">
               <h1 className="text-2xl">Basic</h1>
               <button type="radio"></button>
@@ -69,7 +69,7 @@ function Premium() {
             </ul>
           </div>
 
-          <div className="w-[22%] h-[33vw] bg-[#16181c] rounded-xl p-3">
+          <div className="w-[22%] h-[33vw] bg-[#16181c] rounded-xl p-3 max-sm:w-full max-sm:h-fit max-sm:p-2 max-sm:mt-3">
             <div className="flex">
               <h1 className="text-2xl">Premium</h1>
               <button type="radio"></button>
@@ -114,7 +114,7 @@ function Premium() {
             </ul>
           </div>
 
-          <div className="w-[22%] h-[33vw] bg-[#16181c] rounded-xl p-3">
+          <div className="w-[22%] h-[33vw] bg-[#16181c] rounded-xl p-3 max-sm:w-full max-sm:h-fit max-sm:mt-3">
             <div className="flex">
               <h1 className="text-2xl">Premium+</h1>
               <button type="radio"></button>
@@ -150,7 +150,7 @@ function Premium() {
                 Radar
               </li>
 
-              <div className="w-[95%] bg-[#212327] h-[11vw] rounded-md m-auto mt-6 p-2">
+              <div className="w-[95%] bg-[#212327] h-[11vw] rounded-md m-auto mt-6 p-2 max-sm:h-fit">
                 <h1 className="text-xl mb-2">SuperGrok</h1>
                 <ul>
                   <li className="flex items-center gap-2 mb-1">
@@ -171,7 +171,7 @@ function Premium() {
           </div>
         </div>
 
-        <div className="w-[67%] h-fit m-auto mt-7">
+        <div className="w-[67%] h-fit m-auto mt-7 max-sm:w-full max-sm:p-3 max-sm:text-sm">
           <div>
             <h2 className="text-2xl font-semibold">Compare tiers & features</h2>
           </div>

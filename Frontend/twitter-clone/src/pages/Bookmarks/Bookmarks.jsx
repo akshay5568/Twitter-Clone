@@ -32,7 +32,7 @@ function Bookmarks() {
   const DeleteBookmark = async (bookmarkID) => {
     try {
       const response = await axios.delete(
-        `http://localhost:8080/api/delete-bookmark/${bookmarkID}`
+        `${import.meta.env.VITE_BACKEND_API}/api/delete-bookmark/${bookmarkID}`
       );
       dispatch(userBookmarkDelete(bookmarkID));
       console.log(response.data);

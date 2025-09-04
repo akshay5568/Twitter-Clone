@@ -33,7 +33,7 @@ function Home({
     if (token) {
       const userApi = async () => {
         const response = await axios.get(
-          "http://localhost:8080/api/auth/user",
+          `${import.meta.env.VITE_BACKEND_API}/api/auth/user`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -51,7 +51,7 @@ function Home({
     if (token) {
       const postsApi = async () => {
         const response = await axios.get(
-          "http://localhost:8080/api/user-posts"
+          `${import.meta.env.VITE_BACKEND_API}/api/user-posts`
         );
         dispatch(allUserPosts(response.data));
       };
@@ -62,7 +62,7 @@ function Home({
   //Indivisual user post api.
   useEffect(() => {
     const callApi = async () => {
-      const response = await axios.get("http://localhost:8080/api/user-post", {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_API}/api/user-post`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -77,7 +77,7 @@ function Home({
     try {
       const apiCall = async () => {
         const response = await axios.get(
-          "http://localhost:8080/api/allbookmarks"
+          `${import.meta.env.VITE_BACKEND_API}/api/allbookmarks`
         );
         dispatch(allBookmarks(response.data));
       };

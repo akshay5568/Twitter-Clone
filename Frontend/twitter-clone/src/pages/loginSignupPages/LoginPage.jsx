@@ -27,7 +27,7 @@ function LoginPage() {
     try {
 
       const response = await axios.post(
-        "http://localhost:8080/api/auth/login",
+        `${import.meta.env.VITE_BACKEND_API}/api/auth/login`,
         inputData
       );
 

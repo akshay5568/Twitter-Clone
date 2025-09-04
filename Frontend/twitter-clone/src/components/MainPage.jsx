@@ -30,7 +30,7 @@ function MainPage() {
     try {
       const ApiCall = async () => {
         const response = await axios.post(
-          `http://localhost:8080/api/post-like/${PostId}`,
+          `${import.meta.env.VITE_BACKEND_API}/api/post-like/${PostId}`,
           {},
           {
             headers: {
@@ -52,7 +52,7 @@ function MainPage() {
     try {
       const UserId = user._id;
       const response = await axios.post(
-        `http://localhost:8080/api/add-bookmark/${PostId}`,
+        `${import.meta.env.VITE_BACKEND_API}/api/add-bookmark/${PostId}`,
         { UserId }
       );
       console.log(response.data);

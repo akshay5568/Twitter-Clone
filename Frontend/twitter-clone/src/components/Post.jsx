@@ -24,7 +24,7 @@ function Post() {
 
       try {
         const res = await axios.post(
-          "http://localhost:8080/api/user-posts",
+          `${import.meta.env.VITE_BACKEND_API}/api/user-posts`,
           formData,
           {
             headers: {

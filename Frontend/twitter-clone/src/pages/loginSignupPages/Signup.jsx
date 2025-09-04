@@ -21,7 +21,7 @@ function Signup() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/auth/signup",
+        `${import.meta.env.VITE_BACKEND_API}/api/auth/signup`,
         inputData
       );
       if (response.status == 200 || response.status == 201) {

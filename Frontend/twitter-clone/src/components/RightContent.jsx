@@ -29,7 +29,7 @@ function RightContent() {
   //follow Handller
   const followHandel = async (followUserID, isFollow) => {
     await axios.post(
-      `http://localhost:8080/api/user-followers/${followUserID}`,
+      `${import.meta.env.VITE_BACKEND_API}/api/user-followers/${followUserID}`,
       { followingUserID }
     );
     dispatch(followAccount({ followUserID, followingUserID }));
@@ -42,7 +42,7 @@ function RightContent() {
   useEffect(() => {
     const ApiCAll = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/all-users");
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_API}/api/all-users`);
         dispatch(allUsersAccounts(response.data));
       } catch (error) {
         console.error("Something went wrong with api", error);
