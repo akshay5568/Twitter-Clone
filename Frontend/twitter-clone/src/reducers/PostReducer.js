@@ -14,7 +14,7 @@ export const PostReducer = createSlice({
       state.post = action.payload;
     },
     userPost: (state, action) => {
-      state.userPost = action.payload.flat();
+      state.userPost = action.payload;
     },
     Likes: (state, action) => {
       const { UserId, PostId } = action.payload;
