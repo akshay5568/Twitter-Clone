@@ -53,7 +53,10 @@ function Home({
         const response = await axios.get(
           `${import.meta.env.VITE_BACKEND_API}/api/user-posts`
         );
-        dispatch(allUserPosts(response.data));
+         const posts = Array.isArray(response.data)
+        ? response.data
+        : response.data.data || [];
+        dispatch(allUserPosts(posts));
       };
       postsApi();
     }
@@ -67,7 +70,10 @@ function Home({
           Authorization: `Bearer ${token}`,
         },
       });
-      dispatch(userPost(response.data));
+          const posts = Array.isArray(response.data)
+        ? response.data
+        : response.data.data || [];
+      dispatch(userPost(posts));
     };
     callApi();
   }, []);
@@ -79,7 +85,10 @@ function Home({
         const response = await axios.get(
           `${import.meta.env.VITE_BACKEND_API}/api/allbookmarks`
         );
-        dispatch(allBookmarks(response.data));
+            const posts = Array.isArray(response.data)
+        ? response.data
+        : response.data.data || [];
+        dispatch(allBookmarks(posts));
       };
       apiCall();
     } catch (error) {
