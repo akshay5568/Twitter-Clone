@@ -39,7 +39,8 @@ export const PostReducer = createSlice({
       state.allUsersAccounts = action.payload;
     },
     followAccount: (state, action) => {
-      const { followUserID, followingUserID } = action.payload;
+      try {
+ const { followUserID, followingUserID } = action.payload;
 
       const userDetails = state.allUsersAccounts.find(
         (u) => u._id == followUserID
@@ -60,11 +61,24 @@ export const PostReducer = createSlice({
           followingUser.following.push(followUserID);
         }
       }
+      }
+      catch (error) {
+        console.error(error);
+      }
+     
     },
     UpdateUserProfile: (state, action) => {
+      try {
         const data = action.payload;
-        const updatedProfileImg = state.allUsersAccounts.find(user => user._id === data._id);
-        updatedProfileImg.profileImg = data.profileImg;
+        const updatedProfileImg = state.allUsersAccounts.find(
+          (user) => user._id === data._id
+        );
+        if (updatedProfileImg) {
+          updatedProfileImg.profileImg = data.profileImg;
+        }
+      } catch (error) {
+        console.error(error);
+      }
     },
   },
 });
