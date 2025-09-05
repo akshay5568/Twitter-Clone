@@ -110,7 +110,7 @@ function Home({
         <Navbar />
       </div>
 
-      <div className="w-[40%] h-screen overflow-scroll scroll-smooth max-sm:w-full">
+      <div className="w-[40%] h-full overflow-scroll scroll-smooth max-sm:w-full">
         <div className="h-fit">
           {showMain && <MainPage />}
           {showExplore && <Explore />}
