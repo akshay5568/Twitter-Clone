@@ -66,7 +66,9 @@ function MainPage() {
   //Main content
   return (
     <div className="w-full h-fit bg-black text-white border-1 overflow-auto border-gray-800 ">   
-      <div></div>
+      <div>
+
+      </div>
 
       {token ? (
         <div className="max-sm:hidden">
@@ -151,10 +153,15 @@ function MainPage() {
                 </div>
               </div>
             </div>
+           
           </div>
         );
       })}
+        <div className="w-full h-[60px] sm:hidden">
+
+        </div>
       <ToastContainer/>
+      
     </div>
   );
 }

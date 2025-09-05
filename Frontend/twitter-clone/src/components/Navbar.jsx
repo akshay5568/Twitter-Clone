@@ -31,16 +31,16 @@ function Navbar({ setCurrentPage }) {
     <div className="max-sm:bg-black">
       <div className="max-sm:hidden">
         <NavLink to="/">
-          <img src={logo} alt="" className="w-[20%]" />
+          <img src={logo} alt="" className="w-[20%]" />   
         </NavLink>
       </div>
 
       <div
-        className="w-full mt-5 text-xl relative max-sm:flex max-sm:justify-between"
+        className="w-full mt-5 max-sm:mt-0 text-xl  max-sm:flex max-sm:justify-between"
         onBlur={() => setLogout(false)}
       >
         <NavLink
-          className="flex items-center gap-3  mb-2 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer"
+          className="flex items-center gap-3  mb-2 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer"   
           to="/"
           style={(e) => (e.isActive ? { color: "tomato" } : { color: "white" })}
         >
@@ -50,7 +50,7 @@ function Navbar({ setCurrentPage }) {
 
         <NavLink
           to="/explore"
-          className="flex items-center gap-3 mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer"
+          className="flex items-center gap-3 mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer"   
           style={(e) => (e.isActive ? { color: "tomato" } : { color: "white" })}
         >
           <IoSearch />
