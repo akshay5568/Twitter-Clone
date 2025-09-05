@@ -20,15 +20,15 @@ router.post("/user-posts", async (req, res) => {
   try {
     const token = req.headers.authorization?.split(" ")[1];
     if (!token) return res.status(401).json({ message: "Unauthorized" });
-    const decode = JWT.decode(token, process.env.JWT_SECRET);
+    const decode = JWT.verify(token, process.env.JWT_SECRET);
 
     const userId = decode.id;
     const content = req.body.textContent;
-    const img = req.files ? req.files.image : "" ;
+    const img = req.files?.image;
 
     let imgURL = null;
-    let mediaTYPE = null
-    if (img) {
+    let mediaTYPE = null;
+    if (img && img.data) {
       const fileBase64 = fs.readFileSync(img.tempFilePath).toString("base64");
       const result = await imagekit.upload({
         file: fileBase64,
@@ -45,8 +45,8 @@ router.post("/user-posts", async (req, res) => {
     const newPost = new Post({
       content,
       img: imgURL,
-      mediaType:mediaTYPE,
-      userId:userId,
+      mediaType: mediaTYPE,
+      userId: userId,
     });
     await newPost.save();
 
@@ -132,13 +132,13 @@ router.post("/profile-image/:id", async (req, res) => {
     const userId = req.params.id;
     const img = req.files ? req.files.image : null;
     const fileBase64 = fs.readFileSync(img.tempFilePath).toString("base64");
-    
+
     const result = await imagekit.upload({
-      file:fileBase64,
-      fileName:`profile-image-${userId}`,
-      folder:'Profile-images-twitter-clone',
+      file: fileBase64,
+      fileName: `profile-image-${userId}`,
+      folder: "Profile-images-twitter-clone",
       useUniqueFileName: true,
-    })
+    });
     let image = result.url;
     const updatedUserData = await User.findByIdAndUpdate(
       userId,
@@ -150,5 +150,6 @@ router.post("/profile-image/:id", async (req, res) => {
     res.status(500).send("Something Went Wrong in the server", error);
   }
 });
+
 
 module.exports = router;
