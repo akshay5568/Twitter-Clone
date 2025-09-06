@@ -106,11 +106,11 @@ function Home({
   //Logic
   return (
     <div className="w-full h-screen bg-black text-white flex ">
-      <div className="w-[25%] max-sm:w-full bg-black pl-30 max-sm:pl-0 p-3 max-sm:p-0 pr-5 max-sm:absolute max-sm:bottom-0">
+      <div className="w-[25%] max-sm:w-full bg-black pl-30 max-sm:pl-0 p-3 max-sm:p-0 pr-5 max-sm:fixed max-sm:bottom-0">
         <Navbar />
       </div>
 
-      <div className="w-[40%] h-full overflow-scroll scroll-smooth max-sm:w-full">
+      <div className="w-[40%] h-full overflow-y-scroll scroll-smooth max-sm:w-full max-sm:h-full">
         <div className="h-fit">
           {showMain && <MainPage />}
           {showExplore && <Explore />}

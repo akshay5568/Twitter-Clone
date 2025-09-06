@@ -71,7 +71,7 @@ function Profile() {
 
   //Main logic code.
   return (
-    <div className="w-full h-fit bg-black text-white border-1 border-gray-800">   
+    <div className="w-full h-full bg-black text-white border-1 border-gray-800">   
       <div className="flex items-center gap-3 h-[3vw] w-full bg-transparent p-2 max-sm:p-5">
         <button className="cursor-pointer max-sm:text-gray-500" onClick={() => navigate(-1)}>
           <FaArrowLeft />
@@ -79,7 +79,7 @@ function Profile() {
         <h3 >{filterdUser[0]?.name}</h3>
       </div>
 
-      <div className="w-full h-fit relative">
+      <div className="w-full relative">
         <div className="h-[15vw] max-sm:h-[30vw]">
           <img
             className="h-full w-full object-fit"
@@ -120,11 +120,11 @@ function Profile() {
           <div className="font-semibold border-b-1 p-3 border-b-gray-400">
             Posts
           </div>
-          <div className="p-3 border-1 border-gray-800 mt-3 rounded-md">
+          <div className="h-full  border-1 border-gray-800 mt-3 rounded-md">
             {filterdPost.length > 0
               ? filterdPost.map((posts, index) => {
                   return (
-                    <div className="h-full " key={posts._id}>
+                    <div className="h-full" key={posts._id}>
                       <div className="bg-black h-fit border-1 mb-3 rounded-md border-gray-800 p-2 ">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3">

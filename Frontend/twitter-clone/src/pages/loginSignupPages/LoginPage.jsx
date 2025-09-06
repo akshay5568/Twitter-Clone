@@ -50,15 +50,15 @@ function LoginPage() {
 
   return (
     <div className="bg-[#000000] w-full h-full text-white">
-      <div className="flex w-full h-full">
+      <div className="sm:flex  w-full h-full">
         <div className="flex w-[60%] justify-center items-center">
-          <img className="w-[50%]" src={logo} alt="" />
+          <img className="sm:w-[50%] max-sm:w-[25%]" src={logo} alt="" />
         </div>
 
         <div className="w-[40%] h-[80%] flex items-center">
           <div className="w-full">
             <div className="mb-7">
-              <h1 className="text-7xl mb-7 font-serif">Happening now</h1>
+              <h1 className="sm:text-7xl mb-7 font-serif">Happening now</h1>
               <h2 className="text-3xl font-serif">Join today.</h2>
             </div>
 
