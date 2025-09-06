@@ -51,21 +51,21 @@ function LoginPage() {
   return (
     <div className="bg-[#000000] w-full h-full text-white">
       <div className="sm:flex  w-full h-full">
-        <div className="flex w-[60%] justify-center items-center">
+        <div className="flex w-[60%] max-sm:w-full  justify-center items-center">
           <img className="sm:w-[50%] max-sm:w-[25%]" src={logo} alt="" />
         </div>
 
-        <div className="w-[40%] h-[80%] flex items-center">
-          <div className="w-full">
+        <div className="w-[40%] h-[80%] max-sm:w-full flex items-center">
+          <div className="w-full max-sm:text-center">
             <div className="mb-7">
-              <h1 className="sm:text-7xl mb-7 font-serif">Happening now</h1>
-              <h2 className="text-3xl font-serif">Join today.</h2>
+              <h1 className="sm:text-7xl max-sm:text-2xl sm:mb-7 font-serif">Happening now</h1>
+              <h2 className="text-3xl font-serif max-sm:text-xl">Join today.</h2>
             </div>
 
             <form action="" className="w-full" onSubmit={formHandler}>
               <input
                 type="email"
-                className="p-2 w-[50%] rounded-full bg-[#ffffff] text-black border-none mb-3"
+                className="p-2 w-[50%] max-sm:w-[70%] max-sm:rounded-xl rounded-full bg-[#ffffff] text-black border-none mb-3"
                 placeholder="Email"
                 name="email"
                 value={inputData.email}
@@ -75,7 +75,7 @@ function LoginPage() {
               <br />
               <input
                 type="password"
-                className="p-2 w-[50%] rounded-full bg-[#ffffff] text-black border-none"
+                className="p-2 w-[50%] rounded-full max-sm:w-[70%] max-sm:rounded-xl bg-[#ffffff] text-black border-none"
                 placeholder="Password"
                 value={inputData.password}
                 name="password"
@@ -83,22 +83,22 @@ function LoginPage() {
                 required
               />
               <br />
-              <button className="bg-[#1d9bf0] rounded-xl w-[50%] p-2 font-semibold text-xs mt-5">
+              <button className="bg-[#1d9bf0] max-sm:w-[70%] max-sm:rounded-xl rounded-xl w-[50%] p-2 font-semibold text-xs mt-5">
                 Login
               </button>
             </form>
             <ToastContainer/>
 
-            <div className="flex w-[50%] items-center mt-3">
+            <div className="flex w-[50%] items-center max-sm:justify-center max-sm:mb-3 max-sm:w-full mt-3">
               <div className="text-gray-500">________________</div>
               <div>OR</div>
               <div className="text-gray-500">________________</div>
             </div>
 
-            <div className="w-[50%] flex justify-center mt-6">
+            <div className="w-[50%] max-sm:w-full flex justify-center mt-6 max-sm:m-auto">
               <button
                 onClick={() => signUpHandler()}
-                className="bg-[#1d9bf0] rounded-xl w-full p-2 font-semibold text-xs"
+                className="bg-[#1d9bf0] rounded-xl w-full max-sm:w-[70%] max-sm:rounded-xl p-2 font-semibold text-xs"
               >
                 Create account
               </button>

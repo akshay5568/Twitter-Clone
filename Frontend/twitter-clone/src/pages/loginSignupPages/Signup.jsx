@@ -46,10 +46,10 @@ function Signup() {
       >
         <RxCross2 />
       </button>
-      <div className="w-[40%] h-[80%] bg-black rounded-xl px-20">
+      <div className="sm:w-[40%] sm:h-[80%] max-sm:w-full bg-black rounded-xl px-20">
         <img className="w-[50px] m-auto mt-3" src={logo} alt="" />
         <h1 className="text-2xl mt-7">Create your account</h1>
-        <div>
+        <div className="w-full">
           <form action="" className="m-auto mt-5" onSubmit={HandlerFormSubmit}>
             <input
               type="text"
