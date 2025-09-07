@@ -92,7 +92,7 @@ function Navbar({ setCurrentPage }) {
           <span className="max-sm:hidden">Premium</span>
         </NavLink>
 
-        <NavLink
+        {token ? <NavLink
           className="flex items-center gap-3  mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer"
           to={token ? `/profile/${userDetails._id}` : "/login"}
           style={(e) => (e.isActive ? { color: "tomato" } : { color: "white" })}
@@ -100,7 +100,8 @@ function Navbar({ setCurrentPage }) {
           {" "}
           <CiUser />
           <span className="max-sm:hidden">Profle</span>
-        </NavLink>
+        </NavLink>: <NavLink to={`/login`} className="flex items-center gap-3 text-xl  mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer">Login</NavLink>}
+
 
         <div className="w-full p-3 bg-white rounded-full text-center max-sm:hidden">
           <button
@@ -129,7 +130,7 @@ function Navbar({ setCurrentPage }) {
             </div>
           </div>
         ) : (
-          <div className="mt-25 h-[50px] w-[200px] rounded-xl border-1 transition duration-500 hover:bg-[#3c3c3c]  border-gray-800 flex items-center justify-center">
+          <div className="mt-25 h-[50px] max-sm:hidden w-[200px] rounded-xl border-1 transition duration-500 hover:bg-[#3c3c3c]  border-gray-800 flex items-center justify-center">
             <button
               className="text-base font-semibold cursor-pointer"
               onClick={() => navigate("/login")}

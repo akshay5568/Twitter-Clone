@@ -4,7 +4,7 @@ import { CiBookmark } from "react-icons/ci";
 import { FiShare } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import Post from "./Post";
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Likes } from "../reducers/PostReducer";
 import axios from "axios";
@@ -15,6 +15,9 @@ import logo from "../assets/logo.jpg";
 function MainPage() {
   //Other state variabls
   const token = localStorage.getItem("token");
+
+  //SetToggle For logout in mobile.
+  const [Toggle, setToggel] = useState(false);
 
   //For redux
   const allUserPosts = useSelector((state) => state.post?.post);
@@ -64,21 +67,39 @@ function MainPage() {
     }
   };
 
+  const navigate = useNavigate();
+  //Logout function for the mobiles.
+  const logoutMobile = () => {
+    localStorage.removeItem("token");
+    toast.success("User Logout");
+    setTimeout(() => {
+      navigate("/login");
+    }, 1000);
+  };
+
   //Main content
   return (
     <div className="w-full h-fit bg-black text-white border-1 overflow-auto border-gray-800 ">
-
       <div className="max-sm:inline hidden bg-white w-full h-[15px]">
         <div className="w-[56%] h-full flex items-center justify-between p-1">
-          <img
+         {token ? <img
             className="w-[3vw] h-[3vw] rounded-full border-1 border-gray-400 hover:border-1 max-sm:w-[10vw] max-sm:h-[10vw] "
             src={user.profileImg}
             alt=""
-          />
+            onClick={() => setToggel(!Toggle)}
+          /> : <NavLink to={`/login`}>Login</NavLink>}
           <img className="w-[50px]" src={logo} alt="" />
         </div>
 
-        
+        {Toggle ? (
+          <div className="absolute bg-black p-3 rounded-xl text-sm left-2 border-1 border-gray-800">
+            <div className="">
+              <button onClick={logoutMobile}>Logout</button>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
 
       {token ? (

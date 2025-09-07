@@ -116,11 +116,11 @@ function Profile() {
           </div>
         </div>
 
-        <div className="w-full h-fit border-b-1 border-gray-800 mt-3">
+        <div className="w-full h-full border-b-1 border-gray-800 mt-3">
           <div className="font-semibold border-b-1 p-3 border-b-gray-400">
             Posts
           </div>
-          <div className="h-full  border-1 border-gray-800 mt-3 rounded-md">
+          <div className="h-full  border-1 border-gray-800 mt-3 rounded-md max-sm:mb-11">
             {filterdPost.length > 0
               ? filterdPost.map((posts, index) => {
                   return (

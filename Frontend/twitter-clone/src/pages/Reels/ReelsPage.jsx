@@ -16,18 +16,16 @@ function ReelsPage() {
         >
           <video
             autoPlay
-            muted
-            
+            muted  
             playsInline
             className="w-auto h-fit object-cover"
             onClick={(e) => e.target.muted = !e.target.muted}
             src={video}
           ></video>
 
-           <div className="absolute bottom-10 m-auto bg-white p-2 rounded-md text-black px-8 flex items-center justify-center text-2xl">
-           
-               <button className="cursor-pointer"><CgAddR/></button>
-          
+           <div className="absolute bottom-10 m-auto bg-white max-sm:bottom-20 p-2 rounded-md text-black px-8 flex items-center justify-center text-2xl">  
+               <input className="hidden" type="file" id="ReelsID"/> 
+               <label htmlFor="ReelsID"><CgAddR/></label>
           </div>
         </div>
 
