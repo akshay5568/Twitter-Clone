@@ -80,6 +80,8 @@ function MainPage() {
   //Main content
   return (
     <div className="w-full h-fit bg-black text-white border-1 overflow-auto border-gray-800 ">
+
+      {/*For only mobile*/}
       <div className="max-sm:inline hidden bg-white w-full h-[15px]">
         <div className="w-[56%] h-full flex items-center justify-between p-1">
          {token ? <img
@@ -158,7 +160,7 @@ function MainPage() {
                       />
                     )
                   ) : (
-                    ""
+                    "Render Backend server resposing..."
                   )}
                 </div>
 

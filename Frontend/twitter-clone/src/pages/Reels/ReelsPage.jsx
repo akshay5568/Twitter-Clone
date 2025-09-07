@@ -1,4 +1,7 @@
 import { CgAddR } from "react-icons/cg";
+import { PiHeartStraightLight } from "react-icons/pi";
+import { FiShare } from "react-icons/fi";
+
 
 function ReelsPage() {
   const videos = [
@@ -12,18 +15,25 @@ function ReelsPage() {
       {videos.map((video, index) => (
         <div
           key={index}
-          className="w-full h-screen snap-start flex items-center justify-center"
+          className="w-full h-screen snap-start flex items-center relative justify-center"
         >
           <video
             autoPlay
             muted  
             playsInline
-            className="w-auto h-fit object-cover"
+            className="w-auto h-full object-cover"
             onClick={(e) => e.target.muted = !e.target.muted}
             src={video}
           ></video>
-
-           <div className="absolute bottom-10 m-auto bg-white max-sm:bottom-20 p-2 rounded-md text-black px-8 flex items-center justify-center text-2xl">  
+          <div className="absolute  right-1 bottom-60 z-50">
+               <div className="mb-3">
+                <button className="text-3xl "><PiHeartStraightLight/></button>
+               </div>
+               <div>
+                 <button className="text-3xl"><FiShare/></button>
+               </div>
+          </div>
+           <div className="absolute bottom-7 m-auto bg-white max-sm:bottom-15 p-2 rounded-md text-black px-8 flex items-center justify-center text-2xl">  
                <input className="hidden" type="file" id="ReelsID"/> 
                <label htmlFor="ReelsID"><CgAddR/></label>
           </div>
