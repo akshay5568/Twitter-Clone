@@ -2,7 +2,6 @@ import { CgAddR } from "react-icons/cg";
 import { PiHeartStraightLight } from "react-icons/pi";
 import { FiShare } from "react-icons/fi";
 
-
 function ReelsPage() {
   const videos = [
     "https://res.cloudinary.com/doz6vrvnj/video/upload/v1750242759/samples/cld-sample-video.mp4",
@@ -15,31 +14,40 @@ function ReelsPage() {
       {videos.map((video, index) => (
         <div
           key={index}
-          className="w-full h-screen snap-start flex items-center relative justify-center"
+          className="w-full h-full snap-start flex items-center relative justify-center"
         >
           <video
             autoPlay
-            muted  
+            muted
             playsInline
             className="w-auto h-full object-cover"
-            onClick={(e) => e.target.muted = !e.target.muted}
+            onClick={(e) => {
+              e.target.muted = !e.target.muted;
+              if (!e.target.muted) {
+                e.target.play(); // ensure playback continues with sound
+              }
+            }}
             src={video}
           ></video>
           <div className="absolute  right-1 bottom-60 z-50">
-               <div className="mb-3">
-                <button className="text-3xl "><PiHeartStraightLight/></button>
-               </div>
-               <div>
-                 <button className="text-3xl"><FiShare/></button>
-               </div>
+            <div className="mb-3">
+              <button className="text-3xl cursor-pointer">
+                <PiHeartStraightLight />
+              </button>
+            </div>
+            <div>
+              <button className="text-3xl cursor-pointer">
+                <FiShare />
+              </button>
+            </div>
           </div>
-           <div className="absolute bottom-7 m-auto bg-white max-sm:bottom-15 p-2 rounded-md text-black px-8 flex items-center justify-center text-2xl">  
-               <input className="hidden" type="file" id="ReelsID"/> 
-               <label htmlFor="ReelsID"><CgAddR/></label>
+          <div className="absolute bottom-7 m-auto bg-white max-sm:bottom-15 p-2 rounded-md text-black px-8 flex items-center justify-center text-2xl">
+            <input className="hidden" type="file" id="ReelsID" />
+            <label htmlFor="ReelsID">
+              <CgAddR />
+            </label>
           </div>
         </div>
-
-        
       ))}
     </div>
   );
