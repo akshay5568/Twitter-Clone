@@ -20,10 +20,12 @@ function MainPage() {
   const [Toggle, setToggel] = useState(false);
 
   //For redux
-  const allUserPosts = useSelector((state) => state.post?.post);
+  const totalPostsInEntireProject = useSelector(state => state.post?.post).length;
+  const start = Math.floor(Math.random() * totalPostsInEntireProject);
+  const allUserPosts = useSelector((state) => state.post?.post).slice(start,totalPostsInEntireProject);   
 
   const userBookmark = useSelector((state) => state.bookmarks?.userBookmark);
-  const allUsersAccount = useSelector((state) => state.post?.allUsersAccounts);
+  const allUsersAccount = useSelector((state) => state.post?.allUsersAccounts);       
   // console.log(allUsersAccount)
   const user = useSelector((state) => state.user?.user);
   const dispatch = useDispatch();
@@ -79,7 +81,7 @@ function MainPage() {
 
   //Main content
   return (
-    <div className="w-full h-fit bg-black text-white border-1 overflow-auto border-gray-800 ">
+    <div className="w-full h-fit bg-black text-white border-1 overflow-auto border-gray-800 scrollbar-hide">
       {/*For only mobile*/}
       <div className="max-sm:inline hidden bg-white w-full h-[15px]">
         <div className="w-[56%] h-full flex items-center justify-between p-1">

@@ -18,11 +18,11 @@ function RightContent() {
 
   //Slice user's for better ui looking.4
   const user = Math.floor(Math.random() * 5) + 2;
-  const allUsers = useSelector((state) => state.post.allUsersAccounts);
-  // .slice(
-  //   0,
-  //   user
-  // );
+  const allUsers = useSelector((state) => state.post.allUsersAccounts)
+  .slice(
+    0,
+    user
+  );
 
   const followingUserID = userDetails._id;
 
@@ -53,8 +53,8 @@ function RightContent() {
 
   //Main code
   return (
-    <div className="w-full h-full pl-9 p-3">
-      <div className="w-[80%]">
+    <div className="w-full h-full pl-9 p-3 overflow-scroll">
+      <div className="w-[80%] h-full">
         <div>
           <Explore />
         </div>

@@ -39,7 +39,7 @@ function Signup() {
     }
   };
   return (
-    <div className="w-full h-full bg-[#242d35] flex justify-center items-center text-white">
+    <div className="w-full h-full bg-[#242d35] flex justify-center items-center text-white">   
       <button
         onClick={() => navigate("/login")}
         className="absolute top-4 left-5 bg-red-400 rounded-full text-2xl"

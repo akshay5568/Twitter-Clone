@@ -24,11 +24,11 @@ function Explore() {
 
   //Slice user's for better ui looking.4
   const user = Math.floor(Math.random() * 5) + 2;
-  const allUsers = useSelector((state) => state.post.allUsersAccounts);
-  // .slice(
-  //   0,
-  //   user
-  // );
+  const allUsers = useSelector((state) => state.post.allUsersAccounts)
+  .slice(
+    0,
+    user
+  );
 
   const followingUserID = userDetails._id;
 
