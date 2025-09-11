@@ -50,7 +50,7 @@ function Signup() {
         <img className="w-[50px] m-auto mt-3" src={logo} alt="" />
         <h1 className="text-2xl mt-7">Create your account</h1>
         <div className="w-full">
-          <form action="" className="m-auto mt-5" onSubmit={HandlerFormSubmit}>
+          <form action="" className="m-auto mt-4" onSubmit={HandlerFormSubmit}>
             <input
               type="text"
               className="w-full p-5 border-1 border-gray-700 rounded text-xl"
