@@ -105,7 +105,8 @@ function Home({
 
   //Logic
   return (
-    <div className="w-full h-screen bg-black text-white flex ">
+    //h-screen replace with h-full //11SEP@)@5
+    <div className="w-full h-full bg-black text-white flex ">
       <div className="w-[25%] max-sm:w-full bg-black pl-30 max-sm:pl-0 p-3 max-sm:p-0 pr-5 max-sm:fixed max-sm:bottom-0 z-50">
         <Navbar />
       </div>

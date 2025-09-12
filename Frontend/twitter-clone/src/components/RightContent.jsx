@@ -14,14 +14,15 @@ function RightContent() {
   // const [isFollow, setIsFollow] = useState(true);
   const dispatch = useDispatch();
 
-  const userDetails = useSelector((state) => state.user.user);
-
+  const userDetails = useSelector((state) => state.user.user);      
+  
   //Slice user's for better ui looking.4
-  const user = Math.floor(Math.random() * 5) + 2;
-  const allUsers = useSelector((state) => state.post.allUsersAccounts)
+  const totalUserAccount = useSelector(state => state.post?.allUsersAccounts).length;       
+  const start = Math.floor(Math.random() * totalUserAccount - totalUserAccount + 5) + 2;
+  const allUsers = useSelector((state) => state.post?.allUsersAccounts)
   .slice(
     0,
-    user
+    start
   );
 
   const followingUserID = userDetails._id;
