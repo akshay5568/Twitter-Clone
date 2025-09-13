@@ -27,8 +27,8 @@ app.use('/api' , followRoute);
 const bookmarkRoute = require('./routes/bookmarkRoute');
 app.use('/api', bookmarkRoute);
 
-
-
+const ReelsRoute = require('./routes/ReelsRoute');
+app.use('/reels', ReelsRoute);
 
 app.listen(8080, () => {
   console.log("Server is Running on Port");

@@ -40,32 +40,30 @@ export const PostReducer = createSlice({
     },
     followAccount: (state, action) => {
       try {
- const { followUserID, followingUserID } = action.payload;
+        const { followUserID, followingUserID } = action.payload;
 
-      const userDetails = state.allUsersAccounts.find(
-        (u) => u._id == followUserID
-      );
-      const followingUser = state.allUsersAccounts.find(
-        (u) => u._id == followingUserID
-      );
+        const userDetails = state.allUsersAccounts.find(
+          (u) => u._id == followUserID
+        );
+        const followingUser = state.allUsersAccounts.find(
+          (u) => u._id == followingUserID
+        );
 
-      if (userDetails) {
-        if (userDetails.followers.includes(followingUserID)) {
-          const userFound = userDetails.followers.indexOf(followingUserID);
-          if (userFound !== -1) userDetails.followers.splice(userFound, 1);
+        if (userDetails) {
+          if (userDetails.followers.includes(followingUserID)) {
+            const userFound = userDetails.followers.indexOf(followingUserID);
+            if (userFound !== -1) userDetails.followers.splice(userFound, 1);
 
-          const index = followingUser.following.indexOf(followUserID);
-          if (index !== -1) followingUser.following.splice(index, 1);
-        } else {
-          userDetails.followers.push(followingUserID);
-          followingUser.following.push(followUserID);
+            const index = followingUser.following.indexOf(followUserID);
+            if (index !== -1) followingUser.following.splice(index, 1);
+          } else {
+            userDetails.followers.push(followingUserID);
+            followingUser.following.push(followUserID);
+          }
         }
-      }
-      }
-      catch (error) {
+      } catch (error) {
         console.error(error);
       }
-     
     },
     UpdateUserProfile: (state, action) => {
       try {

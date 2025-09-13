@@ -230,7 +230,7 @@ function MainPage() {
                 fill="#1C64F2"
               />
             </svg>
-            Loading Data from Backend it will take some 20 seconds please stay here...
+            Loading Data from Backend it will take around 20 seconds please stay here...   
           </button>
         </div>
       )}
