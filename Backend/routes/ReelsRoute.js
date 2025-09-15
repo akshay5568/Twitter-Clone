@@ -13,6 +13,7 @@ router.use(
   })
 );
 
+//Reels Uploding Route.
 router.post("/reels", async (req, res) => {
   try {
     const token = req.headers.authorization?.split(" ")[1];
@@ -47,11 +48,35 @@ router.post("/reels", async (req, res) => {
   }
 });
 
+//Reels Fatching and send to frontend.
 router.get("/all-users-reels", async (req, res) => {
   try {
-    const allReels = await Reels.find();
-    if(!allReels) return res.status(401).send("Unable to fatch reels");
+    const allReels = await Reels.find().populate("userId");
+    if (!allReels) return res.status(401).send("Unable to fatch reels");
     res.status(200).json(allReels);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+//Reels Likes route.
+router.post("/like/:reelsID", async (req, res) => {
+  try {
+    const reelId = req.params.reelsID;
+    const reelData = await Reels.findById(reelId);
+    const {likedUserId} = req.body;
+    if (!reelData) return res.status(401).send("Unable to find reels data");
+
+    if (reelData.Reelslikes.includes(likedUserId)) {
+        const index = reelData.Reelslikes.indexOf(likedUserId);
+        reelData.Reelslikes.splice(index,1);
+    }
+     else {
+        reelData.Reelslikes.push(likedUserId);
+    }
+    await reelData.save();
+
+    res.status(200).json(reelData);
   } catch (error) {
     console.error(error);
   }

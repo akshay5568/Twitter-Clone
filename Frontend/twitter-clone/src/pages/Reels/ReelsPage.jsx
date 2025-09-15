@@ -6,27 +6,30 @@ import { allReels } from "../../reducers/ReelsReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from 'axios';
+import { LikesOnReels } from "../../reducers/ReelsReducer";
 function ReelsPage() {
-  const videos = [
-    "https://res.cloudinary.com/doz6vrvnj/video/upload/v1750242759/samples/cld-sample-video.mp4",       
-    "https://res.cloudinary.com/doz6vrvnj/video/upload/v1750242759/samples/sea-turtle.mp4",
-    "https://res.cloudinary.com/doz6vrvnj/video/upload/v1750242759/samples/elephants.mp4",
-  ];
+ 
 
-
+  //Fatching All reells from reducer.
   const allUserReels = useSelector(state => state.reels.reels);
+  const user = useSelector(state => state.user.user);
 
 
+  //jwt token
   const token = localStorage.getItem("token");
   const dispatch = useDispatch();
+
+  //Calling allReeels Api and fatching all reels from database and then send to rells reducer.
   useEffect(() => {
         const AllReelsFatchingApiCall = async () => {
-               const respose = await axios.get(`${import.meta.env.VITE_BACKEND_API}/reels/all-users-reels`);
+               const respose = await axios.get(`${import.meta.env.VITE_BACKEND_API}/reels/all-users-reels`);       
                dispatch(allReels(respose.data));
+               console.log(respose.data)
         }
         AllReelsFatchingApiCall();
   }, [])
 
+  //Reels upload logic and function.
   const reelsUpload = async (r) => {
        const reels = r.target.files[0]
        const formData = new FormData();
@@ -40,16 +43,31 @@ function ReelsPage() {
        console.log(respose);
   }
 
+  //Like button for reels.
+  const ReelsLike = async (reelsID,) => {
+        const likedUserId = user._id;
+        dispatch(LikesOnReels({reelsID,likedUserId}))
+        const respose = await axios.post(`${import.meta.env.VITE_BACKEND_API}/reels/like/${reelsID}`, {likedUserId});
+        console.log(respose.data);
+  }
+
+  
+
+  //Acthual main code for the reels and UI.
   return (
-    <div className="border-1 border-gray-800 snap-y snap-mandatory w-full h-screen overflow-y-scroll ">       
-      {allUserReels.map((reels, index) => (
-        <div
+    <div className="border-1 border-gray-800 snap-y snap-mandatory w-full h-screen overflow-y-scroll ">   
+      {allUserReels.length > 0 ?   
+      allUserReels.map((reels, index) => {
+        const isLiked = reels.Reelslikes.includes(user._id);
+        console.log(isLiked);
+      return ( <div
           key={index}
           className="w-full h-full snap-start flex items-center relative justify-center"
         >
           <video
             autoPlay
             muted
+            
             playsInline
             className="w-auto h-full object-cover"
             onClick={(e) => {
@@ -61,11 +79,14 @@ function ReelsPage() {
             src={reels.reelUrl}
           ></video>
           <div className="absolute  right-1 bottom-60 z-50">
-            <div className="mb-3">
-              <button className="text-3xl cursor-pointer">
+
+            <div className="mb-5 text-center">
+              <button className={`text-3xl cursor-pointer ${isLiked ? "text-red-600" : "text-white"}`} onClick={() => ReelsLike(reels._id)}>
                 <PiHeartStraightLight />
               </button>
+              <span className="text-sm block">{reels.Reelslikes.length}</span>
             </div>
+
             <div>
               <button className="text-3xl cursor-pointer">
                 <FiShare />
@@ -79,7 +100,8 @@ function ReelsPage() {
             </label>
           </div>
         </div>
-      ))}
+       )
+}) : <h1>loading...</h1>}
     </div>
   );
 }

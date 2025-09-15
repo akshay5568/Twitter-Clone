@@ -157,10 +157,10 @@ function MainPage() {
                       ) : (
                         <video
                           className="max-w-[95%] rounded-xl mt-5 border-1 border-gray-500"
-                          onClick={(e) => (e.target.muted = !e.target.muted)}
                           autoPlay
                           loop
                           muted
+                          controls
                           playsInline
                           src={posts.img}
                         />
