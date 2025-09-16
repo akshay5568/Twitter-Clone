@@ -38,10 +38,11 @@ export const PostReducer = createSlice({
     allUsersAccounts: (state, action) => {
       state.allUsersAccounts = action.payload;
     },
+
     followAccount: (state, action) => {
       try {
         const { followUserID, followingUserID } = action.payload;
-
+      
         const userDetails = state.allUsersAccounts.find(
           (u) => u._id == followUserID
         );
@@ -51,7 +52,7 @@ export const PostReducer = createSlice({
 
         if (userDetails) {
           if (userDetails.followers.includes(followingUserID)) {
-            const userFound = userDetails.followers.indexOf(followingUserID);
+            const userFound = userDetails.followers.indexOf(followingUserID);   
             if (userFound !== -1) userDetails.followers.splice(userFound, 1);
 
             const index = followingUser.following.indexOf(followUserID);
