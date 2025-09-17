@@ -8,15 +8,16 @@ import { followAccount } from "../reducers/PostReducer";
 import { toast, ToastContainer } from "react-toastify";
 
 function Explore() {
-   const [inputData,setInputData] = useState("");
+  const [inputData,setInputData] = useState("");
   const [SearchBar, setSearchBar] = useState(false);
-  const allUsersAccount = useSelector(state => state.post?.allUsersAccounts);
+  const allUsersAccount = useSelector(state => state.post?.allUsersAccounts);       
   const filterdUsers = allUsersAccount.filter(user => {
     return user.name.toLowerCase().includes(inputData.toLowerCase());
   } )
 
-    //Variables
+  //Variables
   const navigate = useNavigate();
+
   // const [isFollow, setIsFollow] = useState(true);
   const dispatch = useDispatch();
 
@@ -24,7 +25,7 @@ function Explore() {
 
   //Slice user's for better ui looking.4
   const user = Math.floor(Math.random() * 5) + 2;
-  const allUsers = useSelector((state) => state.post.allUsersAccounts)
+  const allUsers = useSelector((state) => state.post.allUsersAccounts)      
   .slice(
     0,
     user

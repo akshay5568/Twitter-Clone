@@ -11,38 +11,59 @@ export const PostReducer = createSlice({
   initialState,
   reducers: {
     allUserPosts: (state, action) => {
-      state.post = action.payload;
+      try {
+        state.post = action.payload;
+      } catch (error) {
+        console.error(error);
+      }
     },
     userPost: (state, action) => {
-      state.userPost = action.payload;
+      try {
+        state.userPost = action.payload;
+      } catch (error) {
+        console.log(error);
+      }
     },
     Likes: (state, action) => {
-      const { UserId, PostId } = action.payload;
-      const post = state.post.find((post) => post._id === PostId);
-      if (post) {
-        if (post.likedBy.includes(UserId)) {
-          const userfound = post.likedBy.indexOf(UserId);
-          if (userfound !== -1) post.likedBy.splice(userfound, 1);
-          Math.max(0, (post.likes -= 1));
-        } else {
-          post.likedBy.push(UserId);
-          post.likes += 1;
+      try {
+        const { UserId, PostId } = action.payload;
+        const post = state.post.find((post) => post._id === PostId);
+        if (post) {
+          if (post.likedBy.includes(UserId)) {
+            const userfound = post.likedBy.indexOf(UserId);
+            if (userfound !== -1) post.likedBy.splice(userfound, 1);
+            Math.max(0, (post.likes -= 1));
+          } else {
+            post.likedBy.push(UserId);
+            post.likes += 1;
+          }
         }
+      } catch (error) {
+        console.error(error);
       }
     },
     postDelete: (state, action) => {
-      const id = action.payload;
-      state.userPost = state.userPost.filter((post) => post._id !== id);
-      state.post = state.post.filter((post) => post._id !== id);
+      try {
+        const id = action.payload;
+        state.userPost = state.userPost.filter((post) => post._id !== id);
+        state.post = state.post.filter((post) => post._id !== id);
+      } catch (error) {
+        console.log(error);
+      }
     },
+
     allUsersAccounts: (state, action) => {
-      state.allUsersAccounts = action.payload;
+      try {
+        state.allUsersAccounts = action.payload;
+      } catch (error) {
+        console.error(error);
+      }
     },
 
     followAccount: (state, action) => {
       try {
         const { followUserID, followingUserID } = action.payload;
-      
+
         const userDetails = state.allUsersAccounts.find(
           (u) => u._id == followUserID
         );
@@ -52,7 +73,7 @@ export const PostReducer = createSlice({
 
         if (userDetails) {
           if (userDetails.followers.includes(followingUserID)) {
-            const userFound = userDetails.followers.indexOf(followingUserID);   
+            const userFound = userDetails.followers.indexOf(followingUserID);
             if (userFound !== -1) userDetails.followers.splice(userFound, 1);
 
             const index = followingUser.following.indexOf(followUserID);
