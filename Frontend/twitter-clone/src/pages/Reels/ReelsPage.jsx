@@ -169,7 +169,7 @@ function ReelsPage() {
               <div className="flex absolute bottom-40 left-5 gap-5 items-center cursor-pointer w-[70%]">
                 <NavLink
                   to={`/profile/${reels.userId._id}`}
-                  className="flex gap-3 items-center cursor-pointer w-[30%] max-sm:w-[40%]"
+                  className="flex gap-3 items-center cursor-pointer max-sm:w-fit"
                 >
                   <div className="">
                     <img
