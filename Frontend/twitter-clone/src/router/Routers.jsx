@@ -4,7 +4,8 @@ import Home from "../components/mainpages/Home";
 import Signup from "../pages/loginSignupPages/Signup";
 import Premium from '../pages/Premium/Premium';
 import Post from "../components/Post";
-Post
+import MainJobPage from "../pages/Job/MainJobPage";
+
 function Router() {
   return(
     <>
@@ -18,6 +19,7 @@ function Router() {
             <Route path="/bookmarks" element={<Home showBookmarks={true}/>}/>   
             <Route path="/reels" element={<Home showReels={true}/>}/>   
             <Route path="/post" element={<Post/>}/>   
+            <Route path="/jobs" element={<MainJobPage/>}/>   
         </Routes>
    </>
   );

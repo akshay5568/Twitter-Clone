@@ -77,7 +77,7 @@ function Navbar({ setCurrentPage }) {
 
         <NavLink
           className="flex items-center gap-3   mb-3 transition duration-500 hover:bg-[#3c3c3c] p-3 rounded-full cursor-pointer"
-          to="/"
+          to="/jobs"
           style={(e) => (e.isActive ? { color: "tomato" } : { color: "white" })}
         >
           <PiSuitcaseSimpleBold />
