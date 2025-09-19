@@ -62,7 +62,7 @@ function Navbar({ setCurrentPage }) {
           to="/reels"
           style={(e) => (e.isActive ? { color: "tomato" } : { color: "white" })}
         >
-          <BiMovie />
+          <BiMovie/>
           <span className="max-sm:hidden">Reels</span>
         </NavLink>
 

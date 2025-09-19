@@ -12,7 +12,9 @@ export const PostReducer = createSlice({
   reducers: {
     allUserPosts: (state, action) => {
       try {
-        state.post = action.payload;
+        const start = Math.floor(Math.random() * action.payload.length);
+        const totalPosts = action.payload.length;
+        state.post = action.payload.slice(start,totalPosts);
       } catch (error) {
         console.error(error);
       }

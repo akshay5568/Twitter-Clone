@@ -9,13 +9,17 @@ import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { LikesOnReels } from "../../reducers/ReelsReducer";
 import { toast, ToastContainer } from "react-toastify";
-import { followAccount } from "../../reducers/PostReducer";
+import { allUserPosts, followAccount } from "../../reducers/PostReducer";
 function ReelsPage() {
   //Fatching All reells from reducer.
-  const allUserReels = useSelector((state) => state.reels.reels);
+  const TotalReels = useSelector((state) => state.reels.reels).length;
+  const start = Math.floor(Math.random() * TotalReels - 2);
+ 
+  const allUserReels = useSelector((state) => state.reels?.reels)
+  // .slice(start,TotalReels);
+
   const user = useSelector((state) => state.user.user);
   const allUsers = useSelector((state) => state.post?.allUsersAccounts);
-
 
   //jwt token
   const token = localStorage.getItem("token");
@@ -28,7 +32,6 @@ function ReelsPage() {
         `${import.meta.env.VITE_BACKEND_API}/reels/all-users-reels`
       );
       dispatch(allReels(respose.data));
-      console.log(respose.data);
     };
     AllReelsFatchingApiCall();
   }, []);
@@ -38,18 +41,16 @@ function ReelsPage() {
     const reels = r.target.files[0];
     const formData = new FormData();
     formData.append("reel", reels);
-    console.log(reels);
     const respose = await axios.post(
       `${import.meta.env.VITE_BACKEND_API}/reels/reels`,
       formData,
       {
         headers: {
-          Authorization: `Brearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       }
     );
     toast.success("Reel Uploaded");
-    console.log(respose);
   };
 
   //Like button for reels.
@@ -60,7 +61,7 @@ function ReelsPage() {
       `${import.meta.env.VITE_BACKEND_API}/reels/like/${reelsID}`,
       { likedUserId }
     );
-    console.log(respose.data);
+    
   };
 
   //Follow Logic
@@ -75,8 +76,7 @@ function ReelsPage() {
     else toast.success("Followed");
   };
 
-
-//Reels audio logic
+  //Reels audio logic
   const videoRefs = useRef([]);
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -115,7 +115,7 @@ function ReelsPage() {
           const reelOwner = allUsers.find((u) => u._id === reels.userId._id);
           const isFollow = reelOwner?.followers.includes(user._id);
 
-          console.log(isFollow);
+        
           return (
             <div
               key={index}
@@ -187,7 +187,7 @@ function ReelsPage() {
                 >
                   <button
                     onClick={() => FollowButton(reels.userId._id, isFollow)}
-                    className="border-1 border-white p-1 rounded-xl text-sm"
+                    className="border-1 border-white p-1 rounded-xl text-sm cursor-pointer"
                   >
                     {isFollow ? "Followed" : "Follow"}
                   </button>

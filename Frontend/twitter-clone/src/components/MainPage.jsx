@@ -22,7 +22,8 @@ function MainPage() {
   //For redux
   const totalPostsInEntireProject = useSelector(state => state.post?.post).length;
   const start = Math.floor(Math.random() * totalPostsInEntireProject);
-  const allUserPosts = useSelector((state) => state.post?.post).slice(start,totalPostsInEntireProject);   
+  const allUserPosts = useSelector((state) => state.post?.post)
+  // .slice(start,totalPostsInEntireProject);   
 
   const userBookmark = useSelector((state) => state.bookmarks?.userBookmark);
   const allUsersAccount = useSelector((state) => state.post?.allUsersAccounts);       
@@ -31,12 +32,12 @@ function MainPage() {
   const dispatch = useDispatch();
 
   //For likes button
-  const Hanlde = (PostId) => {
+  const Hanlde = (PostId) => {   
     //For likes Api
     try {
       const ApiCall = async () => {
         const response = await axios.post(
-          `${import.meta.env.VITE_BACKEND_API}/api/post-like/${PostId}`,
+          `${import.meta.env.VITE_BACKEND_API}/api/post-like/${PostId}`,   
           {},
           {
             headers: {
@@ -58,7 +59,7 @@ function MainPage() {
     try {
       const UserId = user._id;
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_API}/api/add-bookmark/${PostId}`,
+        `${import.meta.env.VITE_BACKEND_API}/api/add-bookmark/${PostId}`,   
         { UserId }
       );
       console.log(response.data);
